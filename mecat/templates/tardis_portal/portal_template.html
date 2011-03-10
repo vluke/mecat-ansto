@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>TARDIS {% if subtitle %}- {{ subtitle }} {% endif %}</title>
+<link rel="stylesheet" type="text/css" href="/site_media/css/common.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/site_media/css/inside.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/site_media/css/theme/ui.all.css" media="all" />
+<link rel="stylesheet" type="text/css" href="tardis-ansto.css" media="all" />
+
+
+<!--[if IE]>
+   <style type="text/css">
+   .set li.main-image span  {
+       background:transparent;
+       filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
+       zoom: 1;
+       bottom:0;
+    }
+    </style>
+<![endif]-->
+<!--[if lt IE 7]>
+<script type="text/javascript">
+   window.onload = function () {
+        var navElements = document.getElementById("navigation").getElementsByTagName("LI");
+
+        for (count = 0;  count < navElements.length; count++)
+        {
+                navElements[count].onmouseover = function () {
+                        if (this.className != '') {
+                                this.className += ' hover';
+                        } else {
+                                this.className = 'hover';
+                        }
+                }
+
+                navElements[count].onmouseout = function () {
+                        this.className = this.className.replace(' hover', '');
+                        this.className = this.className.replace('hover', '');
+                }
+        }
+};
+
+</script>
+<style>.forum-image {margin-left:13px!important;}</style>
+<![endif]-->
+
+<!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="http://www.ansto.gov.au/_designs/ansto_new/css/iefixes.css" media="all" />
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.ansto.gov.au/home/left_column/latest_news/latest_news" />
+{% block script %}
+{% endblock %}
+</head>
+<body>
+  <div id="top-container">
+    <div id="bottom-container">
+      <div id="banner">
+        <div id="aus-gov-logo">
+          <a href="http://www.innovation.gov.au"><img src="/site_media/images/aus_gov_logo.gif" alt="Australian Government Logo" /></a>
+        </div><!-- aus-gov-logo -->
+        <div id="ansto-logo">
+          <a href="/"><img src="/site_media/images/ansto_logo.gif" alt="ANSTO Logo" /></a>
+        </div><!-- ansto-logo -->
+        <div id="header-title">
+          <img src="/site_media/images/header_title.gif" alt="Delivering excellence in nuclear science & technology" />
+        </div><!-- header-title -->
+      </div><!-- banner -->
+      <div id="banner-right-image"><img src="http://www.ansto.gov.au/__data/assets/image/0008/35279/banner_image.jpg" alt="Work Floor" /></div><!-- banner-right-image -->
+      <div class="clear2"></div>
+      <div id="sec-bar">
+        <div id="page-title"><img src="http://www.ansto.gov.au/__data/assets/image/0018/35280/page_title.gif" alt="Australian Nuclear Science and Technology Organisation" /></div>
+        <div id="search-panel">
+          <span id="search-label"><img src="http://www.ansto.gov.au/__data/assets/image/0019/35281/search_label.gif" alt="Search"/></span>
+          <form action="http://bureau-query.funnelback.com/search/search.cgi?" method="get">
+            <span id="search-text-box"><input name="query" value="" class="text" id="txtSearch" type="text"></span>
+            <span id="search-button"><input alt="Go" class="imgbutt" src="http://www.ansto.gov.au/__data/assets/image/0020/35282/go_button.gif" type="image"></span>
+            <input name="collection" value="ansto" type="hidden">
+          </form>
+        </div><!-- search-panel -->
+      </div><!-- sec-bar -->
+      <div class="clear2"></div>
+      <div id="navigation">
+	<ul>
+	  <li class="lineheight"><a href="http://www.ansto.gov.au/">ANSTO Home</a></li>
+	  <!-- <li class="lineheight"><a href="/news">News</a></li> -->
+	  <li class="lineheight"><a href="/">Home</a></li>
+	  <li class="lineheight"><a href="/experiment/view">Data</a></li>
+	  <li class="lineheight"><a href="/about">About</a></li>
+	  <!-- <li><a href="#">Wiki</a></li> -->
+	  <li class="lineheight"><a href="/partners">Partners</a></li>
+	  <li>
+	    <form name="input" action="/search/quick/" method="get" class="quicksearch">
+	      <input type="hidden" name="results" value="">
+	      <input type="text" name="quicksearch" value="" size="10">
+	      <input type="submit" value="search" class="quicksearch-submit">
+	    </form>
+	  </li>
+	  {% if username %}
+	    <li class="lineheight"><a href="/logout">Logout</a></li>
+	    {% if user.is_superuser %}
+	      <div id="userinfo">Welcome, <a href="/admin">{{ username }}.</a></div>
+	    {% else %}
+	     <div id="userinfo">Welcome, {{ username }}.</div>
+	    {% endif %}
+	  {% else %}
+	  <li class="lineheight"><a href="/login">Login</a></li>
+	  <li class="lineheight"><a href="/accounts/register">Register</a></li>
+	  {% endif %}
+	</ul>
+      </div><!-- navigation -->
+
+
+        <div id="outer-body">
+	  <div class="clear2"></div>
+	  <div class="clear2"></div>
+          <div id="body">
+	    {% if status %}
+	    <br/>
+            {% if error %}
+	    <div id="statusBoxError">
+              {{status}}
+	    </div><!-- statusBoxError -->
+            {% else %}
+	    <div id="statusBox">
+              {{status}}
+	    </div><!-- statusBox -->
+            {% endif %}
+	    {% endif %}
+
+	    <!-- start content -->
+
+	    {% block content %}{% endblock %}
+
+	    {% block fullpage %}{% endblock %}
+
+	  </div><!-- body -->
+	<div style="clear: both; padding: 20px 30px 25px 20px;">
+	  {% block bottom %}{% endblock %}
+        </div>
+      </div><!-- outer-body -->
+      <div id="side">
+	<div class="clear2"></div>
+	<div id="sub_navigation">{% block sidebar %}{% endblock %}</div><!-- sub-navigation -->
+	<div id="versi-footer">
+             <a href="http://www.monash.edu.au/eresearch/" target="_blank"><img src="/site_media/images/merc.png" ></a>
+             <a href="http://www.versi.edu.au" target="_blank"><img src="/site_media/images/acquia_marina_logo.jpg"></a>
+	</div><!-- versi-footer -->
+       </div><!-- side -->
+   </div><!-- bottom-container -->
+</div><!-- top-container -->
+<div id="footer">
+    <div id="footer-links">
+        <a href="http://www.ansto.gov.au/sitemap">Sitemap</a> | <a href="http://www.ansto.gov.au/contact_ansto">Contact us</a> | <a href="http://www.ansto.gov.au/feedback">Feedback</a> | <a href="http://www.ansto.gov.au/copyright">Copyright</a> | <a href="http://www.ansto.gov.au/privacy">Privacy</a>
+</div><!-- footer -->
+<script type="text/javascript" src="http://www.ansto.gov.au/__data/assets/text_file/0010/41995/jquery.innerfade.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+ $('.set').innerfade({
+     speed: 400,
+     timeout: 8000,
+     type: 'random',
+     containerheight: '195px'
+    });
+});
+</script>
+</body>
+</html>
