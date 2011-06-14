@@ -27,12 +27,18 @@
 }
 
 #versi-footer {
+  float: right;
+  margin-top: -22px;
+  padding-left: 25px;
+  height: 71px;
+  width: 456px;
+  background-image: url('/ansto_media/images/footer-logo-bg.gif');
+  background-position: left bottom;
+  background-repeat: no-repeat;
 }
 
 #versi-footer img {
     border: 0;
-    padding-top:10px;
-    width: 100%;
 }
 
 #userinfo {
@@ -428,16 +434,17 @@ background-image: none;
       <div id="side">
 	<div class="clear2"></div>
 	<div id="sub_navigation">{% block sidebar %}{% endblock %}</div><!-- sub-navigation -->
-	<div id="versi-footer">
-             <a href="http://www.monash.edu.au/eresearch/" target="_blank"><img src="/site_media/images/merc.png" ></a>
-             <a href="http://www.versi.edu.au" target="_blank"><img src="/site_media/images/acquia_marina_logo.jpg"></a>
-	</div><!-- versi-footer -->
        </div><!-- side -->
    </div><!-- bottom-container -->
 </div><!-- top-container -->
 <div id="footer">
+	<div id="versi-footer">
+             <a href="http://www.monash.edu.au/eresearch/" target="_blank"><img src="/site_media/images/merc.png" style="padding-top:10px" height="52" ></a>
+             <a href="http://www.versi.edu.au" target="_blank"><img src="/site_media/images/acquia_marina_logo.jpg" style="padding-left:10px" height="62" ></a>
+	</div><!-- versi-footer -->
     <div id="footer-links">
         <a href="http://www.ansto.gov.au/sitemap">Sitemap</a> | <a href="http://www.ansto.gov.au/contact_ansto">Contact us</a> | <a href="http://www.ansto.gov.au/feedback">Feedback</a> | <a href="http://www.ansto.gov.au/copyright">Copyright</a> | <a href="http://www.ansto.gov.au/privacy">Privacy</a>
+    </div><!-- footer-links -->
 </div><!-- footer -->
 <script type="text/javascript" src="http://www.ansto.gov.au/__data/assets/text_file/0010/41995/jquery.innerfade.js"></script>
 <script type="text/javascript">
