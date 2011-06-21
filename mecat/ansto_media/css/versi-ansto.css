@@ -1,0 +1,298 @@
+#body {
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  min-height: 600px;
+  height:auto !important;
+  height:600px;
+  width:100%;
+}
+
+#sub_navigation ul li h2 {
+    padding: 4px 0;
+    margin: 0 0 0 4px;
+    padding-left: 11px;
+    vertical-align: bottom;
+    font-size: 12px;
+    color:#2161ba;
+    text-decoration:none;
+}
+
+#sub_navigation:empty {
+    display: none;
+}
+
+#versi-footer {
+  float: right;
+  margin-top: -48px;
+  padding-left: 25px;
+  height: 71px;
+  width: 456px;
+  background-image: url('/ansto_media/images/footer-logo-bg.gif');
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+#versi-footer img {
+    border: 0;
+}
+
+#userinfo {
+    color:#FFFFFF;
+    display:block;
+    float:right;
+    font-family: Tahoma,Arial,Verdana;
+    font-size: 1.2em;
+    padding: 4px 10px 0 0;
+    line-height:1.9em;
+    text-decoration: none;
+
+}
+
+.entry img {
+    border: none
+}
+
+.dataset_metadata
+{
+    margin: 10px;
+}
+
+.dataset_metadata ul {
+    list-style-type: none;
+    list-style-image: none;
+    list-style-position: inside;
+    font-size: 12px;
+}
+
+.dataset_information ul {
+
+    list-style-position: inside;
+    font-size: 14px;
+}
+
+.datafile_list
+{
+    list-style-type: none;
+    list-style-image: none;
+    list-style-position: inside;
+    font-size: 14px;
+}
+
+.dataset_title
+{
+        display: inline;
+}
+
+.dataset_info
+{
+        border-width: 2px;
+        border-color: gray;
+        border-style: dotted;
+        margin: 5px;
+        padding: 10px;
+        margin-bottom: 30px;
+}
+
+.dataset_description
+{
+        border-width: 1px;
+        border-color: black;
+        border-style: solid;
+        margin: 2px;
+        padding: 5px;
+        background-color: #fcf2ef;
+}
+
+.dataset_extrainfo
+{
+        border-width: 1px;
+        border-color: black;
+        border-style: solid;
+        margin: 2px;
+        padding: 5px;
+        background-color: #fcfcfc;
+}
+
+.datafile_info {
+        list-style-type: none;
+        list-style-image: none;
+        list-style-position: inside;
+        font-size: 14px;
+        font-size: 12px;
+        background-color: #f0f3f6;
+        width: 90%;
+        padding: 10px;
+        margin: 10px;
+}
+
+a.filelink {
+        color: #9b3430;
+}
+
+#statusBox {
+        border-width: 2px;
+        border-color: #666666;
+        border-style: dashed;
+        margin: 20px 20px 0 20px;
+        padding: 5px;
+        background-color: #fff68c;
+        clear: both;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+}
+
+#statusBoxError {
+        border-width: 2px;
+        border-color: #E92E2E;
+        border-style: dashed;
+        margin: 20px 20px 0 20px;
+        padding: 5px;
+        background-color: #FF8C8C;
+        clear: both;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+}
+
+table.experiment-table {
+        margin: 0;
+        padding: 0;
+        width: 85%;
+        }
+
+.experiment-table tr {
+        padding: 0;
+        margin: 0;
+}
+
+.experiment-table td, th {
+        text-align: left;
+        margin: 5px;
+        vertical-align: bottom;
+}
+
+.experiment-table th
+{
+        width: 70%;
+        border-width: 0 0 1px 0;
+        border-style: dotted;
+        border-color: gray;
+        padding: 20px 10px 4px 0px;
+}
+
+.experiment-table td
+{
+
+}
+
+.experiment-table-stats
+{
+        text-align: right;
+        padding: 5px 10px 25px 0px;
+}
+
+table.results-table {
+        margin: 2px;
+        padding: 2px;
+        width: 85%;
+        }
+
+.results-table tr {
+        padding: 0;
+        margin: 0;
+}
+
+.results-table td, th {
+        text-align: left;
+        margin: 5px;
+        vertical-align: bottom;
+}
+
+.results-table th
+{
+        width: 30%;
+/*      border-width: 0 0 1px 0;
+        border-style: solid;
+        border-color: gray;     */
+        padding: 20px 10px 9px 0px;
+}
+
+.results-table td
+{
+
+}
+
+
+/*FORM STYLE*/
+
+/*
+ wFORMS 2.0 Stylesheet - Post-It Theme v3 by Jason Shore (www.shoremark.com) - Aug. 2006
+ See http://www.formassembly.com/wForms
+
+ To be used along with wforms-jsonly.css
+ This stylesheet and the associated images are Copyright (c) 2005 Jason Shore (http://www.shoremark.com)
+ and licensed under the Creative Commons Attribution-ShareAlike License (http://creativecommons.org/licenses/by-sa/2.0/)
+*/
+
+form {
+        margin: 0;
+        padding: 0 10px 10px 10px;
+        background-repeat: repeat-x;
+        background-position: 0 0;
+}
+form a{
+        color:#3366cc;
+        text-decoration: none;
+}
+form a:hover{
+        color:#00c;
+        border-bottom: 1px dotted #00c;
+}
+
+/* VeRSI */
+.topmenu li {
+background-image:url("../images/AS/separator_navitem.gif");
+}
+.topmenu li.item53 a span {
+background-image: url(../images/AS/icon_home.gif);
+}
+.ui-widget-header {
+background-image: none;
+background-position: left 5px;
+background-color: transparent;
+border-style: none;
+}
+.ui-state-active, .ui-widget-content .ui-state-active {
+border-color: #C0C0C0;
+}
+.ui-widget-content {
+border-style: none;
+}
+.ui-tabs .ui-tabs-panel {
+border-width: 1px;
+border-style: solid;
+border-color: #C0C0C0;
+}
+.dataset_description {
+background-color: transparent;
+}
+a, td a {
+color: inherit;
+}
+.ui-tabs .ui-tabs-nav li {
+border-color: #C0C0C0;
+background-color: #F5F8F9;
+background-image: none;
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-selected {
+    background-color: #FFFFFF;
+    background-image: none;
+}
+.ui-tabs .ui-tabs-nav li a {
+    color: #000000;
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-selected a {
+    color: #ff0000;
+}
