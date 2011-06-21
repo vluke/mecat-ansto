@@ -109,7 +109,7 @@ class Backend():
             # Switch the suds cache off, otherwise suds will try to
             # create a tmp directory in /tmp. If it already exists but
             # has the wrong permissions, the authentication will fail.
-            client = Client(VBLSTORAGEGATEWAY, cache=None)
+            client = Client(VBLSTORAGEGATEWAY, cache=None, proxy=settings.VBLPROXY)
         except:
             logger.exception('')
             return None
