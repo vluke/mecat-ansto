@@ -25,8 +25,12 @@ logger = logging.getLogger('tardis.mecat')
 
 class VBLDownload():
     def __init__(self, request):
-        self.client = Client(settings.VBLSTORAGEGATEWAY)
-        self.client.set_options(cache=None)
+        # Switch the suds cache off, otherwise suds will try to
+        # create a tmp directory in /tmp. If it already exists but
+        # has the wrong permissions, the download will fail.
+        self.client = Client(settings.VBLSTORAGEGATEWAY,
+                             cache=None, 
+                             proxy=settings.VBLPROXY)
         self.SOAPLoginKey = request.session[SOAP_LOGIN_KEY]
 
     def download(self, EPN, FileString=''):
