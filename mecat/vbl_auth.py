@@ -122,7 +122,7 @@ class Backend():
         # result contains comma separated list of epns the user is
         # allowed to see and a key for downloads
         # e.g. [['Home'], 'f0yDuDyFebNDyX67NA3Y8AALqW1Q']
-        epns, key = eval(result)
+        epns, email, key = eval(result)
         request.session[EPN_LIST] = epns
         request.session[SOAP_LOGIN_KEY] = key
 
@@ -130,7 +130,7 @@ class Backend():
         # does not distinguish between usernames and emails
         return {'display': username,
                 'id': username,
-                'email': username}
+                'email': email}
 
     def get_user(self, user_id):
         raise NotImplemented()
