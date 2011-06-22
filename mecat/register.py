@@ -15,76 +15,76 @@ from tardis.tardis_portal import models
 from tardis.tardis_portal.auth import auth_service
 from tardis.tardis_portal.auth.localdb_auth import django_user, django_group
 
-from mecat.auth import auth_key as vbl_auth_key
+from mecat.vbl_auth import auth_key as vbl_auth_key
 from mecat.forms import RegisterMetamanForm
 
 
 logger = logging.getLogger('tardis.mecat')
 
 _config = {}
-_config['Echidna'] = {
-    'expSchema': '',
+_config['ECH'] = {
+    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
-    'dfSchema': '',
+    'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
-    'filetypes': re.compile('.*\.\d+$|.*\.(spc)$|.*\.(spa)$', re.IGNORECASE),
+    'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
     'groupDSRules': ['file', '.'],
     'metadata': None,
     'beamline_group': 'BEAMLINE_ECH',
-    'sampleSchema': '',
+    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['Kowari'] = {
-    'expSchema': '',
+_config['KWR'] = {
+    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
-    'dfSchema': '',
+    'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
-    'filetypes': re.compile('.*\.\d+$|.*\.(spc)$|.*\.(spa)$', re.IGNORECASE),
+    'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
     'groupDSRules': ['file', '.'],
     'metadata': None,
-    'beamline_group': 'BEAMLINE_ECH',
-    'sampleSchema': '',
+    'beamline_group': 'BEAMLINE_KWR',
+    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['Platypus'] = {
-    'expSchema': '',
+_config['PLP'] = {
+    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
-    'dfSchema': '',
+    'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
-    'filetypes': re.compile('.*\.\d+$|.*\.(spc)$|.*\.(spa)$', re.IGNORECASE),
+    'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
     'groupDSRules': ['file', '.'],
     'metadata': None,
-    'beamline_group': 'BEAMLINE_ECH',
-    'sampleSchema': '',
+    'beamline_group': 'BEAMLINE_PLP',
+    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['Quokka'] = {
-    'expSchema': '',
+_config['QKK'] = {
+    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
-    'dfSchema': '',
+    'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
-    'filetypes': re.compile('.*\.\d+$|.*\.(spc)$|.*\.(spa)$', re.IGNORECASE),
+    'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
     'groupDSRules': ['file', '.'],
     'metadata': None,
-    'beamline_group': 'BEAMLINE_ECH',
-    'sampleSchema': '',
+    'beamline_group': 'BEAMLINE_QKK',
+    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['Wombat'] = {
-    'expSchema': '',
+_config['WBT'] = {
+    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
-    'dfSchema': '',
+    'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
-    'filetypes': re.compile('.*\.\d+$|.*\.(spc)$|.*\.(spa)$', re.IGNORECASE),
+    'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
     'groupDSRules': ['file', '.'],
     'metadata': None,
-    'beamline_group': 'BEAMLINE_ECH',
-    'sampleSchema': '',
+    'beamline_group': 'BEAMLINE_WBT',
+    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
 
@@ -105,7 +105,6 @@ class Datafile():
         # File size
         if key == 'File Size':
             self.size = value.replace(' bytes', '')
-            
         else:
             key = key.replace(' ', '').replace('/', '')
             if key in self.data:
@@ -305,13 +304,15 @@ def _parse_metaman(request, cleaned_data):
     experiment.save()
     logger.debug('experiment %i saved' % experiment.id)
 
-    order = 1
+    order = 0
     author_experiment = models.Author_Experiment(experiment=experiment,
                                                  author=cleaned_data['principal_investigator'],
                                                  order=order)
     author_experiment.save()
     order += 1
     for author in cleaned_data['researchers'].split(' ~ '):
+        if author == '':
+            continue
         logger.debug('adding author %s' % author)
         author_experiment = models.Author_Experiment(experiment=experiment,
                                                      author=author,
@@ -327,7 +328,7 @@ def _parse_metaman(request, cleaned_data):
     exp_parameterset.save()
 
     experiment_metadata = {'program_id': cleaned_data['program_id'],
-                           'epn': cleaned_data['epn']} 
+                           'epn': cleaned_data['epn']}
     for key, value in experiment_metadata.iteritems():
         try:
             exp_parameter = models.ParameterName.objects.get(schema=exp_schema,
@@ -469,14 +470,10 @@ def _parse_metaman(request, cleaned_data):
     ###
     ### IV: Setup permissions (for users and groups)
     ###
-    # experiment_owners = cleaned_data['experiment_owner'] + [cleaned_data['principal_investigator']]
     owners = cleaned_data['experiment_owner'].split(' ~ ')
-    owners.append(cleaned_data['principal_investigator'])
-
     for owner in owners:
         if owner == '':
             continue
-
         logger.debug('looking for owner %s' % owner)
         # find corresponding user
         user = auth_service.getUser({'pluginname': vbl_auth_key,
@@ -488,8 +485,8 @@ def _parse_metaman(request, cleaned_data):
                                    entityId=str(user.id),
                                    isOwner=True,
                                    canRead=True,
-                                   canWrite=False,
-                                   canDelete=False,
+                                   canWrite=True,
+                                   canDelete=True,
                                    aclOwnershipType=models.ExperimentACL.OWNER_OWNED)
         acl.save()
 
@@ -527,7 +524,6 @@ def _parse_metaman(request, cleaned_data):
                                aclOwnershipType=models.ExperimentACL.SYSTEM_OWNED)
     acl.save()
 
-    logger.info('=== processing experiment %i done ' % experiment.id)
     return experiment.id
 
 

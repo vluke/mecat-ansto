@@ -8,8 +8,10 @@ class RegisterMetamanForm(forms.Form):
     metaman = forms.FileField(required=True)
     principal_investigator = forms.CharField(required=True)
     researchers = forms.CharField(required=False)
+    # ldap login!
+    experiment_owner = forms.CharField(required=False)
     institution_name = forms.CharField(max_length=400, required=True)
-    program_id = forms.CharField(max_length=30, required=True)
+    program_id = forms.CharField(max_length=30, required=False)
     epn = forms.CharField(max_length=30, required=True)
     start_time = forms.DateTimeField(required=False)
     end_time = forms.DateTimeField(required=False)

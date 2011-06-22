@@ -165,21 +165,18 @@ $(document).ready(function() {
           <a href="mailto:{{owner.email}}">{{ owner.email}}</a>
         {% endif %}
         ({{ owner.username }})
-        {% if not forloop.last %}
           <br/>
-	{% endif %}
-	</p>
-	<p align="right">
-	{% if experiment.public %}
-		<em>This experiment is public.</em>
-	{% endif %}
-	{% if is_owner %}
-	{% if not experiment.public %}
-		<strong><a href="publish/">Publish Experiment</a></strong><br/>
-	{% endif %}
-	{% endif %}
       {% endfor %}
-  </p>
-{% endif %}
+    {% endif %}
+
+    {% if experiment.public %}
+      <em>This experiment is public.</em>
+    {% endif %}
+    {% if is_owner %}
+      {% if not experiment.public %}
+        <strong><a href="publish/">Publish Experiment</a></strong><br/>
+      {% endif %}
+    {% endif %}
+    </p>
 
 </div>

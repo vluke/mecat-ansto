@@ -49,7 +49,7 @@ logger = logging.getLogger('tardis.mecat')
 EPN_LIST = "_epn_list"
 SOAP_LOGIN_KEY = "_soap_login_key"
 
-auth_key = u'ansto_vbl'
+auth_key = u'vbl'
 auth_display_name = u'VBL'
 
 
