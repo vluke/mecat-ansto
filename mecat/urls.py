@@ -11,7 +11,7 @@ def no_view(request):
 
 urlpatterns = patterns('',
                        (r'^$', 'tardis.tardis_portal.views.experiment_index'),
-                       (r'^experiment/register/$', 'mecat.register.register_metaman'),
+                       (r'^vbl/experiment/register/$', 'mecat.register.register_metaman'),
                        (r'^vbl/download/datafile/(?P<datafile_id>\d+)/$', 'mecat.download.download_datafile'),
                        (r'^vbl/download/experiment/(?P<experiment_id>\d+)/(?P<comptype>[a-z]{3})/$', 'mecat.download.download_experiment'),
                        (r'^vbl/download/datafiles/$', 'mecat.download.download_datafiles'),

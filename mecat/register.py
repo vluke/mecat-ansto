@@ -29,7 +29,7 @@ _config['ECH'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['file', '.'],
+    'groupDSRules': ['directory', 1],
     'metadata': None,
     'beamline_group': 'BEAMLINE_ECH',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -42,7 +42,7 @@ _config['KWR'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['file', '.'],
+    'groupDSRules': ['directory', 1],
     'metadata': None,
     'beamline_group': 'BEAMLINE_KWR',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -55,7 +55,7 @@ _config['PLP'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['file', '.'],
+    'groupDSRules': ['directory', 1],
     'metadata': None,
     'beamline_group': 'BEAMLINE_PLP',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -68,7 +68,7 @@ _config['QKK'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['file', '.'],
+    'groupDSRules': ['directory', 1],
     'metadata': None,
     'beamline_group': 'BEAMLINE_QKK',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -81,7 +81,7 @@ _config['WBT'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['file', '.'],
+    'groupDSRules': ['directory', 1],
     'metadata': None,
     'beamline_group': 'BEAMLINE_WBT',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
