@@ -126,6 +126,10 @@ class Backend():
         request.session[EPN_LIST] = epns
         request.session[SOAP_LOGIN_KEY] = key
 
+        if not email == '':
+            id = email
+        else:
+            id = username
         # the authentication provider convention, however the vbl
         # does not distinguish between usernames and emails
         return {'display': username,
