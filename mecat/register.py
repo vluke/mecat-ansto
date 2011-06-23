@@ -22,7 +22,7 @@ from mecat.forms import RegisterMetamanForm
 logger = logging.getLogger('tardis.mecat')
 
 _config = {}
-_config['ECH'] = {
+_config['Echidna'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21',
@@ -35,7 +35,7 @@ _config['ECH'] = {
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['KWR'] = {
+_config['Kowari'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21',
@@ -48,7 +48,7 @@ _config['KWR'] = {
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['PLP'] = {
+_config['Platypus'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21',
@@ -61,7 +61,7 @@ _config['PLP'] = {
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['QKK'] = {
+_config['Quokka'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21',
@@ -74,7 +74,7 @@ _config['QKK'] = {
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
 }
 
-_config['WBT'] = {
+_config['Wombat'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': '',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21',
@@ -266,8 +266,9 @@ def _parse_metaman(request, cleaned_data):
     :keyword cleaned_data: cleaned form fields
     '''
 
-    # which beamline did it come from?
-    beamline = cleaned_data['instrument']
+    # which beamline/instrument did it come from?
+    beamline = cleaned_data['beamline']
+    epn = cleaned_data['epn']
 
     ###
     ### I: Parse MetaMan ouput, loop over individual metadata blocks
@@ -294,8 +295,22 @@ def _parse_metaman(request, cleaned_data):
         logger.error("No data will be commited to the database!")
         return HttpResponseServerError()
 
+
     # create experiment with info from post
-    experiment = models.Experiment()
+    # check if experiment already exists
+    # if so, run in 'update' rather then 'create' mode
+    try:
+        experiment = models.Experiment.objects.get(experimentparameterset__experimentparameter__string_value=epn, 
+                                                   experimentparameterset__experimentparameter__name__name='EPN')
+        update = True
+        logger.debug('experiment with epn %s alreadt exists' % epn)
+        logger.debug('- ingesting is being run in UPDATE mode')
+        logger.debug('- all parametersets will be re-created, acls will not be touched')
+    except models.Experiment.DoesNotExist:
+        experiment = models.Experiment()
+        update = False
+        logger.debug('ingesting is being run in CREATE mode')
+
     experiment.title = cleaned_data['title']
     experiment.institution_name = cleaned_data['institution_name']
     experiment.created_by = request.user
@@ -305,6 +320,9 @@ def _parse_metaman(request, cleaned_data):
     logger.debug('experiment %i saved' % experiment.id)
 
     order = 0
+    if update:
+        models.Author_Experiment.objects.filter(experiment=experiment).delete()
+        
     author_experiment = models.Author_Experiment(experiment=experiment,
                                                  author=cleaned_data['principal_investigator'],
                                                  order=order)
@@ -323,12 +341,15 @@ def _parse_metaman(request, cleaned_data):
     # additional experiment metadata
     exp_schema = \
         models.Schema.objects.get(namespace__exact=_config[beamline]['expSchema'])
+    if update:
+        models.ExperimentParameterSet.objects.filter(schema=exp_schema, 
+                                                     experiment=experiment).delete()
     exp_parameterset = models.ExperimentParameterSet(schema=exp_schema,
                                                      experiment=experiment)
     exp_parameterset.save()
 
     experiment_metadata = {'program_id': cleaned_data['program_id'],
-                           'epn': cleaned_data['epn']}
+                           'epn': epn}
     for key, value in experiment_metadata.iteritems():
         try:
             exp_parameter = models.ParameterName.objects.get(schema=exp_schema,
@@ -347,10 +368,14 @@ def _parse_metaman(request, cleaned_data):
         sample_schema = \
             models.Schema.objects.get(namespace__exact=_config[beamline]['sampleSchema'])
 
+        if update:
+            models.ExperimentParameterSet(schema=sample_schema,
+                                          experiment=experiment).delete()
+            
         sample_parameterset = models.ExperimentParameterSet(schema=sample_schema,
                                                             experiment=experiment)
         sample_parameterset.save()
-
+        
         for line in sample:
             line = line.rstrip('\n')
             if not line == '':
@@ -433,13 +458,28 @@ def _parse_metaman(request, cleaned_data):
 
     # loop over datasets
     for dsName, ds in datasets.items():
-        dataset = models.Dataset(experiment=experiment,
-                                 description=dsName.replace('Data/', ''))
-        dataset.save()
+        description = dsName.replace('Data/', '')
+        if update:
+            try:
+                dataset = models.Dataset.objects.get(experiment=experiment,
+                                                     description=description)
+            except models.Dataset.DoesNotExists:
+                dataset = models.Dataset(experiment=experiment,
+                                         description=description)
+                dataset.save()
+        else:
+            dataset = models.Dataset(experiment=experiment,
+                                     description=description)
+            dataset.save()
 
         # does this dataset have any metadata?
         if dsName in metadata.keys():
             ds_schema = models.Schema.objects.get(namespace__exact=_config[beamline]['dsSchema'])
+            if update:
+                models.DatasetParameterSet.objects.get(schema=ds_schema,
+                                                       dataset=dataset).delete()
+
+
             ds_parameterset = models.DatasetParameterSet(schema=ds_schema,
                                                          dataset=dataset)
             ds_parameterset.save()
@@ -451,14 +491,31 @@ def _parse_metaman(request, cleaned_data):
             models.Schema.objects.get(namespace__exact=_config[beamline]['dfSchema'])
 
         for df in ds:
-            dataset_file = models.Dataset_File(dataset=dataset,
-                                               filename=os.path.basename(df.name),
-                                               url='vbl://' + df.name,
-                                               size=df.getSize(),
-                                               protocol='vbl')
+            if update:
+                try:
+                    dataset_file = models.Dataset_File.objects.get(dataset=dataset,
+                                                                    url='vbl://' + df.name,
+                                                                    protocol='vbl')
+                    dataset_file.size=df.getSize()
+                except models.Dataset_File.DoesNotExist:
+                    dataset_file = models.Dataset_File(dataset=dataset,
+                                                       filename=os.path.basename(df.name),
+                                                       url='vbl://' + df.name,
+                                                       size=df.getSize(),
+                                                       protocol='vbl')
+            else:
+                dataset_file = models.Dataset_File(dataset=dataset,
+                                                   filename=os.path.basename(df.name),
+                                                   url='vbl://' + df.name,
+                                                   size=df.getSize(),
+                                                   protocol='vbl')
             dataset_file.save()
 
             # loop over file meta-data
+            if update:
+                models.DatafileParameterSet.objects.get(schema=df_schema,
+                                                        dataset_file=dataset_file).delete()
+
             df_parameterset = models.DatafileParameterSet(schema=df_schema,
                                                           dataset_file=dataset_file)
             df_parameterset.save()
@@ -470,6 +527,10 @@ def _parse_metaman(request, cleaned_data):
     ###
     ### IV: Setup permissions (for users and groups)
     ###
+    if update:
+        logger.debug('update mode, experiment acls will not be touched')
+        return experiment.id
+
     owners = cleaned_data['experiment_owner'].split(' ~ ')
     for owner in owners:
         if owner == '':
