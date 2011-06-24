@@ -80,6 +80,31 @@ class VblGroupProvider(GroupProvider):
             return request.session[EPN_LIST]
 
 
+    def searchGroups(self, **filter):
+
+        epn = filter.get('name')
+        if not epn:
+            return []
+
+        # we can't really search for groups yet 
+        # TODO: implement user's lookup through SOAP call
+        # requires somethings like the following
+        # users = str(self.client.service.VBLgetEmailsFromExpID(epn))
+
+        # chop off literals (a,b,c) from epn (2467a -> 2467)
+        from re import match
+        epn = match('\d*', epn).group(0)
+
+        try:
+            id = int(epn)
+        except ValueError:
+            id = 0
+            
+        return [{'id': id,
+                 'display': 'VBL/EPN_%s' % epn,
+                 #'members': users.split(',')}]
+                 'members': []}]
+
 class Backend():
     """
     Authenticate against the VBL SOAP Webservice. It is assumed that

@@ -6,7 +6,7 @@ class RegisterMetamanForm(forms.Form):
     password = forms.CharField(max_length=30, required=True,
                                widget=forms.PasswordInput)
     metaman = forms.FileField(required=True)
-    principal_investigator = forms.CharField(required=True)
+    principal_investigator = forms.CharField(required=False)
     researchers = forms.CharField(required=False)
     # ldap login!
     experiment_owner = forms.CharField(required=False)
