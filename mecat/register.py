@@ -369,8 +369,8 @@ def _parse_metaman(request, cleaned_data):
             models.Schema.objects.get(namespace__exact=_config[beamline]['sampleSchema'])
 
         if update:
-            models.ExperimentParameterSet(schema=sample_schema,
-                                          experiment=experiment).delete()
+            models.ExperimentParameterSet.objects.get(schema=sample_schema,
+                                                      experiment=experiment).delete()
             
         sample_parameterset = models.ExperimentParameterSet(schema=sample_schema,
                                                             experiment=experiment)
