@@ -29,7 +29,8 @@ _config['Echidna'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['directory', 1],
+    #'groupDSRules': ['directory', 1],
+    'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_ECH',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -42,7 +43,8 @@ _config['Kowari'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['directory', 1],
+    #'groupDSRules': ['directory', 1],
+    'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_KWR',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -55,7 +57,8 @@ _config['Platypus'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['directory', 1],
+    #'groupDSRules': ['directory', 1],
+    'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_PLP',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -68,7 +71,8 @@ _config['Quokka'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['directory', 1],
+    #'groupDSRules': ['directory', 1],
+    'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_QKK',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -81,7 +85,8 @@ _config['Wombat'] = {
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
     # group all file which have the same basename into a dataset
-    'groupDSRules': ['directory', 1],
+    #'groupDSRules': ['directory', 1],
+    'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_WBT',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
@@ -193,7 +198,15 @@ def _getDatasetName(df, beamline):
         item = _config[beamline]['groupDSRules'][1]
         tokens = df.name.split('/')
         return tokens[item]
-
+    # group by sample_name  
+    elif ds_rule == 'sample':
+        # name will default to the directory name if
+        # no sample is specified
+        try:
+            name =  df['sample_name'][0]       
+        except KeyError:
+            name = df.name.split('/')[1]
+        return name
     else:
         return df.name
 
@@ -463,7 +476,7 @@ def _parse_metaman(request, cleaned_data):
             try:
                 dataset = models.Dataset.objects.get(experiment=experiment,
                                                      description=description)
-            except models.Dataset.DoesNotExists:
+            except models.Dataset.DoesNotExist:
                 dataset = models.Dataset(experiment=experiment,
                                          description=description)
                 dataset.save()
