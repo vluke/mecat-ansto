@@ -296,3 +296,26 @@ background-image: none;
 .ui-tabs .ui-tabs-nav .ui-tabs-selected a {
     color: #ff0000;
 }
+
+/* ryan */
+a img {
+border: 0;
+}
+
+div.schema_name > span {
+z-index: 20;
+background-color: rgb(255, 255, 255);
+margin-left: 20px;
+}
+div.schema_name > hr{
+margin-top:-7px;
+margin-bottom:14px;
+color: #FFF;
+background-color: #FFF;
+}
+div.schema_name > span img {
+padding-right: 20px;
+}
+div.edit_schema {
+float:right;
+}
