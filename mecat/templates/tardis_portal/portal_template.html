@@ -9,6 +9,9 @@
 <link rel="stylesheet" type="text/css" href="http://www.ansto.gov.au/_designs/ansto_new/css/common.css" media="all" />
 <link rel="stylesheet" type="text/css" href="http://www.ansto.gov.au/_designs/ansto_new/css/inside.css" />
 <link rel="stylesheet" type="text/css" href="/ansto_media/css/versi-ansto.css" />
+  <script type="text/javascript" src="/site_media/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery.autocomplete.min.js"></script>
+<link type="text/css" href="/site_media/css/autocomplete/jquery.autocomplete.css" rel="stylesheet" />
 
 <!--[if IE]>
    <style type="text/css">
@@ -73,12 +76,6 @@
       <div id="sec-bar">
         <div id="page-title"><img src="http://www.ansto.gov.au/__data/assets/image/0018/35280/page_title.gif" alt="Australian Nuclear Science and Technology Organisation" /></div>
         <div id="search-panel">
-          <span id="search-label"><img src="http://www.ansto.gov.au/__data/assets/image/0019/35281/search_label.gif" alt="Search"/></span>
-          <form action="http://bureau-query.funnelback.com/search/search.cgi?" method="get">
-            <span id="search-text-box"><input name="query" value="" class="text" id="txtSearch" type="text"></span>
-            <span id="search-button"><input alt="Go" class="imgbutt" src="http://www.ansto.gov.au/__data/assets/image/0020/35282/go_button.gif" type="image"></span>
-            <input name="collection" value="ansto" type="hidden">
-          </form>
         </div><!-- search-panel -->
       </div><!-- sec-bar -->
       <div class="clear2"></div>
@@ -89,12 +86,15 @@
 	  <!-- <li><a href="#">Wiki</a></li> -->
 	  <li class="lineheight"><a href="/partners">Partners</a></li>
 	  <li>
-	    <form name="input" action="/search/quick/" method="get" class="quicksearch">
-	      <input type="hidden" name="results" value="">
-	      <input type="text" name="quicksearch" value="" size="10">
-	      <input type="submit" value="search" class="quicksearch-submit">
-	    </form>
+          </li>
+          <li>
+          {% if form %}
+          <form method="get" action="{% url tardis.tardis_portal.views.single_search %}">
+            <input type="submit" value="search">
+            <input type="text" name="q" id="id_q" />
+          </form>
 	  </li>
+          {% endif %}
 	  {% if username %}
 	    <li class="lineheight"><a href="/logout">Logout</a></li>
 	    {% if user.is_superuser %}
@@ -163,6 +163,29 @@ $(document).ready(function(){
      containerheight: '195px'
     });
 });
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var users = (function () {
+    var val = null;
+    var authMethod = "localdb";
+    var data = { authMethod: authMethod };
+    $.ajax({
+      'async': false,
+      'global': false,
+      'data': data,
+      'url': '/ajax/parameter_field_list',
+      'success': function (data) {
+         val = data;
+       }
+     });
+     return val;
+    })();
+  
+    $("#id_q").autocomplete(users.split(" "), {
+      matchContains: true, multiple: true, multipleSeparator: " ", 
+    });
+  });
 </script>
 </body>
 </html>
