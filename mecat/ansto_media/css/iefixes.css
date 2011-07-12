@@ -1,0 +1,24 @@
+/* http://www.ansto.gov.au/_designs/ansto_new/css/iefixes.css */
+/*
+  Running MySource Matrix
+  Developed by Squiz - http://www.squiz.net
+  MySource, MySource Matrix and Squiz.net are registered Trademarks of Squiz Pty Ltd
+  Page generated: 12 July 2011 12:36:37
+*/
+
+
+#navigation li:hover ul, #navigation li.hover ul {
+left: 0!important;
+margin-top:0px!important;
+
+}
+
+#navigation li ul {
+top:25px!important;
+}
+
+#navigation li {
+position:relative!important;
+}
+
+#navigation ul li {z-index:10;}

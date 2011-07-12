@@ -6,8 +6,8 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <title>TARDIS {% if subtitle %}- {{ subtitle }} {% endif %}</title>
-<link rel="stylesheet" type="text/css" href="http://www.ansto.gov.au/_designs/ansto_new/css/common.css" media="all" />
-<link rel="stylesheet" type="text/css" href="http://www.ansto.gov.au/_designs/ansto_new/css/inside.css" />
+<link rel="stylesheet" type="text/css" href="/ansto_media/css/common.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/ansto_media/css/inside.css" />
 <link rel="stylesheet" type="text/css" href="/ansto_media/css/versi-ansto.css" />
   <script type="text/javascript" src="/site_media/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="/site_media/js/jquery.autocomplete.min.js"></script>
@@ -50,10 +50,9 @@
 <![endif]-->
 
 <!--[if lt IE 8]>
-    <link rel="stylesheet" type="text/css" href="http://www.ansto.gov.au/_designs/ansto_new/css/iefixes.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/ansto_media/css/iefixes.css" media="all" />
 <![endif]-->
 
-<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.ansto.gov.au/home/left_column/latest_news/latest_news" />
 {% block script %}
 {% endblock %}
 </head>
@@ -62,19 +61,26 @@
     <div id="bottom-container">
       <div id="banner">
         <div id="aus-gov-logo">
-          <a href="http://www.ansto.gov.au"><img src="http://www.ansto.gov.au/__data/assets/image/0005/35276/aus_gov_logo.gif" alt="Australian Government Logo" /></a>
+          <!-- <a href="http://www.ansto.gov.au"><img src="http://www.ansto.gov.au/__data/assets/image/0005/35276/aus_gov_logo.gif" alt="Australian Government Logo" /></a> -->
+          <a href="http://www.ansto.gov.au"><img src="/ansto_media/images/aus_gov_logo.gif" alt="Australian Government Logo" /></a>
         </div><!-- aus-gov-logo -->
         <div id="ansto-logo">
-          <a href="/"><img src="http://www.ansto.gov.au/__data/assets/image/0006/35277/ansto_logo.gif" alt="ANSTO Logo" /></a>
+          <!-- <a href="/"><img src="http://www.ansto.gov.au/__data/assets/image/0006/35277/ansto_logo.gif" alt="ANSTO Logo" /></a> -->
+          <a href="/"><img src="/ansto_media/images/ansto_logo.gif" alt="ANSTO Logo" /></a>
         </div><!-- ansto-logo -->
         <div id="header-title">
-	  <img src="http://www.ansto.gov.au/__data/assets/image/0007/35278/header_title.gif" alt="Delivering excellence in nuclear science & technology" />
+          <!-- <img src="http://www.ansto.gov.au/__data/assets/image/0007/35278/header_title.gif" alt="Delivering excellence in nuclear science & technology" /> -->
+          <img src="/ansto_media/images/header_title.gif" alt="Delivering excellence in nuclear science & technology" />
         </div><!-- header-title -->
       </div><!-- banner -->
-      <div id="banner-right-image"><img src="http://www.ansto.gov.au/__data/assets/image/0008/35279/banner_image.jpg" alt="Work Floor" /></div><!-- banner-right-image -->
+<!-- <img src="http://www.ansto.gov.au/__data/assets/image/0008/35279/banner_image.jpg" alt="Work Floor" /> -->
+      <div id="banner-right-image"><img src="/ansto_media/images/banner_image.jpg" alt="Work Floor" /></div><!-- banner-right-image -->
       <div class="clear2"></div>
       <div id="sec-bar">
-        <div id="page-title"><img src="http://www.ansto.gov.au/__data/assets/image/0018/35280/page_title.gif" alt="Australian Nuclear Science and Technology Organisation" /></div>
+        <div id="page-title">
+            <!-- <img src="http://www.ansto.gov.au/__data/assets/image/0018/35280/page_title.gif" alt="Australian Nuclear Science and Technology Organisation" /> -->
+            <img src="/ansto_media/images/page_title.gif" alt="Australian Nuclear Science and Technology Organisation" />
+        </div>
         <div id="search-panel">
         </div><!-- search-panel -->
       </div><!-- sec-bar -->
@@ -153,17 +159,6 @@
         <a href="http://www.ansto.gov.au/sitemap">Sitemap</a> | <a href="http://www.ansto.gov.au/contact_ansto">Contact us</a> | <a href="http://www.ansto.gov.au/feedback">Feedback</a> | <a href="http://www.ansto.gov.au/copyright">Copyright</a> | <a href="http://www.ansto.gov.au/privacy">Privacy</a>
     </div><!-- footer-links -->
 </div><!-- footer -->
-<script type="text/javascript" src="http://www.ansto.gov.au/__data/assets/text_file/0010/41995/jquery.innerfade.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
- $('.set').innerfade({
-     speed: 400,
-     timeout: 8000,
-     type: 'random',
-     containerheight: '195px'
-    });
-});
-</script>
 <script type="text/javascript">
   $(document).ready(function(){
     var users = (function () {

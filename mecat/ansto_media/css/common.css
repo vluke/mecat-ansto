@@ -1,0 +1,292 @@
+/* http://www.ansto.gov.au/_designs/ansto_new/css/common.css */
+/*
+  Running MySource Matrix
+  Developed by Squiz - http://www.squiz.net
+  MySource, MySource Matrix and Squiz.net are registered Trademarks of Squiz Pty Ltd
+  Page generated: 12 July 2011 12:36:01
+*/
+
+
+/* CSS Document */
+
+body 
+{
+font-size:x-small;
+margin: 0px; 
+padding: 0px;
+font-family:Tahoma, Arial, Verdana;
+background-color:#f3f3f3;
+}
+
+a:hover {
+text-decoration: underline !important; 
+}
+
+#top-container
+{
+margin-left:auto;
+margin-right:auto;
+width:961px;
+background:url('../images/top_container_bg.gif') top left no-repeat;
+background-color:#FFFFFF;
+overflow:hidden;
+}
+
+#bottom-container
+{
+width:961px;
+background:url('../images/bottom_container_bg.gif') bottom left no-repeat;
+}
+
+#footer
+{
+width:961px;
+margin-left:auto;
+margin-right:auto;
+color:#757575;
+}
+
+#footer-links
+{
+margin-left:30px;
+padding-top:7px;
+}
+
+
+#footer-links a
+{
+text-decoration:none;
+color:#757575;
+font-size:110%;
+}
+
+#banner
+{
+float:left;
+margin-top:20px;
+margin-left:14px;
+}
+
+#aus-gov-logo
+{
+float:left;
+}
+
+#aus-gov-logo img
+{
+border:none;
+}
+
+
+#ansto-logo
+{
+float:left;
+}
+
+#ansto-logo img
+{
+border:none;
+
+}
+
+#header-title
+{
+float:left;
+}
+
+#banner-right-image
+{
+float:right;
+overflow:hidden;
+}
+
+.clear
+{
+clear:both;
+overflow:hidden;
+height:1%;
+}
+
+.clear2
+{
+clear:both;
+}
+
+
+#sec-bar
+{
+border-top:#e6e6e6 1px solid;
+overflow:hidden;
+
+}
+
+#page-title
+{
+float:left;
+
+}
+
+
+#search-panel
+{
+margin-top:4px;
+margin-right:21px;
+float:right;
+
+height:26px;
+}
+
+
+#search-label
+{
+display:inline;
+
+}
+
+#search-panel form
+{
+padding:0px;
+margin:0px;
+display:inline;
+}
+
+#search-text-box input
+{
+width:134px;
+height:21px;
+border:#dedede 1px solid;
+}
+
+#search-text-box
+{
+position:relative;
+top:-7px;
+}
+
+*+ html #search-text-box
+{
+position:relative;
+top:-1px;
+}
+
+* html #search-text-box
+{
+position:relative;
+top:-1px;
+}
+
+
+/* Top Nav */
+
+#navigation {
+background-color: #0075bf;
+height:25px;
+margin: 0 auto;
+padding-top:5px;
+width:961px;
+}
+
+
+#navigation, #navigation ul {
+padding:0px;
+margin:0px;
+list-style:none;
+}
+
+#navigation ul {
+padding-left:9px;}
+
+#navigation li {
+float:left;
+margin-left:16px;
+margin: 0 10px;
+display:block;
+}
+
+#navigation li.lineheight a {
+line-height:1.9em;
+}
+
+.lineheight {
+padding-top:3px;
+margin-left:10px;
+margin-right:10px;}
+
+#navigation li a {
+color:#FFFFFF;
+text-decoration:none;
+display:block;
+font-family:Tahoma, Arial, Verdana;
+font-size:1.2em;
+padding: 0 0 0 10px;
+float:left;
+}
+
+#navigation li a.selected {
+background: #ffffff url(../images/activeTabLeft.png) no-repeat scroll left top;
+color:#0079c2;
+}
+
+#navigation li li a.selected {
+background-color:#0075BF;
+background-image:none;
+color:#ffffff;}
+
+#navigation li a span {
+height:22px;
+padding-right:10px;
+text-align:center;
+float:left;
+cursor: pointer;}
+
+#navigation li a.selected span {
+background: #ffffff url(../images/activeTabRight.png) no-repeat scroll right top;
+color:#0079c2;
+float:left;}
+
+#navigation li ul {
+display:block;
+position:absolute;
+background-color:#0075BF;
+left:-9999em;
+width:170px;
+padding-left:0px;
+z-index: 10;
+}
+
+
+#navigation li li {
+width:158px;
+padding-bottom:3px;
+margin-left:0px!important;
+margin-right:0px!important;
+}
+
+#navigation li li a {
+padding:3px 6px 3px 6px!important;
+height:auto!important;
+text-align:left!important;
+width:158px;
+line-height:normal!important;
+}
+
+#navigation li li a:hover {
+background-color:#000066;
+color:#FFFFFF;}
+
+/* for padding on parent li */
+
+#navigation li:hover ul, #navigation li.hover ul {
+left:auto;
+}
+
+#navigation li:hover ul, #navigation li.hover ul {
+margin-top: 22px;
+margin-left: 4px;
+}
+
+acronym, abbr {cursor: help;}
+
+
+
+
