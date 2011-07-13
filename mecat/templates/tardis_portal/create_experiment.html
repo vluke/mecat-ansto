@@ -52,36 +52,6 @@
 	total_input.val(total);
     }
 
-    $(document).ready(function() {
-	{% if directory_listing %}
-        $("#demo1").jstree({
-	    core : { /* core options go here */ },
-	    plugins : [ "themes", "html_data", "checkbox" ]
-	});
-
-	//Get checked
-	$('.add_files').live('click', function(){
-	    file_list = $(this).parents(".dataset_container").find(".datafiles");
-
-	    $(".jstree-leaf.jstree-checked").each(function(){
-		exists = false;
-		filename = $(this).attr('id');
-
-		file_list.find(".file").each(function(){
-		    if(filename == $(this).html()) {
-			exists = true;
-		    }
-		});
-
-		if(!exists) {
-		    addDatafile(file_list, filename);
-		}
-	    });
-	    $("#demo1").jstree("uncheck_all");
-	});
-	{% endif %}
-    });
-
     function updateElementIndex(el, prefix, ndx) {
         var id_regex = new RegExp('(' + prefix + '-\\d+)');
         var replacement = prefix + '-' + ndx;
@@ -193,7 +163,6 @@
 		    <input name="dataset-0-description" value="" type="text" id="id_dataset-0-description" size="80" />
 		    <input type="hidden" name="dataset-0-immutable" value="False" id="id_dataset-0-immutable" />
 		  </div>
-		  <p><input class="add_files" type="button" value="Add selected files to dataset"/></p>
 		  <p><strong>Files added to Dataset</strong></p>
 		  <div>
 		    <ul class="datafiles">
@@ -233,25 +202,6 @@
                 {{ form.description }}
               </div>
             </div>
-	    {% if directory_listing %}
-              <p class="my_files">My Files</p>
-	      <div class="msg_body">
-		<p><strong>Select Files To Be Added To A Dataset:</strong></p>
-		<div id="demo1" class="demo">
-		  {{directory_listing|safe}}
-		</div>
-		<p>
-		To add files to 'My Files', mount the following file store via your operating system:
-		</p>
-		<p id="mountpath">
-		<strong>{{staging_mount_prefix}}{{username}}</strong>
-		</p>
-		<p>
-		<a href="#">User Guide</a>
-		</p>
-		<br/>
-	      </div>
-	    {% endif %}
 	    <script type="text/javascript">
 	      function findLastDS() {
 		  forms = $('.dataset_container').not('.formset-custom-template');
@@ -302,7 +252,6 @@
 
 		  $(document).find('.dataset_container.immutable').find('.delete-row').hide();
 		  $(document).find('.dataset_container.immutable').find('.remove_file').hide();
-		  $(document).find('.dataset_container.immutable').find('.add_files').hide();
 
 	      });
 
@@ -322,9 +271,6 @@
    	        {{ dataset_form.immutable.as_hidden }}
 
 		    </div>
-		    {% if directory_listing %}
-		      <p><input class="add_files" type="button" value="Add selected files to dataset"/></p>
-		    {% endif %}
 		    <p><strong>Files added to Dataset</strong></p>
 		    <div>
 		      <ul class="datafiles">
