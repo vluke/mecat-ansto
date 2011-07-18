@@ -39,8 +39,7 @@
 
 #userinfo {
     color:#FFFFFF;
-    display:block;
-    float:right;
+    display:inline;
     font-family: Tahoma,Arial,Verdana;
     font-size: 1.2em;
     padding: 4px 10px 0 0;
@@ -316,4 +315,7 @@ padding-right: 20px;
 }
 div.edit_schema {
 float:right;
+}
+#quicksearch_container {
+    float:right ;
 }

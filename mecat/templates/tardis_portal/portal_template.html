@@ -89,29 +89,30 @@
 	<ul>
 	  <li class="lineheight"><a href="/experiment/view">Data</a></li>
 	  <li class="lineheight"><a href="/about">About</a></li>
-	  <!-- <li><a href="#">Wiki</a></li> -->
 	  <li class="lineheight"><a href="/partners">Partners</a></li>
-	  <li>
-          </li>
-          <li>
-          {% if form %}
-          <form method="get" action="{% url tardis.tardis_portal.views.single_search %}">
-            <input type="submit" value="search"/>
-            <input type="text" name="q" id="id_q"/>
-          </form>
-	  </li>
-          {% endif %}
 	  {% if username %}
 	    <li class="lineheight"><a href="/logout">Logout</a></li>
+        <li class="lineheight">
 	    {% if user.is_superuser %}
-	      <div id="userinfo">Welcome, <a href="/admin">{{ username }}.</a></div>
+	      <span id="userinfo">Welcome, <a href="/admin">{{ username }}.</a></span>
 	    {% else %}
-	     <div id="userinfo">Welcome, {{ username }}.</div>
+	     <span id="userinfo">Welcome, {{ username }}.</span>
 	    {% endif %}
+        </li>
 	  {% else %}
 	  <li class="lineheight"><a href="/login">Login</a></li>
 	  <li class="lineheight"><a href="/accounts/register">Register</a></li>
 	  {% endif %}
+          {% if form %}
+	  <li class="lineheight" style="width:550px;padding-top:0;">
+      <span id="quicksearch_container" style="width:100%;">
+          <form method="get" action="{% url tardis.tardis_portal.views.single_search %}" style="width:100%;">
+            <input type="text" name="q" id="id_q" style="width:85%;"/>
+            <input type="submit" value="search">
+          </form>
+      </span>
+	  </li>
+          {% endif %}
 	</ul>
       </div><!-- navigation -->
 
@@ -178,7 +179,7 @@
     })();
   
     $("#id_q").autocomplete(users.split(" "), {
-      matchContains: true, multiple: true, multipleSeparator: " ", 
+      matchContains: true, multiple: true, multipleSeparator: " "
     });
   });
 </script>
