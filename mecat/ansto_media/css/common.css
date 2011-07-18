@@ -212,7 +212,7 @@ padding-top:3px;
 margin-left:10px;
 margin-right:10px;}
 
-#navigation li a {
+#navigation li > a {
 color:#FFFFFF;
 text-decoration:none;
 display:block;
