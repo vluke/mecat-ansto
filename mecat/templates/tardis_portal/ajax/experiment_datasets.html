@@ -259,8 +259,11 @@
 		<div class="dataset_metadata">
 		</div> <!-- dataset metadata -->
 
-	      <div class="dataset_datafiles">
-		<strong>Files ({{ dataset.dataset_file_set.count }}): </strong>
+	        <div class="dataset_datafiles">
+               
+                <span{% if dataset.pk in file_matched_datasets %} style="background-color: #FFFF00"{% endif %}>
+		  <strong>Files ({{ dataset.dataset_file_set.count }}): </strong>
+                 </span>
 		{% if dataset.dataset_file_set.count|lt:"1000000" %}
 		  <a class="datafile_list_toggle" href="{% url tardis.tardis_portal.views.retrieve_datafile_list dataset.id %}{% if query %}?query={{ query }}{% endif %}">[Show]</a>
 		  {% else %}

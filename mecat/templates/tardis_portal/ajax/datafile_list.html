@@ -39,12 +39,30 @@ File filter: <input title='Enter part or all of a filename, then press enter. e.
 <br/>
 Select: <a class="dataset_selector_all">[All]</a> / <a class="dataset_selector_none">[None]</a>
 <br/><br/>
+<script type="text/javascript">
+  $("input[name$='show_datafile_search']").click(function() {
+    if($(this).val() == "matches")
+    {   
+      $(".datafile").hide();
+      $(".search_match_file").show();
+    } 
+    else
+    {
+      $(".datafile").show();
+    }
+  }); 
+</script>
+{% if highlighted_dataset_files %}
+<form name="datafile_search_select_form" id="datafile_search_form" method="post" action="">
+    <div><label><input type="radio" name="show_datafile_search" value="all" checked>Show all</label></div>  
+    <div><label><input type="radio" name="show_datafile_search" value="matches">Search matches only</label></div>  
+</form>
+{% endif %}
 {% for datafile in dataset.object_list %}
-{% if datafile.pk in display_dataset_files %}
-<li class="datafile">
+<li class="datafile{% if datafile.pk in highlighted_dataset_files %} search_match_file{% endif %}">
 	<input type="checkbox" class="datafile_checkbox" name="datafile" value="{{datafile.id}}">
 
-    <span>
+    <span{% if datafile.pk in highlighted_dataset_files %} style="background-color: #FFFF00"{% endif %}>
     <a class="filelink" href="{{ datafile.get_download_url }}" target="_blank">{{ datafile.filename }}</a> 
     </span>
     {% if datafile.size %}({{ datafile.size|filesizeformat }}){% endif %}
@@ -78,7 +96,6 @@ Select: <a class="dataset_selector_all">[All]</a> / <a class="dataset_selector_n
 	</ul>
 
 </li>
-{% endif %}
 {% endfor %}
 
 
