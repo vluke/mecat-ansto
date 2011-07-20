@@ -24,7 +24,7 @@ logger = logging.getLogger('tardis.mecat')
 _config = {}
 _config['Echidna'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': '',
+    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -38,7 +38,7 @@ _config['Echidna'] = {
 
 _config['Kowari'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': '',
+    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -52,7 +52,7 @@ _config['Kowari'] = {
 
 _config['Platypus'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': '',
+    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -66,7 +66,7 @@ _config['Platypus'] = {
 
 _config['Quokka'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': '',
+    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -80,7 +80,7 @@ _config['Quokka'] = {
 
 _config['Wombat'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': '',
+    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -138,6 +138,17 @@ class Datafile():
         else:
             return False
 
+class DatasetMetadata():
+    def __init__(self):
+        self.data = {}
+    def __setitem__(self, key, value):
+        self.data[key] = value
+    def __getitem__(self, key):
+        return self.data[key]
+    def __len__(self):
+        return len(self.data)
+    def __delitem__(self, key):
+        del self.data[key]
 
 def _acceptFile(name, beamline):
     '''
@@ -298,10 +309,25 @@ def _parse_metaman(request, cleaned_data):
     logger.debug("Metaman file '%s' uploaded. Size: %i bytes"
                  % (metaman.name, metaman.size))
 
+    # Save the metaman file for debugging for now
+    tmpfn = os.path.join('/tmp', metaman.name)
+    tmpfile = open(tmpfn, 'w')
+    for chunk in metaman.chunks():
+        tmpfile.write(chunk)
+    metaman.seek(0)
+    tmpfile.close()
+
     sample = None
     if 'sample' in request.FILES:
         sample = request.FILES['sample']
         logger.info("Sample information received. Size %i bytes" % sample.size)
+        # Save the sample file for debugging for now
+        tmpfn = os.path.join('/tmp', 's'+str(epn)+'.txt')
+        tmpfile = open(tmpfn, 'w')
+        for chunk in sample.chunks():
+            tmpfile.write(chunk)
+        metaman.seek(0)
+        tmpfile.close()
 
     if not beamline in _config:
         logger.error("Unknown beamline key '%s'" % beamline)
@@ -326,6 +352,7 @@ def _parse_metaman(request, cleaned_data):
 
     experiment.title = cleaned_data['title']
     experiment.institution_name = cleaned_data['institution_name']
+    experiment.description = cleaned_data['description']
     experiment.created_by = request.user
     experiment.start_time = cleaned_data['start_time']
     experiment.end_time = cleaned_data['end_time']
@@ -337,7 +364,7 @@ def _parse_metaman(request, cleaned_data):
         models.Author_Experiment.objects.filter(experiment=experiment).delete()
         
     author_experiment = models.Author_Experiment(experiment=experiment,
-                                                 author=cleaned_data['principal_investigator'],
+                                                 author=cleaned_data['experiment_owner'],
                                                  order=order)
     author_experiment.save()
     order += 1
@@ -361,8 +388,11 @@ def _parse_metaman(request, cleaned_data):
                                                      experiment=experiment)
     exp_parameterset.save()
 
-    experiment_metadata = {'program_id': cleaned_data['program_id'],
+    experiment_metadata = {'beamline': cleaned_data['beamline'],
                            'epn': epn}
+    if cleaned_data['program_id']:
+        experiment_metadata['program_id'] = cleaned_data['program_id']
+
     for key, value in experiment_metadata.iteritems():
         try:
             exp_parameter = models.ParameterName.objects.get(schema=exp_schema,
@@ -453,6 +483,8 @@ def _parse_metaman(request, cleaned_data):
             continue
         # work out the dataset name
         dsName = _getDatasetName(df, beamline)
+        metadata[dsName] = DatasetMetadata()
+        metadata[dsName].data = {'sample_name': [dsName]}
         if not _isDatasetMetadata(df, beamline):
             # usual datafile metadata
             if not dsName in datasets:
@@ -489,8 +521,11 @@ def _parse_metaman(request, cleaned_data):
         if dsName in metadata.keys():
             ds_schema = models.Schema.objects.get(namespace__exact=_config[beamline]['dsSchema'])
             if update:
-                models.DatasetParameterSet.objects.get(schema=ds_schema,
-                                                       dataset=dataset).delete()
+                try:
+                    models.DatasetParameterSet.objects.get(schema=ds_schema,
+                                                           dataset=dataset).delete()
+                except models.DatasetParameterSet.DoesNotExist:
+                    pass  # nothing to delete
 
 
             ds_parameterset = models.DatasetParameterSet(schema=ds_schema,
