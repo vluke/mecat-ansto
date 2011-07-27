@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="keywords" content=""/>
 <meta name="description" content=""/>
 <title>TARDIS {% if subtitle %}- {{ subtitle }} {% endif %}</title>
@@ -105,12 +105,12 @@
 	  {% endif %}
           {% if form %}
 	  <li class="lineheight" style="width:550px;padding-top:0;">
-      <span id="quicksearch_container" style="width:100%;">
           <form method="get" action="{% url tardis.tardis_portal.views.single_search %}" style="width:100%;">
+      <span id="quicksearch_container" style="width:100%;">
             <input type="text" name="q" id="id_q" style="width:85%;"/>
             <input type="submit" value="search">
-          </form>
       </span>
+          </form>
 	  </li>
           {% endif %}
 	</ul>
@@ -153,8 +153,8 @@
 </div><!-- top-container -->
 <div id="footer">
 	<div id="versi-footer">
-             <a href="http://www.monash.edu.au/eresearch/" target="_blank"><img src="/site_media/images/merc.png" style="padding-top:10px" height="52" ></a>
-             <a href="http://www.versi.edu.au" target="_blank"><img src="/site_media/images/acquia_marina_logo.jpg" style="padding-left:10px" height="62" ></a>
+             <a href="http://www.monash.edu.au/eresearch/" target="_blank"><img src="/site_media/images/merc.png" style="padding-top:10px" height="52" alt="MONASH University e-Research Centre"></a>
+             <a href="http://www.versi.edu.au" target="_blank"><img src="/site_media/images/acquia_marina_logo.jpg" style="padding-left:10px" height="62" alt="VeRSI"></a>
 	</div><!-- versi-footer -->
     <div id="footer-links">
         <a href="http://www.ansto.gov.au/sitemap">Sitemap</a> | <a href="http://www.ansto.gov.au/contact_ansto">Contact us</a> | <a href="http://www.ansto.gov.au/feedback">Feedback</a> | <a href="http://www.ansto.gov.au/copyright">Copyright</a> | <a href="http://www.ansto.gov.au/privacy">Privacy</a>
