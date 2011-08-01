@@ -235,7 +235,8 @@
     <div><label><input type="radio" name="show_search" value="matches">Search matches only</label></div>  
   </form>
   {% endif %}
-  <form method="POST" action="{% url tardis.tardis_portal.download.download_datafiles %}" target="_blank">
+  <iframe name="download_iframe" style="display: none"></iframe>
+  <form method="POST" action="{% url tardis.tardis_portal.download.download_datafiles %}" target="download_iframe">
     <input type="hidden" name="expid" value="{{experiment.id}}"/>
     <div id="datasets">
       {% for dataset in experiment.dataset_set.all %}

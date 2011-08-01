@@ -98,6 +98,18 @@ Select: <a class="dataset_selector_all">[All]</a> / <a class="dataset_selector_n
 </li>
 {% endfor %}
 
+<script type="text/javascript">
+   $('a.filelink').click(function(e) {
+      var loadingHTML = "<div style=\"display: inline\">&nbsp;<img src=\"/site_media/images/ajax-loader.gif\"/></div>";
+      if ($(this).next().is('div')) {
+         $(this).next().remove();
+      }
+      $(this).after(loadingHTML);
+      $(this).next().load( $(this).attr('href'), function() { $(this).hide(); });
+      return false;
+   });
+</script>
+
 
 {% if dataset.paginator.num_pages > 1 %}
 <br/>

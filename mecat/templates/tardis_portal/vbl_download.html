@@ -1,14 +1,16 @@
-<h1 class="title"><a href="#">Download file(s)</a></h1>
+<div>
+   <p>Download starting...</p>
+   <p>If nothing happens in 10 seconds, click the button.</p>
+   <br/>
+</div>
 <div class="entry">
-  <script type="text/javascript" language="javascript">
-    window.onload = Start;
-    function Start() {
-    document.getElementById("sslform").submit();
-    }
-  </script>
-  <form method="post" action="https://versi-vbl.nbi.ansto.gov.au/StorageGateway/ssltransStartWS.php" id="sslform">
+  <iframe style="display: none" name="dlframe"></iframe>
+  <form method="post" action="https://versi-vbl.nbi.ansto.gov.au/StorageGateway/ssltransStartWS.php" id="sslform" target="dlframe">
     <input type="hidden" name="key" value="{{key}}">
     <input type="hidden" name="expid" value="{{expid}}">
     <input type="submit" value="Download">
   </form>
+  <script type="text/javascript" language="javascript">
+    document.getElementById("sslform").submit();
+  </script>
 </div>
