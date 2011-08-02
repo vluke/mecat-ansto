@@ -172,27 +172,14 @@ $(document).ready(function() {
     {% for p in protocol %}
       <p>
 	{% if p.0 %}
-	  <strong><a class="download_all" href="{{p.1}}">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
-      
+	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
 	{% else %}
-	  <strong><a class="download_all" href="{{p.1}}">Download Entire Experiment</a></strong><br/>
+	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment</a></strong><br/>
 	{% endif %}
       </p>
     {% endfor %}
     <strong><a href="/experiment/metsexport/{{experiment.id}}">Download Experiment Metadata (METS)</a></strong>
   </div>
-
-<script type="text/javascript">
-   $('a.download_all').click(function(e) {
-      var loadingHTML = "<div style=\"display: inline\">&nbsp;<img src=\"/site_media/images/ajax-loader.gif\"/></div>";
-      if ($(this).next().is('div')) {
-         $(this).next().remove();
-      }
-      $(this).after(loadingHTML);
-      $(this).next().load( $(this).attr('href'), function() { $(this).hide(); });
-      return false;
-   });
-</script>
 
   <p align="right">
     <br/>
