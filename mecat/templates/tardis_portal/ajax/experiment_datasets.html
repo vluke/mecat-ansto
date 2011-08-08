@@ -148,6 +148,7 @@
     $(".datafile_list_toggle").toggle(function(){
 	$(this).text("[Hide]");
 	var href = $(this).attr("href");
+href = this.href;
 
 	$(this).next().html(loadingHTML + "</br>");
 

@@ -104,10 +104,10 @@
 	  <li class="lineheight"><a href="/accounts/register">Register</a></li>
 	  {% endif %}
           {% if form %}
-	  <li class="lineheight" style="width:550px;padding-top:0;">
+	  <li class="lineheight" style="width:470px;padding-top:0;">
           <form method="get" action="{% url tardis.tardis_portal.views.single_search %}" style="width:100%;">
       <span id="quicksearch_container" style="width:100%;">
-            <input type="text" name="q" id="id_q" style="width:85%;"/>
+          <input type="text" name="q" id="id_q" style="width:84%;" {% if query %} value="{{ query }}"{% endif %}/>
             <input type="submit" value="search">
       </span>
           </form>
