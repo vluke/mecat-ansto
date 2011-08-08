@@ -29,16 +29,20 @@ class VBLDownload():
         # create a tmp directory in /tmp. If it already exists but
         # has the wrong permissions, the download will fail.
         self.client = Client(settings.VBLSTORAGEGATEWAY,
-                             cache=None, 
+                             cache=None,
                              proxy=settings.VBLPROXY)
-        self.SOAPLoginKey = request.session[SOAP_LOGIN_KEY]
+        #self.SOAPLoginKey = request.session[SOAP_LOGIN_KEY]
+        self.request = request
 
-    def download(self, EPN, FileString=''):
+    def download(self, EPN, file_string=''):
+        # No authentication is done beyond this point. The caller *must* have
+        # already determined that the logged in user is authorized to access
+        # the experiment in EPN and the files in file_string.
         logger.debug('VBL download request received for EPN %s. ' % EPN)
-        key = self.client.service.VBLstartTransferSSL('SOAPLoginKey', self.SOAPLoginKey, EPN, FileString)
+        key = self.client.service.VBLstartTrustedTransferSSL(EPN, file_string)
         if key.startswith('Error:'):
             logger.error('VBL download request failed: %s' % key)
-            logger.error(FileString)
+            logger.error(file_string)
             return return_response_error(self.request)
         else:
             c = Context({'subtitle': 'Download',
@@ -57,9 +61,9 @@ def download_datafile(request, datafile_id):
                                                     datafile.dataset.experiment)
     epn = par.get(name__name='EPN').string_value
     absolute_filename = datafile.url.partition('://')[2]
-    fileString = absolute_filename + "\\r\\nTARDIS\\r\\n"
+    file_string = absolute_filename + "\\r\\nTARDIS\\r\\n"
     download = VBLDownload(request)
-    return download.download(epn, fileString)
+    return download.download(epn, file_string)
 
 
 def download_datafiles(request):
@@ -83,26 +87,26 @@ def download_datafiles(request):
     datasets = request.POST.getlist('dataset')
 
     # TODO: handle permission denied problem!
-    fileString = ""
+    file_string = ""
     for dsid in datasets:
         if has_dataset_access(request, dsid):
             for datafile in models.Dataset_File.objects.filter(dataset=dsid):
-                absolute_filename = datafile.url.partition(':///')[2]
-                fileString += absolute_filename + "\\r\\nTARDIS\\r\\n"
+                absolute_filename = datafile.url.partition('://')[2]
+                file_string += absolute_filename + "\\r\\nTARDIS\\r\\n"
 
     for dfid in datafiles:
         if has_datafile_access(request, dfid):
             datafile = models.Dataset_File.objects.get(pk=dfid)
             if not datafile.dataset.id in datasets:
-                absolute_filename = datafile.url.partition(':///')[2]
-                fileString += absolute_filename + "\\r\\nTARDIS\\r\\n"
+                absolute_filename = datafile.url.partition('://')[2]
+                file_string += absolute_filename + "\\r\\nTARDIS\\r\\n"
 
     download = VBLDownload(request)
-    return download.download(epn, fileString)
+    return download.download(epn, file_string)
 
 
 @experiment_access_required
-def download_experiment(request, experiment_id):
+def download_experiment(request, experiment_id, comptype=''):
 
     par = models.ExperimentParameter.objects.filter(parameterset__experiment=
                                                     experiment_id)
