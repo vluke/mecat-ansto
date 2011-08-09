@@ -412,13 +412,11 @@ def _parse_metaman(request, cleaned_data):
             models.Schema.objects.get(namespace__exact=_config[beamline]['sampleSchema'])
 
         if update:
-            models.ExperimentParameterSet.objects.get(schema=sample_schema,
-                                                      experiment=experiment).delete()
-            
-        sample_parameterset = models.ExperimentParameterSet(schema=sample_schema,
-                                                            experiment=experiment)
-        sample_parameterset.save()
-        
+            models.ExperimentParameterSet.objects.filter(
+                  schema=sample_schema,
+                  experiment=experiment).delete()
+
+        sample_parameterset = None
         for line in sample:
             line = line.rstrip('\n')
             if not line == '':
@@ -428,6 +426,11 @@ def _parse_metaman(request, cleaned_data):
                 try:
                     sample_parameter = models.ParameterName.objects.get(schema=sample_schema,
                                                                         name__iexact=key)
+                    if key == 'SampleDescription' or sample_parameterset is None:
+                        sample_parameterset = models.ExperimentParameterSet(
+                                schema=sample_schema,
+                                experiment=experiment)
+                        sample_parameterset.save()
                     sample_par = models.ExperimentParameter(parameterset=sample_parameterset,
                                                             name=sample_parameter,
                                                             string_value=value)
@@ -579,25 +582,30 @@ def _parse_metaman(request, cleaned_data):
         logger.debug('update mode, experiment acls will not be touched')
         return experiment.id
 
-    owners = cleaned_data['experiment_owner'].split(' ~ ')
-    for owner in owners:
-        if owner == '':
-            continue
-        logger.debug('looking for owner %s' % owner)
-        # find corresponding user
-        user = auth_service.getUser({'pluginname': vbl_auth_key,
-                                     'id': owner})
+## Removed experiment owner user creation code until EPN->ADuser lookup is
+## possible.
+##
+#    owners = cleaned_data['experiment_owner'].split(' ~ ')
+#    for owner in owners:
+#        if owner == '':
+#            continue
+#        logger.debug('looking for owner %s' % owner)
+#        # find corresponding user
+#        user = auth_service.getUser({'pluginname': vbl_auth_key,
+#                                    'id': owner})
+#
+#       logger.debug('registering user %s for owner %s' % (user.username, owner))
+#       acl = models.ExperimentACL(experiment=experiment,
+#                                  pluginId=django_user,
+#                                  entityId=str(user.id),
+#                                  isOwner=True,
+#                                  canRead=True,
+#                                  canWrite=True,
+#                                  canDelete=True,
+#                                  aclOwnershipType=models.ExperimentACL.OWNER_OWNED)
+#       acl.save()
+##
 
-        logger.debug('registering user %s for owner %s' % (user.username, owner))
-        acl = models.ExperimentACL(experiment=experiment,
-                                   pluginId=django_user,
-                                   entityId=str(user.id),
-                                   isOwner=True,
-                                   canRead=True,
-                                   canWrite=True,
-                                   canDelete=True,
-                                   aclOwnershipType=models.ExperimentACL.OWNER_OWNED)
-        acl.save()
 
     beamline_group = _config[beamline]['beamline_group']
     group, created = Group.objects.get_or_create(name=beamline_group)
