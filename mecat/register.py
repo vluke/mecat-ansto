@@ -34,6 +34,7 @@ _config['Echidna'] = {
     'metadata': None,
     'beamline_group': 'BEAMLINE_ECH',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
+    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Kowari'] = {
@@ -48,6 +49,7 @@ _config['Kowari'] = {
     'metadata': None,
     'beamline_group': 'BEAMLINE_KWR',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
+    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Platypus'] = {
@@ -62,6 +64,7 @@ _config['Platypus'] = {
     'metadata': None,
     'beamline_group': 'BEAMLINE_PLP',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
+    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Quokka'] = {
@@ -76,6 +79,7 @@ _config['Quokka'] = {
     'metadata': None,
     'beamline_group': 'BEAMLINE_QKK',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
+    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Wombat'] = {
@@ -90,6 +94,7 @@ _config['Wombat'] = {
     'metadata': None,
     'beamline_group': 'BEAMLINE_WBT',
     'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
+    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 
