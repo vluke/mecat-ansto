@@ -410,34 +410,51 @@ def _parse_metaman(request, cleaned_data):
         # order of the parameters
         sample_schema = \
             models.Schema.objects.get(namespace__exact=_config[beamline]['sampleSchema'])
+        chemical_schema = \
+            models.Schema.objects.get(namespace__exact=_config[beamline]['chemicalSchema'])
 
         if update:
-            models.ExperimentParameterSet.objects.filter(
-                  schema=sample_schema,
-                  experiment=experiment).delete()
+            models.ExperimentParameterSet.objects.filter(schema=sample_schema,
+                                                      experiment=experiment).delete()
+            models.ExperimentParameterSet.objects.filter(schema=chemical_schema,
+                                                      experiment=experiment).delete()
 
-        sample_parameterset = None
+        sample_ps = None
+        chemical_ps = None
         for line in sample:
             line = line.rstrip('\n')
-            if not line == '':
-                key, value = line.split(' : ')
-                if value == '':
-                    continue
-                try:
-                    sample_parameter = models.ParameterName.objects.get(schema=sample_schema,
-                                                                        name__iexact=key)
-                    if key == 'SampleDescription' or sample_parameterset is None:
-                        sample_parameterset = models.ExperimentParameterSet(
-                                schema=sample_schema,
-                                experiment=experiment)
-                        sample_parameterset.save()
-                    sample_par = models.ExperimentParameter(parameterset=sample_parameterset,
-                                                            name=sample_parameter,
-                                                            string_value=value)
-                    sample_par.save()
+            if line == '':
+                continue
+            key, value = line.split(' : ')
 
-                except models.ParameterName.DoesNotExist:
-                    logger.error('Parameter %s not found in schema %s' % (key, sample_schema))
+            if key == 'SampleDescription' or sample_ps is None:
+                sample_ps = models.ExperimentParameterSet(
+                    schema=sample_schema,
+                    experiment=experiment)
+                sample_ps.save()
+                chemical_ps = None
+            elif key == 'ChemicalName':
+                chemical_ps = models.ExperimentParameterSet(
+                    schema=chemical_schema,
+                    experiment=experiment)
+                chemical_ps.save()
+
+            if value == '':
+                continue
+
+            # Use the chemical parameterset if one is active, otherwise just
+            # use the current sample parameterset.
+            paramset = chemical_ps or sample_ps
+            try:
+                param_name = models.ParameterName.objects.get(
+                        schema=paramset.schema,
+                        name__iexact=key)
+                sample_par = models.ExperimentParameter(parameterset=paramset,
+                                                        name=param_name,
+                                                        string_value=value)
+                sample_par.save()
+            except models.ParameterName.DoesNotExist:
+                logger.error('Parameter %s not found in schema %s' % (key, paramset.schema))
 
     # now parser the very intelligent metaman file
     for line in metaman:
