@@ -95,6 +95,24 @@
 	}
     });
 
+$(document).ready(function() {
+	$("#tabs").tabs({
+	   ajaxOptions: {dataType: "html"},
+	   cookie: { expires: 30 },
+       load: function (e, ui) {
+             $(ui.panel).find(".tab-loading").remove();
+           },
+       select: function (e, ui) {
+         var $panel = $(ui.panel);
+
+
+         $panel.html("<div class='tab-loading'>Loading...<img src='/site_media/images/busy.gif'/></div>")
+
+        }
+
+	});
+});
+
 	$('#schemaselect').live('change', function(e) {
 		e.preventDefault();
 
@@ -155,13 +173,10 @@
         }
         hash.w.fadeOut();
         hash.w.css('opacity', '100%'); // must be set otherwise popup will be displayed but not visible the second time
+        hash.o.remove();
     }
 
 	$(document).ready(function() {
-        $("#tabs").tabs({
-            ajaxOptions: {dataType: "html"},
-            cookie: { expires: 30 }
-        });
 
         // Close Button Highlighting. IE doesn't support :hover. Surprise?
         if($.browser.msie) {
@@ -174,7 +189,6 @@
         $('#jqmAlertExpAdd, #jqmAlertExpEdit').jqm({
             ajax: '@href',
             target: '.jqmAlertContent',
-            overlay: false,
             closeClass: 'jqmClose',
             onHide: refreshMetadataDisplay
         });
@@ -302,7 +316,7 @@
 
             $(this).html(html);
 
-        })
+        });
         return false;
     });
 </script>
