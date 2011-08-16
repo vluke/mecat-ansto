@@ -19,8 +19,6 @@ urlpatterns = patterns('',
                        (r'^accounts/manage_auth_methods/', no_view),
                        (r'^accounts/register/', no_view),
 		       (r'^create/$', no_view),
-                       (r'^ajax/upload_complete/$', no_view),
-                       (r'^ajax/upload_files/', no_view),
                        (r'^ansto_media/(?P<path>.*)$', 'django.views.static.serve',
                         {'document_root': settings.ANSTO_MEDIA_ROOT}),
                        )
