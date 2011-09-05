@@ -393,10 +393,13 @@ def _parse_metaman(request, cleaned_data):
                                                      experiment=experiment)
     exp_parameterset.save()
 
-    experiment_metadata = {'beamline': cleaned_data['beamline'],
-                           'epn': epn}
-    if cleaned_data['program_id']:
-        experiment_metadata['program_id'] = cleaned_data['program_id']
+    experiment_metadata = { 'epn': epn }
+    metadata_keys = (
+        'beamline', 'program_id', 'instrument_url', 'instrument_scientists',
+    )
+    for key in metadata_keys:
+        if cleaned_data.has_key(key) and cleaned_data[key]:
+            experiment_metadata[key] = cleaned_data[key]
 
     for key, value in experiment_metadata.iteritems():
         try:
@@ -586,8 +589,11 @@ def _parse_metaman(request, cleaned_data):
 
             # loop over file meta-data
             if update:
-                models.DatafileParameterSet.objects.get(schema=df_schema,
-                                                        dataset_file=dataset_file).delete()
+                try:
+                    models.DatafileParameterSet.objects.get(
+                        schema=df_schema, dataset_file=dataset_file).delete()
+                except models.DatasetParameterSet.DoesNotExist:
+                    pass  # nothing to delete
 
             df_parameterset = models.DatafileParameterSet(schema=df_schema,
                                                           dataset_file=dataset_file)
