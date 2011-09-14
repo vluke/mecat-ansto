@@ -592,7 +592,7 @@ def _parse_metaman(request, cleaned_data):
                 try:
                     models.DatafileParameterSet.objects.get(
                         schema=df_schema, dataset_file=dataset_file).delete()
-                except models.DatasetParameterSet.DoesNotExist:
+                except models.DatafileParameterSet.DoesNotExist:
                     pass  # nothing to delete
 
             df_parameterset = models.DatafileParameterSet(schema=df_schema,
