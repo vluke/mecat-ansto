@@ -82,7 +82,7 @@
 
 	    <div class="dataset_extrainfo">
 
-		<strong style="float:left;">Dataset:</strong>
+		<strong style="float:left; margin-right: 5px">Dataset</strong>
 
 		{% if has_write_permissions %}{% if not experiment.public %}{% if not dataset.immutable %}
 		<a title="Add" href="{% url tardis.tardis_portal.views.add_dataset_par dataset.id %}"
@@ -101,24 +101,24 @@
 		</div> <!-- dataset metadata -->
 
 	      <div class="dataset_datafiles">
-              <span{% if dataset.pk in file_matched_datasets %} style="background-color: #FFFF00"{% endif %}>
-              <strong style="float:left;">Files ({{ dataset.dataset_file_set.count }}): </strong>
-              </span>
+              
+              <strong style="float:left; margin-right: 5px"><span{% if dataset.pk in file_matched_datasets %} style="background-color: #FFFF00"{% endif %}>Data Files ({{ dataset.dataset_file_set.count }})</span></strong>
+              
 		      {% if dataset.dataset_file_set.count|lt:"1000000" %}
+                {% if has_write_permissions %}
+                  {% if not experiment.public %}
+                    {% if not immutable %}
+                        <a  data-dataset_id="{{dataset.id}}" class="upload_files_link fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Upload Files">
+                            <span class="ui-icon ui-icon-circle-arrow-n"></span>
+                            Upload Files
+                        </a>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
                 <a class="datafile_list_toggle files_hidden fg-button ui-state-default fg-button-icon-solo ui-corner-all" href="{% url tardis.tardis_portal.views.retrieve_datafile_list dataset.id %}?{% if query %}query={{ query }}{% if search%}&{% endif %}{% endif %}{% if search %}search=true{% endif %}" title="Show/Hide">
                     <span class="ui-icon ui-icon-circle-triangle-e"></span>
                     Show/Hide
                 </a>
-{% if has_write_permissions %}
-  {% if not experiment.public %}
-    {% if not immutable %}
-        <a  data-dataset_id="{{dataset.id}}" class="upload_files_link fg-button ui-state-default fg-button-icon-solo ui-corner-all" title="Upload Files">
-            <span class="ui-icon ui-icon-circle-arrow-n"></span>
-            Upload Files
-        </a>
-    {% endif %}
-  {% endif %}
-{% endif %}
 		  {% else %}
 		    <a target="_blank" href="{% url tardis.tardis_portal.views.retrieve_datafile_list dataset.id %}">[Show]</a>
 		  {% endif %}

@@ -1,5 +1,5 @@
 {% load formfieldfilters %}
-
+{% load creativecommons %}
 <div id="experiment_description">
 
   <p>
@@ -42,7 +42,7 @@
   {% if experiment.handle %}
     <p>
       <strong>Persistent Handle:</strong>
-      <a href="{{ handle }}/{{ experiment.handle }}">{{ experiment.handle }}</a><br/>
+      <a href="http://hdl.handle.net/{{ experiment.handle }}">{{ experiment.handle }}</a><br/>
     </p>
   {% endif %}
 
@@ -59,21 +59,22 @@
   {% endif %}
 
   <p>
-	<div class="experiment_md_container">
-	<strong style="float:left;">Experiment:</strong>
+    <div class="experiment_md_container">
+        <strong style="float:left; margin-right: 5px">Experiment</strong>
 
-    {% if has_write_permissions %}{% if not experiment.public %}
-        <a title="Add" id="expAddTrigger" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" href="{% url tardis.tardis_portal.views.add_experiment_par experiment.id %}" 
-                data-toggle_selector=".experiment_metadata_toggle">
-            <span class="ui-icon ui-icon-plusthick"></span>
-            Add
+        {% if has_write_permissions %}{% if not experiment.public %}
+            <a title="Add" id="expAddTrigger" class="fg-button ui-state-default fg-button-icon-solo ui-corner-all" href="{% url tardis.tardis_portal.views.add_experiment_par experiment.id %}" 
+                    data-toggle_selector=".experiment_metadata_toggle">
+                <span class="ui-icon ui-icon-plusthick"></span>
+                Add
+            </a>
+        {% endif %}{% endif %}
+
+        <a title="Show/Hide" class="experiment_metadata_toggle metadata_hidden fg-button ui-state-default fg-button-icon-solo ui-corner-all" href="/ajax/experiment_metadata/{{experiment.id}}/">
+            <span class="ui-icon ui-icon-circle-triangle-e"></span>
+            Show/Hide
         </a>
-    {% endif %}{% endif %}
-    <a title="Show/Hide" class="experiment_metadata_toggle metadata_hidden fg-button ui-state-default fg-button-icon-solo ui-corner-all" href="/ajax/experiment_metadata/{{experiment.id}}/">
-        <span class="ui-icon ui-icon-circle-triangle-e"></span>
-        Show/Hide
-    </a>
-
+	</div>
     <div style="clear:both;"></div>
     <div class="experiment_metadata" style="display:none;"></div>
   </p>
@@ -82,30 +83,42 @@
     <strong>Dataset Information:</strong>
     <div>
       <div class="dataset_information">
-	<ul>
-	  <li><strong>Datasets:</strong> {{experiment.dataset_set.all.count}}</li>
-	  <li><strong>Files:</strong> {{datafiles.count}}</li>
-	  <li><strong>Size:</strong> {{size|filesizeformat}}</li>
-	</ul>
+            <ul>
+              <li><strong>Datasets:</strong> {{experiment.dataset_set.all.count}}</li>
+              <li><strong>Files:</strong> {{datafiles.count}}</li>
+              <li><strong>Size:</strong> {{size|filesizeformat}}</li>
+            </ul>
       </div>
     </div>
   </p>
 
   <p>
-    <strong>Last Updated:</strong>
+    <strong>Experiment Last Updated:</strong>
     {{ experiment.update_time|date:"jS F Y H:i" }}<br/>
   </p>
+	<p>
+	<strong>License: </strong>
+	<div class="license_box">{{experiment.id|show_cc_license|safe}}</div>
+	</p>
   <div class="download_entire_experiment">
     {% for p in protocol %}
       <p>
 	{% if p.0 %}
-	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
+	  <strong><a href="{{p.1}}">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
 	{% else %}
-	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment</a></strong><br/>
+	  <strong><a href="{{p.1}}">Download Entire Experiment</a></strong><br/>
 	{% endif %}
       </p>
     {% endfor %}
     <strong><a href="/experiment/metsexport/{{experiment.id}}">Download Experiment Metadata (METS)</a></strong>
+	{% if is_owner %}
+	<p>
+		<a href="{% url tardis.tardis_portal.views.choose_license experiment.id %}">Choose License</a>
+	</p>
+	{% if not experiment.public %}
+		<strong><a href="publish/">Publish Experiment</a></strong><br/>
+	{% endif %}
+	{% endif %}
   </div>
 
   <p align="right">
@@ -117,13 +130,18 @@
           <a href="mailto:{{owner.email}}">{{ owner.email}}</a>
         {% endif %}
         ({{ owner.username }})
+        {% if not forloop.last %}
           <br/>
-      {% endfor %}
-    {% endif %}
-
-    {% if experiment.public %}
-      <em>This experiment is public.</em>
-    {% endif %}
-    </p>
+		{% endif %}
+		{% endfor %}
+	{% endif %}
+	</p>
+	<p align="right">
+	{% if experiment.public %}
+		<em>This experiment is public.</em>
+	{% endif %}
+      
+  </p>
 
 </div>
+
