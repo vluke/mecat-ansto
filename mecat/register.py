@@ -219,9 +219,11 @@ def _getDatasetName(df, beamline):
         # name will default to the directory name if
         # no sample is specified
         try:
-            name =  df['sample_name'][0]       
+            name =  df['sample_name'][0]
         except KeyError:
             name = df.name.split('/')[1]
+            if name.startswith('LogBook'):
+                name = 'Log Books'
         return name
     else:
         return df.name

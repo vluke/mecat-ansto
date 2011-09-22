@@ -1,5 +1,6 @@
 {% load formfieldfilters %}
 {% load creativecommons %}
+{% load logbook %}
 <div id="experiment_description">
 
   <p>
@@ -110,7 +111,11 @@
 	{% endif %}
       </p>
     {% endfor %}
-    <strong><a href="/experiment/metsexport/{{experiment.id}}">Download Experiment Metadata (METS)</a></strong>
+    <p><strong><a href="/experiment/metsexport/{{experiment.id}}">Download Experiment Metadata (METS)</a></strong></p>
+    {% get_log_book as log_book_file %}
+    {% if log_book_file %}
+    <p><strong><a href="{{ log_book_file.get_download_url }}" title="{{ log_book_file.filename }}">Download Log Book (PDF)</a></strong></p>
+    {% endif %}
 	{% if is_owner %}
 	<p>
 		<a href="{% url tardis.tardis_portal.views.choose_license experiment.id %}">Choose License</a>
