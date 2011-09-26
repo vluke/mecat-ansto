@@ -105,16 +105,16 @@
     {% for p in protocol %}
       <p>
 	{% if p.0 %}
-	  <strong><a href="{{p.1}}">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
+	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
 	{% else %}
-	  <strong><a href="{{p.1}}">Download Entire Experiment</a></strong><br/>
+	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment</a></strong><br/>
 	{% endif %}
       </p>
     {% endfor %}
     <p><strong><a href="/experiment/metsexport/{{experiment.id}}">Download Experiment Metadata (METS)</a></strong></p>
     {% get_log_book as log_book_file %}
     {% if log_book_file %}
-    <p><strong><a href="{{ log_book_file.get_download_url }}" title="{{ log_book_file.filename }}">Download Log Book (PDF)</a></strong></p>
+    <p><strong><a href="{{ log_book_file.get_download_url }}" target="_blank" title="{{ log_book_file.filename }}">Download Log Book (PDF)</a></strong></p>
     {% endif %}
 	{% if is_owner %}
 	<p>
