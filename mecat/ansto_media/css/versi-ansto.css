@@ -422,3 +422,17 @@ button.fg-button {
 .parameter_table .parameter_value {
     width: auto;
 }
+
+.parameter_table.chemical-details th {
+    font-size: 10px;
+    padding: 2px;
+}
+.parameter_table.sample-details {
+    clear: both;
+    width: 97%;
+    margin-top: 10px;
+}
+.sample-details .parameter_name {
+    width: 1px;
+}
+
