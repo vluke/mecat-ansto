@@ -1,0 +1,58 @@
+{% extends "tardis_portal/portal_template.html" %}
+{% block content %}
+    <h1> Embargo Periods </h1>
+
+    <h2> Search </h2>
+    <form action="{% url mecat.embargo.search %}" method="GET">
+        {{ form.as_p }}
+        <input type="submit" />
+    </form>
+
+
+    {% if searched %}
+        <h2> Search Results </h2>
+        {% if search_results %}
+            <table border="1">
+                <tr>
+                    <th>
+                        Experiment
+                    </th>
+                    <th>
+                        Authors
+                    </th>
+                    <th>
+                        Start
+                    </th>
+                    <th>
+                        End
+                    </th>
+                    <th>
+                        Embargo Expiry
+                    </th>
+                </tr>
+                {% for experiment in search_results %}
+                <tr>
+                    <td>
+                        {{ experiment.title }}
+                    </td>
+                    <td>
+                        {{ experiment.authors }}
+                    </td>
+                    <td>
+                        {{ experiment.start_time}}
+                    </td>
+                    <td>
+                        {{ experiment.end_time}}
+                    </td>
+                    <td>
+                        {{ experiment.expiry }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            No results found
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
