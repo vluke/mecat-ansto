@@ -308,9 +308,6 @@ background-color: #FFF;
 div.schema_name > span img {
 padding-right: 20px;
 }
-div.edit_schema {
-float:right;
-}
 #quicksearch_container {
     float:right ;
 }
@@ -382,4 +379,46 @@ button.fg-button {
 }
 .fg-toolbar .fg-button {
     font-size: 1em;
+}
+
+.parameter_table {
+    vertical-align: top;
+    display: inline-table;
+    clear: none;
+}
+
+.parameter_table .even {
+    background-color: #D0D3D6;
+}
+
+.parameter_table .odd {
+    background-color: #E0E3E6;
+}
+
+.parameter_table th {
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+
+.parameter_table th {
+    background-color: #c0c3c7;
+    font-weight: bold;
+    font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px;
+}
+
+.parameter_table td {
+    padding: 5px 10px;
+}
+
+.parameter_table .parameter_name {
+    font-weight: bold;
+    width: auto;
+}
+
+.parameter_table .parameter_value {
+    width: auto;
 }
