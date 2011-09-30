@@ -151,6 +151,8 @@ class Backend():
         request.session[EPN_LIST] = epns
         request.session[SOAP_LOGIN_KEY] = key
 
+        logger.info('VBL user %s groups %s' % (username, str(request.session[EPN_LIST])))
+
         if not email == '':
             id = email
         else:
