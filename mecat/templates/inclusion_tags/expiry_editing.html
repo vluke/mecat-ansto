@@ -1,0 +1,50 @@
+{% if never_expires %}
+    Never Expires 
+    {% if because_no_end_date %}
+        (because no end date) {# otherwise it has been explicitly set #}
+    {% else %}
+        <form action="{% url mecat.embargo.default_expiry experiment_id %}" method="POST" id="default_form_{{experiment_id}}">
+            <input type="submit" value="Reset to default"/>
+        </form>
+    {% endif %}
+{% else %}
+    {% if not is_default_expiry %}
+        <form action="{% url mecat.embargo.default_expiry experiment_id %}" method="POST" id="default_form_{{experiment_id}}">
+            <input type="submit" value="Reset to default"/>
+        </form>
+    {% endif %}
+    <form action="{% url mecat.embargo.prevent_expiry experiment_id %}" method="POST" id="prevent_form_{{experiment_id}}">
+        <input type="submit" value="Prevent expiry"/>
+    </form>
+{% endif %}
+<div style="border:1px solid black">
+    {{ expiry_date }} {% if is_default_expiry %} default {% endif %}
+    <form action="{% url mecat.embargo.set_expiry experiment_id %}" method="POST">
+        <input type="text" name="date" id="date_{{experiment_id}}" style="visibility:hidden;" value="{{expiry_date}}"></input>
+    </form>
+</div>
+
+<script>
+$('#date_{{experiment_id}}').datepicker({
+    showOn: 'button',
+    buttonImage: 'images/calendar.gif',  // FIXME
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy/mm/dd',
+    onSelect: function(dateText, inst){
+        if (confirm('Are you sure you want to set the expiry?')) {
+            $(this).parent().submit();
+        }
+    }
+});
+$('#default_form_{{experiment_id}}').submit(function(evt){
+    if (!confirm('Are you sure you want to default?')) {
+        evt.preventDefault();
+    }
+});
+$('#prevent_form_{{experiment_id}}').submit(function(evt){
+    if (!confirm('Are you sure you want to prevent?')) {
+        evt.preventDefault();
+    }
+});
+</script>

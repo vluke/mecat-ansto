@@ -11,6 +11,9 @@ def no_view(request):
 embargo_urls = patterns('mecat.embargo',
                         (r'^$', 'index'),
                         (r'^search/$', 'search'),
+                        (r'^default_expiry/(?P<experiment_id>\d+)/$', 'default_expiry'),
+                        (r'^prevent_expiry/(?P<experiment_id>\d+)/$', 'prevent_expiry'),
+                        (r'^set_expiry/(?P<experiment_id>\d+)/$', 'set_expiry'),
                         )
 
 
