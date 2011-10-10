@@ -1,25 +1,16 @@
 # views and embargohandler
 
 import logging
-import os.path
-import re
 
 from django import forms
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import Group
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import permission_required
 from django.core.urlresolvers import reverse
-from django.db import transaction
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseServerError, \
-    HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context
 from django.views.decorators.http import require_POST
 
-from tardis.tardis_portal.auth import auth_service
-from tardis.tardis_portal.auth.localdb_auth import django_user, django_group
 from tardis.tardis_portal.models import Experiment, ExperimentParameterSet, ParameterName, Schema, ExperimentParameter
 from tardis.tardis_portal.shortcuts import render_response_index
 
@@ -140,8 +131,7 @@ class EmbargoSearchForm(forms.Form):
     author = forms.CharField(required=False)
 
 
-# TODO Permission check
-@login_required
+@permission_required('mecat.embargo_admin')
 def index(request):
     c = Context({'form': EmbargoSearchForm(),
                  'subtitle': 'Embargo Periods',
@@ -151,8 +141,7 @@ def index(request):
     return HttpResponse(render_response_index(request, 'tardis_portal/embargo_index.html', c))
 
 
-# TODO Permission check
-@login_required
+@permission_required('mecat.embargo_admin')
 def search(request):
     form = EmbargoSearchForm(request.GET)
     if form.is_valid():
@@ -177,7 +166,7 @@ def search(request):
 
 
 @require_POST
-@login_required
+@permission_required('mecat.embargo_admin')
 def default_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id)
     embargo_handler.reset_to_default()
@@ -185,15 +174,15 @@ def default_expiry(request, experiment_id):
 
 
 @require_POST
-@login_required
+@permission_required('mecat.embargo_admin')
 def prevent_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, True)
     embargo_handler.prevent_expiry()
     return HttpResponseRedirect(reverse('mecat.embargo.index'))
 
 
-@login_required
 @require_POST
+@permission_required('mecat.embargo_admin')
 def set_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, True)
     embargo_handler.set_expiry(request.POST['date'])
