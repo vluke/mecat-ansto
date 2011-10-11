@@ -1,6 +1,15 @@
 {% extends "tardis_portal/data_browsing_template.html" %}
 {% load embargo %}
 {% block content %}
+<script>
+$(document).ready(function(){
+    $('.date_input').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+});
+</script>
     <h1> Embargo Periods </h1>
 
     <h2> Search </h2>
@@ -30,6 +39,10 @@
                     <th>
                         Embargo Expiry
                     </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
                 </tr>
                 {% for experiment in search_results %}
                 <tr>
@@ -45,9 +58,7 @@
                     <td>
                         {{ experiment.end_time}}
                     </td>
-                    <td>
-                        {% embargo_edit experiment.id %}
-                    </td>
+                    {% embargo_edit experiment.id %}
                 </tr>
                 {% endfor %}
             </table>

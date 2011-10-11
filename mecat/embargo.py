@@ -55,15 +55,9 @@ class EmbargoHandler(object):
         return not self.never_expires()
 
     def is_default_expiry(self):
-        '''end date set, expiry is default as described in settings.py'''
-        if self.never_expires():
-            return False
-
         expiry_date = self._get_or_none(EXPIRY_DATE_KEY)
-        if expiry_date:
-            return False
-        else:
-            return True
+        never_expires = self._get_or_none(NEVER_EXPIRE_KEY)
+        return never_expires or expiry_date
 
     def because_no_end_date(self):
         if self._get_or_none(NEVER_EXPIRE_KEY):
@@ -110,7 +104,6 @@ class EmbargoHandler(object):
             logger.warn('tried to delete parameterset that does not exist')
 
     def set_expiry(self, date_string):
-        logger.fatal(date_string)
         if not self.parameterset:
             raise Exception('incorrectly initialised, call with create=True')
 
@@ -123,9 +116,8 @@ class EmbargoHandler(object):
 
 
 class EmbargoSearchForm(forms.Form):
-    from django.forms.extras.widgets import SelectDateWidget
-    start_date = forms.DateField(required=False, widget=SelectDateWidget())
-    end_date = forms.DateField(required=False, widget=SelectDateWidget())
+    start_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
+    end_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
     title = forms.CharField(required=False)
     proposal_id = forms.IntegerField(required=False)
     author = forms.CharField(required=False)

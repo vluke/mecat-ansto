@@ -18,6 +18,7 @@ def embargo_edit(context, experiment_id):
     else:
         raise Exception('unknown state - should never get here')
     inclusion_context['is_default_expiry'] = handler.is_default_expiry()
+    inclusion_context['can_be_defaulted'] = not handler.is_default_expiry()
 
     return inclusion_context
 
