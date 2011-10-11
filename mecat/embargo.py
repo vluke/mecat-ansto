@@ -133,6 +133,12 @@ def index(request):
     return HttpResponse(render_response_index(request, 'tardis_portal/embargo_index.html', c))
 
 
+def _proposal_id(experiment):
+    epns = ExperimentParameter.objects.filter(name__name='EPN', parameterset__experiment=experiment)
+    if epns.count() > 0:
+        return epns[0].string_value
+    
+    
 @permission_required('mecat.embargo_admin')
 def search(request):
     form = EmbargoSearchForm(request.GET)
@@ -143,6 +149,7 @@ def search(request):
             'authors': ', '.join([a.author for a in e.author_experiment_set.all()]),
             'start_time': e.start_time,
             'end_time': e.end_time,
+            'proposal_id': _proposal_id(e),
             'id': e.id,
             } for e in search_results]
     else:

@@ -25,6 +25,9 @@ $(document).ready(function(){
             <table border="1">
                 <tr>
                     <th>
+                        Proposal ID
+                    </th>
+                    <th>
                         Experiment
                     </th>
                     <th>
@@ -39,13 +42,14 @@ $(document).ready(function(){
                     <th>
                         Embargo Expiry
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th colspan=2>
                     </th>
                 </tr>
                 {% for experiment in search_results %}
                 <tr>
+                    <td>
+                        {{ experiment.proposal_id }}
+                    </td>
                     <td>
                         {{ experiment.title }}
                     </td>
