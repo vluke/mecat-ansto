@@ -8,7 +8,7 @@ register = template.Library()
 def embargo_edit(context, experiment_id):
     handler = EmbargoHandler(experiment_id)
     inclusion_context = {'experiment_id': experiment_id}
-    if handler.never_expires():  # explicitly never expires
+    if handler.never_expires():
         inclusion_context['never_expires'] = True
         inclusion_context['because_no_end_date'] = handler.because_no_end_date()
     elif handler.has_any_expiry():
