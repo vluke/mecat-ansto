@@ -97,7 +97,6 @@ class EmbargoHandler(object):
         param.save()
 
     def reset_to_default(self):
-        # delete parameterset if any
         if self.parameterset:
             self.parameterset.delete()
         else:
