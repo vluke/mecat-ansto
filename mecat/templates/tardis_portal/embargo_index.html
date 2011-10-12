@@ -14,8 +14,10 @@ $(document).ready(function(){
 
     <h2> Search </h2>
     <form action="{% url mecat.embargo.search %}" method="GET">
-        {{ form.as_p }}
-        <input type="submit" />
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Search" />
     </form>
 
 
