@@ -1,3 +1,6 @@
+<th>
+    Expiry
+</th>
 <td>
     <span>
         <span>
@@ -36,6 +39,24 @@
 {% endif %}
 
 <script>
+var refresh = function() {
+    window.location.href = window.location.href;
+};
+var error = function(jqXHR, textStatus, errorThrown) {
+    alert(textStatus);
+};
+var doit = function($form) {
+    console.log('%o', $form);
+    console.log($form.serialize());
+    console.log($form.attr('action'));
+    $.ajax({
+        data: $form.serialize(),
+        error: error,
+        success: refresh,
+        url: $form.attr('action'),
+        type: 'POST'
+    });
+};
 $('#date_{{experiment_id}}').datepicker({
     showOn: 'button',
     buttonImage: '/media/img/admin/icon_calendar.gif',
@@ -44,18 +65,20 @@ $('#date_{{experiment_id}}').datepicker({
     dateFormat: 'yy/mm/dd',
     onSelect: function(dateText, inst){
         if (confirm('Are you sure you want to set the expiry?')) {
-            $(this).parent().submit();
+            doit($(this).parent());
         }
     }
 });
 $('#default_form_{{experiment_id}}').submit(function(evt){
-    if (!confirm('Are you sure you want to default?')) {
-        evt.preventDefault();
+    evt.preventDefault();
+    if (confirm('Are you sure you want to default?')) {
+        doit($(this));
     }
 });
 $('#prevent_form_{{experiment_id}}').submit(function(evt){
-    if (!confirm('Are you sure you want to prevent?')) {
-        evt.preventDefault();
+    evt.preventDefault();
+    if (confirm('Are you sure you want to prevent?')) {
+        doit($(this));
     }
 });
 </script>

@@ -383,3 +383,6 @@ button.fg-button {
 .fg-toolbar .fg-button {
     font-size: 1em;
 }
+.embargo_edit td, .embargo_edit th{
+    vertical-align: text-bottom;
+}

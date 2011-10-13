@@ -23,53 +23,38 @@ $(document).ready(function(){
 
     {% if searched %}
         <h2> Search Results </h2>
+
         {% if search_results %}
-            <table border="1">
+            {% for experiment in search_results %}
+                <table class="experiment-table">
                 <tr>
-                    <th>
-                        Proposal ID
-                    </th>
-                    <th>
-                        Experiment
-                    </th>
-                    <th>
-                        Authors
-                    </th>
-                    <th>
-                        Start
-                    </th>
-                    <th>
-                        End
-                    </th>
-                    <th>
-                        Embargo Expiry
-                    </th>
-                    <th colspan=2>
-                    </th>
+                  <th>
+                    <span>
+                        <a href="">{{experiment.title}}</a>
+                    </span>
+                  </th>
                 </tr>
-                {% for experiment in search_results %}
                 <tr>
-                    <td>
-                        {{ experiment.proposal_id }}
-                    </td>
-                    <td>
-                        {{ experiment.title }}
-                    </td>
-                    <td>
-                        {{ experiment.authors }}
-                    </td>
-                    <td>
-                        {{ experiment.start_time}}
-                    </td>
-                    <td>
-                        {{ experiment.end_time}}
-                    </td>
-                    {% embargo_edit experiment.id %}
+                  <td>
+                    Proposal ID <strong>{{experiment.proposal_id}}</strong>
+                    Authors <strong>{{ experiment.authors }}</strong>
+                  </td>
+                </tr>    
+                <tr>
+                  <td>
+                    <strong>{{ experiment.start_time|date:"jS F Y H:i" }}</strong>
+                    - <strong>{{ experiment.end_time|date:"jS F Y H:i" }}</strong>
+                  </td>
                 </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            No results found
+                <tr>
+                    <table class="embargo_edit">
+                        <tr>
+                            {% embargo_edit experiment.id %}
+                        </tr>
+                    </table>
+                </tr>
+                </table>
+            {% endfor %}
         {% endif %}
     {% endif %}
 

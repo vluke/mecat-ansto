@@ -21,4 +21,3 @@ def embargo_edit(context, experiment_id):
     inclusion_context['can_be_defaulted'] = not handler.is_default_expiry()
 
     return inclusion_context
-

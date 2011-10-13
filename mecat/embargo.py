@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context
 from django.views.decorators.http import require_POST
+from django.views.decorators.cache import never_cache
 
 from tardis.tardis_portal.models import Experiment, ExperimentParameterSet, ParameterName, Schema, ExperimentParameter
 from tardis.tardis_portal.shortcuts import render_response_index
@@ -138,6 +139,7 @@ def _proposal_id(experiment):
         return epns[0].string_value
     
     
+@never_cache
 @permission_required('mecat.embargo_admin')
 def search(request):
     form = EmbargoSearchForm(request.GET)
@@ -168,7 +170,7 @@ def search(request):
 def default_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id)
     embargo_handler.reset_to_default()
-    return HttpResponseRedirect(reverse('mecat.embargo.index'))
+    return HttpResponse('{"success": true}', mimetype='application/json');
 
 
 @require_POST
@@ -176,7 +178,7 @@ def default_expiry(request, experiment_id):
 def prevent_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, True)
     embargo_handler.prevent_expiry()
-    return HttpResponseRedirect(reverse('mecat.embargo.index'))
+    return HttpResponse('{"success": true}', mimetype='application/json');
 
 
 @require_POST
@@ -184,7 +186,7 @@ def prevent_expiry(request, experiment_id):
 def set_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, True)
     embargo_handler.set_expiry(request.POST['date'])
-    return HttpResponseRedirect(reverse('mecat.embargo.index'))
+    return HttpResponse('{"success": true}', mimetype='application/json');
 
 
 def _search(cleaned_data):
