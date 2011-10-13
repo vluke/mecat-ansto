@@ -46,9 +46,6 @@ var error = function(jqXHR, textStatus, errorThrown) {
     alert(textStatus);
 };
 var doit = function($form) {
-    console.log('%o', $form);
-    console.log($form.serialize());
-    console.log($form.attr('action'));
     $.ajax({
         data: $form.serialize(),
         error: error,
