@@ -20,11 +20,11 @@
 
 <td>
     {% if can_be_defaulted %}
-        (default)
-    {% else %}
         <form action="{% url mecat.embargo.default_expiry experiment_id %}" method="POST" id="default_form_{{experiment_id}}">
             <input type="submit" value="Default"/>
         </form>
+    {% else %}
+        (default)
     {% endif %}
 </td>
 

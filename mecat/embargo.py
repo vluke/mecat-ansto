@@ -55,7 +55,7 @@ class EmbargoHandler(object):
     def has_any_expiry(self):
         return not self.never_expires()
 
-    def is_default_expiry(self):
+    def can_be_defaulted(self):
         expiry_date = self._get_or_none(EXPIRY_DATE_KEY)
         never_expires = self._get_or_none(NEVER_EXPIRE_KEY)
         return never_expires or expiry_date
