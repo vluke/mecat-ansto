@@ -19,18 +19,18 @@ logger = logging.getLogger('tardis.mecat')
 
 EXPIRY_DATE_KEY = 'expiry'
 NEVER_EXPIRE_KEY = 'never_expire'
+NAMESPACE = "http://www.tardis.edu.au/schemas/ansto_embargo/2011/06/10"
 
 
 class EmbargoHandler(object):
-    namespace = "http://www.tardis.edu.au/schemas/ansto_embargo/2011/06/10"
 
     def __init__(self, experiment_id, create=False):
         self.experiment = Experiment.objects.get(pk=experiment_id)
 
         parametersets = ExperimentParameterSet.objects.filter(
-            schema__namespace=self.namespace, experiment__id=experiment_id)
+            schema__namespace=NAMESPACE, experiment__id=experiment_id)
 
-        self.schema, _ = Schema.objects.get_or_create(namespace=self.namespace, name='Embargo Details')
+        self.schema, _ = Schema.objects.get_or_create(namespace=NAMESPACE, name='Embargo Details')
         self.expiry_date, _ = ParameterName.objects.get_or_create(schema=self.schema, name=EXPIRY_DATE_KEY, full_name='Expiry', immutable=True, data_type=ParameterName.DATETIME)
         self.never_expire, _ = ParameterName.objects.get_or_create(schema=self.schema, name=NEVER_EXPIRE_KEY, full_name='Never Expires', immutable=True, data_type=ParameterName.STRING)
 
