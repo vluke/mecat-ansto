@@ -21,6 +21,8 @@ from mecat.forms import RegisterMetamanForm
 
 logger = logging.getLogger('tardis.mecat')
 
+PROPDB_LINK_TEMPLATE = "https://neutron.ansto.gov.au/Bragg/proposal/ProposalView.jsp?id=%s"
+
 _config = {}
 _config['Echidna'] = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
@@ -395,7 +397,9 @@ def _parse_metaman(request, cleaned_data):
                                                      experiment=experiment)
     exp_parameterset.save()
 
-    experiment_metadata = { 'epn': epn }
+    experiment_metadata = { 'epn': epn,
+                            'propdb_link': PROPDB_LINK_TEMPLATE % epn
+    }
     metadata_keys = (
         'beamline', 'program_id', 'instrument_url', 'instrument_scientists',
     )
