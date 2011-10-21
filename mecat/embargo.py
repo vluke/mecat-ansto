@@ -149,6 +149,7 @@ def search(request):
             'authors': ', '.join([a.author for a in e.author_experiment_set.all()]),
             'start_time': e.start_time,
             'end_time': e.end_time,
+            'url': e.get_absolute_url(),
             'proposal_id': _proposal_id(e),
             'id': e.id,
             } for e in search_results]
