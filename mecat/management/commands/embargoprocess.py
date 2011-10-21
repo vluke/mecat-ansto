@@ -39,13 +39,15 @@ class Command(BaseCommand):
                 self._unembargo(exp, verbosity)
 
     def _unembargo(self, experiment, verbosity):
-        embargo_schema = Schema.objects.get(namespace=NAMESPACE)
-        embargo_parametersets = experiment.experimentparameterset_set.filter(schema=embargo_schema)
-
+#        embargo_schema = Schema.objects.get(namespace=NAMESPACE)
+#        embargo_parametersets = experiment.experimentparameterset_set.filter(schema=embargo_schema)
+#
+#        if verbosity > 0:
+#            self.stdout.write("Deleting %s parameterset(s) for %s\n" %
+#                                (embargo_parametersets.count(), experiment))
+#        embargo_parametersets.delete()
         if verbosity > 0:
-            self.stdout.write("Deleting %s parameterset(s) for %s\n" %
-                                (embargo_parametersets.count(), experiment))
-        embargo_parametersets.delete()
+            self.stdout.write("Publicising %s (%s)\n" % (experiment, experiment.id))
 
         experiment.public = True
         experiment.save()
