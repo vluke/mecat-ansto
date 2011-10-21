@@ -120,6 +120,7 @@ class EmbargoSearchForm(forms.Form):
     title = forms.CharField(required=False)
     proposal_id = forms.IntegerField(required=False)
     author = forms.CharField(required=False)
+    include_public = forms.BooleanField(required=False)
 
 
 @permission_required('mecat.embargo_admin')
@@ -170,7 +171,7 @@ def search(request):
 def default_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id)
     embargo_handler.reset_to_default()
-    return HttpResponse('{"success": true}', mimetype='application/json');
+    return HttpResponse('{"success": true}', mimetype='application/json')
 
 
 @require_POST
@@ -178,7 +179,7 @@ def default_expiry(request, experiment_id):
 def prevent_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, create=True)
     embargo_handler.prevent_expiry()
-    return HttpResponse('{"success": true}', mimetype='application/json');
+    return HttpResponse('{"success": true}', mimetype='application/json')
 
 
 @require_POST
@@ -186,17 +187,21 @@ def prevent_expiry(request, experiment_id):
 def set_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, create=True)
     embargo_handler.set_expiry(request.POST['date'])
-    return HttpResponse('{"success": true}', mimetype='application/json');
+    return HttpResponse('{"success": true}', mimetype='application/json')
 
 
 def _search(cleaned_data):
-    query = Q(public=False)
+    query = Q()
+
     start_date = cleaned_data.get('start_date')
     end_date = cleaned_data.get('end_date')
     title = cleaned_data.get('title')
     proposal_id = cleaned_data.get('proposal_id')
     author = cleaned_data.get('author')
+    include_public = cleaned_data.get('include_public')
 
+    if not include_public:
+        query &= Q(public=False)
     if start_date:
         query &= Q(start_time__gte=start_date)
     if end_date:
