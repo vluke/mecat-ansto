@@ -6,15 +6,13 @@
 
 import datetime as dt
 from optparse import make_option
-import sys
 
 from django.conf import settings
-from django.contrib.auth.models import Permission, ContentType
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from tardis.tardis_portal.models import Experiment, ParameterName, Schema
 
-from mecat.embargo import EXPIRY_DATE_KEY, NEVER_EXPIRE_KEY, NAMESPACE
+from mecat.embargo import EXPIRY_DATE_KEY, NAMESPACE
 
 
 class Command(BaseCommand):
@@ -34,11 +32,10 @@ class Command(BaseCommand):
         list_only = options.get('list')
 
         exps = self._get_experiments_to_publicise(verbosity)
-        if verbosity > 0:
-            for exp in exps:
+        for exp in exps:
+            if verbosity > 0:
                 self.stdout.write("%s %s\n" % (exp.id, exp))
-        if not list_only:
-            for exp in exps:
+            if not list_only:
                 self._unembargo(exp, verbosity)
 
     def _unembargo(self, experiment, verbosity):
@@ -55,7 +52,6 @@ class Command(BaseCommand):
 
     def _get_experiments_to_publicise(self, verbosity):
         embargo_schema = Schema.objects.get(namespace=NAMESPACE)
-        never_expire = ParameterName.objects.get(schema=embargo_schema, name=NEVER_EXPIRE_KEY)
         expiry_date = ParameterName.objects.get(schema=embargo_schema, name=EXPIRY_DATE_KEY)
 
         defaulted = Experiment.objects.exclude(experimentparameterset__schema=embargo_schema)

@@ -12,10 +12,8 @@ from django.template import Context
 from django.shortcuts import render_to_response
 
 from tardis.tardis_portal import models
-from tardis.tardis_portal.auth import auth_service
-from tardis.tardis_portal.auth.localdb_auth import django_user, django_group
+from tardis.tardis_portal.auth.localdb_auth import django_group
 
-from mecat.vbl_auth import auth_key as vbl_auth_key
 from mecat.forms import RegisterMetamanForm
 
 

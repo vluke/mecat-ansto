@@ -5,9 +5,8 @@ import logging
 from django import forms
 from django.conf import settings
 from django.contrib.auth.decorators import permission_required
-from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import Context
 from django.views.decorators.http import require_POST
 from django.views.decorators.cache import never_cache
@@ -176,7 +175,7 @@ def default_expiry(request, experiment_id):
 @require_POST
 @permission_required('mecat.embargo_admin')
 def prevent_expiry(request, experiment_id):
-    embargo_handler = EmbargoHandler(experiment_id, True)
+    embargo_handler = EmbargoHandler(experiment_id, create=True)
     embargo_handler.prevent_expiry()
     return HttpResponse('{"success": true}', mimetype='application/json');
 
@@ -184,7 +183,7 @@ def prevent_expiry(request, experiment_id):
 @require_POST
 @permission_required('mecat.embargo_admin')
 def set_expiry(request, experiment_id):
-    embargo_handler = EmbargoHandler(experiment_id, True)
+    embargo_handler = EmbargoHandler(experiment_id, create=True)
     embargo_handler.set_expiry(request.POST['date'])
     return HttpResponse('{"success": true}', mimetype='application/json');
 
