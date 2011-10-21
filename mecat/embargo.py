@@ -96,6 +96,9 @@ class EmbargoHandler(object):
         param = ExperimentParameter(name=self.never_expire, string_value='True', parameterset=self.parameterset)
         param.save()
 
+        self.experiment.public = False
+        self.experiment.save()
+
     def reset_to_default(self):
         if self.parameterset:
             self.parameterset.delete()
@@ -113,6 +116,11 @@ class EmbargoHandler(object):
         param = ExperimentParameter(name=self.expiry_date, datetime_value=expiry_date, parameterset=self.parameterset)
         param.save()
 
+        if expiry_date.date() < datetime.date.today():
+            self.experiment.public = True
+        else:
+            self.experiment.public = False
+        self.experiment.save()
 
 class EmbargoSearchForm(forms.Form):
     start_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
@@ -151,6 +159,7 @@ def search(request):
             'start_time': e.start_time,
             'end_time': e.end_time,
             'url': e.get_absolute_url(),
+            'public': e.public,
             'proposal_id': _proposal_id(e),
             'id': e.id,
             } for e in search_results]

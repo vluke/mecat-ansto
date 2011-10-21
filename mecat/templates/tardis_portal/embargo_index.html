@@ -31,6 +31,9 @@ $(document).ready(function(){
                   <th>
                     <span>
                         <a href="{{ experiment.url }}">{{experiment.title}}</a>
+                        {% if experiment.public %}
+                            (public)
+                        {% endif %}
                     </span>
                   </th>
                 </tr>
