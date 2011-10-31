@@ -2,21 +2,28 @@
 
 {% block sidebar %}
     <ul>
-      <li>
-    <h2>Browse Experiments</h2>
-    <ul>
-      <li><a href="{% url tardis.tardis_portal.views.experiment_index %}">Index</a></li>
-      <li><a href="{% url tardis.tardis_portal.views.search_experiment %}">Search</a></li>
-    </ul>
-    {% if is_authenticated %}
-        <br/>
-        <h2>Controls</h2>
-        <ul>
-          <li><a href="{% url tardis.tardis_portal.views.control_panel %}">Experiment Access</a></li>
-          <li><a href="{% url tardis.tardis_portal.views.manage_groups %}">Group Management</a></li>
-        </ul>
-        <br/>
-    {% endif %}
-      </li>
+        <li>
+            <h2>Browse Experiments</h2>
+            <ul>
+                <li><a href="{% url tardis.tardis_portal.views.experiment_index %}">Index</a></li>
+                <li><a href="{% url tardis.tardis_portal.views.search_experiment %}">Search</a></li>
+            </ul>
+            {% if is_authenticated %}
+                <br />
+                <h2>Controls</h2>
+                <ul>
+                    <li><a href="{% url tardis.tardis_portal.views.control_panel %}">Experiment Access</a></li>
+                    <li><a href="{% url tardis.tardis_portal.views.manage_groups %}">Group Management</a></li>
+                </ul>
+            {% endif %}
+
+            {% if perms.mecat.embargo_admin %}
+                <br />
+                <h2>Admin</h2>
+                <ul>
+                    <li><a href="{% url mecat.embargo.index %}">Embargo Periods</a></li>
+                </ul>
+            {% endif %}
+        </li>
     </ul>
 {% endblock %}
