@@ -100,8 +100,17 @@ class EmbargoHandler(object):
         self.experiment.save()
 
     def reset_to_default(self):
+        import datetime
         if self.parameterset:
             self.parameterset.delete()
+
+            expiry_date = self.get_expiry_date()
+            if expiry_date and expiry_date.date() < datetime.date.today():
+                self.experiment.public = True
+            else:
+                self.experiment.public = False
+            self.experiment.save()
+
         else:
             logger.warn('tried to delete parameterset that does not exist')
 
