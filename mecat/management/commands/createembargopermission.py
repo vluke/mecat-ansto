@@ -4,12 +4,8 @@
 
 import sys
 
-from optparse import make_option
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Permission, ContentType
-
-
-from datetime import datetime as dt
 
 
 class Command(BaseCommand):
@@ -19,5 +15,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         verbosity = int(options.get('verbosity', 1))
 
-        content_type, _ = ContentType.objects.get_or_create(model='', app_label='mecat')
+        content_type, _ = ContentType.objects.get_or_create(model='experiment', app_label='tardis_portal')
         permission, _ = Permission.objects.get_or_create(codename='embargo_admin', name='Embargo Administrator', content_type=content_type)
