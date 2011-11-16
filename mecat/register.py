@@ -256,6 +256,7 @@ def _save_parameters(schema, parameterset, data):
                         # TODO: make sure that unit matches!
                     except:
                         logger.exception('%s : %s ' % (key, item))
+                        continue
                     parameter.numerical_value = numerical_value
                 else:
                     parameter.string_value = item
