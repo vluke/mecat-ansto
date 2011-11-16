@@ -17,7 +17,7 @@ class RegisterMetamanForm(forms.Form):
     end_time = forms.DateTimeField(required=False)
     title = forms.CharField(max_length=400, required=True)
     description = forms.CharField(required=False)
-    beamline = forms.CharField(max_length=10, required=True)
+    beamline = forms.CharField(max_length=50, required=True)
     instrument_url = forms.CharField(max_length=255, required=False)
     instrument_scientists = forms.CharField(required=False)
     # holding sample information

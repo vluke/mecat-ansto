@@ -37,17 +37,17 @@ Created on 20/06/2011
 import logging
 from string import lower
 from suds.client import Client
+import json
 
 from django.conf import settings
 
-from tardis.tardis_portal.auth.interfaces import GroupProvider
+from tardis.tardis_portal.auth.interfaces import AuthProvider, GroupProvider
 
 
 logger = logging.getLogger('tardis.mecat')
 
 
 EPN_LIST = "_epn_list"
-SOAP_LOGIN_KEY = "_soap_login_key"
 
 auth_key = u'vbl'
 auth_display_name = u'VBL'
@@ -99,23 +99,37 @@ class VblGroupProvider(GroupProvider):
             id = int(epn)
         except ValueError:
             id = 0
-            
+
         return [{'id': id,
                  'display': 'VBL/EPN_%s' % epn,
                  #'members': users.split(',')}]
                  'members': []}]
 
-class Backend():
+
+class Backend(AuthProvider):
+    def _get_client(self):
+        try:
+            VBLTARDISINTERFACE = settings.VBLTARDISINTERFACE
+        except AttributeError:
+            logger.error('setting VBLTARDISINTERFACE not configured')
+            return None
+
+        try:
+            proxy = getattr(settings, 'VBLPROXY', None)
+            # Switch the suds cache off, otherwise suds will try to
+            # create a tmp directory in /tmp. If it already exists but
+            # has the wrong permissions, the authentication will fail.
+            return Client(VBLTARDISINTERFACE, cache=None, proxy=proxy)
+        except:
+            logger.exception('')
+            return None
+
+
     """
     Authenticate against the VBL SOAP Webservice. It is assumed that
     the request object contains the username and password to be
-    provided to the VBLgetSOAPLoginKey function.
-
-    A new local user is created if it doesn't already exist.
-
-    This login module is slightly different from the AS one!
+    provided to the VBLauthenticate function.
     """
-
     def authenticate(self, request):
         username = lower(request.POST['username'])
         password = request.POST['password']
@@ -123,45 +137,47 @@ class Backend():
         if not username or not password:
             return None
 
+        client = self._get_client()
+
         # authenticate user and update group memberships
-        try:
-            VBLSTORAGEGATEWAY = settings.VBLSTORAGEGATEWAY
-        except AttributeError:
-            logger.error('setting VBLSTORAGEGATEWAY not configured')
+        result = str(client.service.VBLauthenticate(username, password))
+        user_info = self._load_user_info(result)
+        if not user_info:
+            logger.warning('VBLauthenticate failure: %s %s' % (username, result))
             return None
 
-        try:
-            # Switch the suds cache off, otherwise suds will try to
-            # create a tmp directory in /tmp. If it already exists but
-            # has the wrong permissions, the authentication will fail.
-            client = Client(VBLSTORAGEGATEWAY, cache=None, proxy=settings.VBLPROXY)
-        except:
-            logger.exception('')
-            return None
-
-        result = str(client.service.VBLgetSOAPLoginKey(username, password))
-        if result == 'None' or result.startswith('Error'):
-            logger.error('VBLgetSOAPLoginKey: %s %s' % (username, result))
-            return None
-
-        # result contains comma separated list of epns the user is
-        # allowed to see and a key for downloads
-        # e.g. [['Home'], 'f0yDuDyFebNDyX67NA3Y8AALqW1Q']
-        epns, email, key = eval(result)
-        request.session[EPN_LIST] = epns
-        request.session[SOAP_LOGIN_KEY] = key
+        request.session[EPN_LIST] = user_info['epns']
 
         logger.info('VBL user %s groups %s' % (username, str(request.session[EPN_LIST])))
+        return user_info
 
-        if not email == '':
-            id = email
-        else:
-            id = username
-        # the authentication provider convention, however the vbl
-        # does not distinguish between usernames and emails
-        return {'display': username,
-                'id': username,
-                'email': email}
 
     def get_user(self, user_id):
-        raise NotImplemented()
+        if not user_id:
+            return None
+
+        client = self._get_client()
+        result = str(client.service.VBLgetUserInfo(user_id))
+        user_info = self._load_user_info(result)
+        if not user_info:
+            logger.info('VBLgetUserInfo user not found: %s %s' % (user_id, result))
+        return user_info
+
+
+    def _load_user_info(self, json_user_info):
+        try:
+            user_info = json.loads(json_user_info)
+            return self._make_user_dict(user_info)
+        except:
+            return None
+
+
+    def _make_user_dict(self, user_info):
+        return { 'display': user_info['name'],
+                 'id': user_info['username'],
+                 'email': user_info.get('email', ''),
+                 'first_name': user_info['first_name'],
+                 'last_name': user_info['last_name'],
+                 'epns': user_info['epns'],
+               }
+
