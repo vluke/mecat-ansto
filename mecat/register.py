@@ -405,10 +405,9 @@ def _parse_metaman(request, cleaned_data):
                             'instrument_url': instrument_urls,
                             'instrument_scientists': instrument_scientists
     }
-    metadata_keys = ( 'program_id', )
-    for key in metadata_keys:
-        if cleaned_data.has_key(key) and cleaned_data[key]:
-            experiment_metadata[key] = [ cleaned_data[key] ]
+    prog_id_key = 'program_id'
+    if prog_id_key in cleaned_data and cleaned_data[prog_id_key]:
+        experiment_metadata[prog_id_key] = [ cleaned_data[prog_id_key] ]
 
     _save_parameters(exp_schema, exp_parameterset, experiment_metadata)
 
