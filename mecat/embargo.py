@@ -132,8 +132,8 @@ class EmbargoHandler(object):
         self.experiment.save()
 
 class EmbargoSearchForm(forms.Form):
-    start_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
-    end_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
+    start_date = forms.DateField(required=False, input_formats=['%d/%m/%Y'], widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
+    end_date = forms.DateField(required=False, input_formats=['%d/%m/%Y'], widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
     title = forms.CharField(required=False)
     proposal_id = forms.IntegerField(required=False)
     author = forms.CharField(required=False)
