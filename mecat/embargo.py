@@ -132,15 +132,15 @@ class EmbargoHandler(object):
         self.experiment.save()
 
 class EmbargoSearchForm(forms.Form):
-    start_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
-    end_date = forms.DateField(required=False, widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
+    start_date = forms.DateField(required=False, input_formats=['%d/%m/%Y'], widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
+    end_date = forms.DateField(required=False, input_formats=['%d/%m/%Y'], widget=forms.DateInput(format='%d/%m/%Y', attrs={"class": "date_input"}))
     title = forms.CharField(required=False)
     proposal_id = forms.IntegerField(required=False)
     author = forms.CharField(required=False)
     include_public = forms.BooleanField(required=False)
 
 
-@permission_required('mecat.embargo_admin')
+@permission_required('tardis_portal.embargo_admin')
 def index(request):
     c = Context({'form': EmbargoSearchForm(),
                  'subtitle': 'Embargo Periods',
@@ -157,7 +157,7 @@ def _proposal_id(experiment):
     
     
 @never_cache
-@permission_required('mecat.embargo_admin')
+@permission_required('tardis_portal.embargo_admin')
 def search(request):
     form = EmbargoSearchForm(request.GET)
     if form.is_valid():
@@ -185,7 +185,7 @@ def search(request):
 
 
 @require_POST
-@permission_required('mecat.embargo_admin')
+@permission_required('tardis_portal.embargo_admin')
 def default_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id)
     embargo_handler.reset_to_default()
@@ -193,7 +193,7 @@ def default_expiry(request, experiment_id):
 
 
 @require_POST
-@permission_required('mecat.embargo_admin')
+@permission_required('tardis_portal.embargo_admin')
 def prevent_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, create=True)
     embargo_handler.prevent_expiry()
@@ -201,7 +201,7 @@ def prevent_expiry(request, experiment_id):
 
 
 @require_POST
-@permission_required('mecat.embargo_admin')
+@permission_required('tardis_portal.embargo_admin')
 def set_expiry(request, experiment_id):
     embargo_handler = EmbargoHandler(experiment_id, create=True)
     embargo_handler.set_expiry(request.POST['date'])
