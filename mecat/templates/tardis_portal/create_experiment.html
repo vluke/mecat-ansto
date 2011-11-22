@@ -228,7 +228,6 @@
 	      }
 	      function addDatasetCB(row) {
 		  var ndx = findLastDS();
-		  console.log(ndx);
 		  updateDSid(ndx, row);
 		  row.find("li.datafile").remove();
 		  row.find('[name$=TOTAL_FORMS]').val("0");
