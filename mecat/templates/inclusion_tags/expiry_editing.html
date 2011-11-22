@@ -13,14 +13,14 @@
             {% endif %}
         </span>
         <form action="{% url mecat.embargo.set_expiry experiment_id %}" method="POST" style="display:inline;">
-            <input type="hidden" name="date" id="date_{{experiment_id}}" value="{{expiry_date}}"></input>
+            <input type="hidden" name="date" id="date_{{experiment_id}}" class="expiry_picker" value="{{expiry_date}}"></input>
         </form>
     </span>
 </td>
 
 <td>
     {% if can_be_defaulted %}
-        <form action="{% url mecat.embargo.default_expiry experiment_id %}" method="POST" id="default_form_{{experiment_id}}">
+        <form action="{% url mecat.embargo.default_expiry experiment_id %}" method="POST" id="default_form_{{experiment_id}}" class="default_form">
             <input type="submit" value="Default"/>
         </form>
     {% else %}
@@ -32,50 +32,10 @@
     <td />
 {% else %}
     <td>
-        <form action="{% url mecat.embargo.prevent_expiry experiment_id %}" method="POST" id="prevent_form_{{experiment_id}}">
+        <form action="{% url mecat.embargo.prevent_expiry experiment_id %}" method="POST" data-experiment_id="prevent_form_{{experiment_id}}" class="prevent_expiry">
             <input type="submit" value="Never expire"/>
         </form>
     </td>
 {% endif %}
 
-<script>
-var refresh = function() {
-    window.location.href = window.location.href;
-};
-var error = function(jqXHR, textStatus, errorThrown) {
-    alert(textStatus);
-};
-var doit = function($form) {
-    $.ajax({
-        data: $form.serialize(),
-        error: error,
-        success: refresh,
-        url: $form.attr('action'),
-        type: 'POST'
-    });
-};
-$('#date_{{experiment_id}}').datepicker({
-    showOn: 'button',
-    buttonImage: '/ansto_media/images/icon_calendar.gif',
-    changeMonth: true,
-    changeYear: true,
-    dateFormat: 'yy/mm/dd',
-    onSelect: function(dateText, inst){
-        if (confirm('Are you sure you want to set the expiry?')) {
-            doit($(this).parent());
-        }
-    }
-});
-$('#default_form_{{experiment_id}}').submit(function(evt){
-    evt.preventDefault();
-    if (confirm('Are you sure you want to default?')) {
-        doit($(this));
-    }
-});
-$('#prevent_form_{{experiment_id}}').submit(function(evt){
-    evt.preventDefault();
-    if (confirm('Are you sure you want to prevent?')) {
-        doit($(this));
-    }
-});
-</script>
+{# see embargo_index.html for javascript #}
