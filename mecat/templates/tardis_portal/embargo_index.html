@@ -8,6 +8,45 @@ $(document).ready(function(){
         changeMonth: true,
         changeYear: true
     });
+var refresh = function() {
+    window.location.href = window.location.href;
+};
+var error = function(jqXHR, textStatus, errorThrown) {
+    alert(textStatus);
+};
+var doit = function($form) {
+    $.ajax({
+        data: $form.serialize(),
+        error: error,
+        success: refresh,
+        url: $form.attr('action'),
+        type: 'POST'
+    });
+};
+$('input.expiry_picker').datepicker({
+    showOn: 'button',
+    buttonImage: '/ansto_media/images/icon_calendar.gif',
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy/mm/dd',
+    onSelect: function(dateText, inst){
+        if (confirm('Are you sure you want to set the expiry?')) {
+            doit($(this).parent());
+        }
+    }
+});
+$('form.default_form').submit(function(evt){
+    evt.preventDefault();
+    if (confirm('Are you sure you want to default?')) {
+        doit($(this));
+    }
+});
+$('form.prevent_expiry').live('submit', function(evt){
+    evt.preventDefault();
+    if (confirm('Are you sure you want to prevent?')) {
+        doit($(this));
+    }
+});
 });
 </script>
     <h1> Embargo Periods </h1>
@@ -64,3 +103,4 @@ $(document).ready(function(){
     {% endif %}
 
 {% endblock %}
+
