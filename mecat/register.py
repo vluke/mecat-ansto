@@ -21,10 +21,15 @@ logger = logging.getLogger('tardis.mecat')
 
 PROPDB_LINK_TEMPLATE = "https://neutron.ansto.gov.au/Bragg/proposal/ProposalView.jsp?id=%s"
 
-_config = {}
-_config['Echidna'] = {
+experiment_wide_config = {
     'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
     'dsSchema': 'http://gendsschema.com/',
+    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
+    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
+}
+
+_config = {}
+_config['Echidna'] = {
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -33,13 +38,9 @@ _config['Echidna'] = {
     'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_ECH',
-    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
-    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Kowari'] = {
-    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -48,13 +49,9 @@ _config['Kowari'] = {
     'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_KWR',
-    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
-    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Platypus'] = {
-    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -63,13 +60,9 @@ _config['Platypus'] = {
     'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_PLP',
-    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
-    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Quokka'] = {
-    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -78,13 +71,9 @@ _config['Quokka'] = {
     'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_QKK',
-    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
-    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 _config['Wombat'] = {
-    'expSchema': 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21',
-    'dsSchema': 'http://gendsschema.com/',
     'dfSchema': 'http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21',
     # accept OPUS files, which end with a number, and SPA and SPC files
     'filetypes': re.compile('.*\.(pdf)$|.*\.(hdf)$', re.IGNORECASE),
@@ -93,8 +82,6 @@ _config['Wombat'] = {
     'groupDSRules': ['sample'], 
     'metadata': None,
     'beamline_group': 'BEAMLINE_WBT',
-    'sampleSchema': 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21',
-    'chemicalSchema': 'http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21',
 }
 
 
@@ -142,6 +129,9 @@ class Datafile():
             return True
         else:
             return False
+
+    def getBeamline(self):
+        return self.name.split('/')[0]
 
 class DatasetMetadata():
     def __init__(self):
@@ -266,6 +256,7 @@ def _save_parameters(schema, parameterset, data):
                         # TODO: make sure that unit matches!
                     except:
                         logger.exception('%s : %s ' % (key, item))
+                        continue
                     parameter.numerical_value = numerical_value
                 else:
                     parameter.string_value = item
@@ -298,7 +289,9 @@ def _parse_metaman(request, cleaned_data):
     '''
 
     # which beamline/instrument did it come from?
-    beamline = cleaned_data['beamline']
+    beamlines_unfiltered = cleaned_data['beamline'].split(', ')
+    instrument_urls = cleaned_data['instrument_url'].split(', ')
+    instrument_scientists = cleaned_data['instrument_scientists'].split(', ')
     epn = cleaned_data['epn']
 
     ###
@@ -318,11 +311,14 @@ def _parse_metaman(request, cleaned_data):
 
     # Save the metaman file for debugging for now
     tmpfn = os.path.join('/tmp', metaman.name)
-    tmpfile = open(tmpfn, 'w')
-    for chunk in metaman.chunks():
-        tmpfile.write(chunk)
-    metaman.seek(0)
-    tmpfile.close()
+    try:
+        tmpfile = open(tmpfn, 'w')
+        for chunk in metaman.chunks():
+            tmpfile.write(chunk)
+        metaman.seek(0)
+        tmpfile.close()
+    except:
+        pass
 
     sample = None
     if 'sample' in request.FILES:
@@ -330,17 +326,25 @@ def _parse_metaman(request, cleaned_data):
         logger.info("Sample information received. Size %i bytes" % sample.size)
         # Save the sample file for debugging for now
         tmpfn = os.path.join('/tmp', 's'+str(epn)+'.txt')
-        tmpfile = open(tmpfn, 'w')
-        for chunk in sample.chunks():
-            tmpfile.write(chunk)
-        metaman.seek(0)
-        tmpfile.close()
+        try:
+            tmpfile = open(tmpfn, 'w')
+            for chunk in sample.chunks():
+                tmpfile.write(chunk)
+            metaman.seek(0)
+            tmpfile.close()
+        except:
+            pass
 
-    if not beamline in _config:
-        logger.error("Unknown beamline key '%s'" % beamline)
+    beamlines = []
+    for beamline in beamlines_unfiltered:
+        if beamline in _config:
+            beamlines.append(beamline)
+
+    # Need at least one valid beamline
+    if not beamlines:
+        logger.error("No relevant beamline keys in '%s'" % beamlines_unfiltered)
         logger.error("No data will be commited to the database!")
-        return HttpResponseServerError()
-
+        return None
 
     # create experiment with info from post
     # check if experiment already exists
@@ -369,7 +373,7 @@ def _parse_metaman(request, cleaned_data):
     order = 0
     if update:
         models.Author_Experiment.objects.filter(experiment=experiment).delete()
-        
+
     author_experiment = models.Author_Experiment(experiment=experiment,
                                                  author=cleaned_data['experiment_owner'],
                                                  order=order)
@@ -387,7 +391,7 @@ def _parse_metaman(request, cleaned_data):
 
     # additional experiment metadata
     exp_schema = \
-        models.Schema.objects.get(namespace__exact=_config[beamline]['expSchema'])
+        models.Schema.objects.get(namespace__exact=experiment_wide_config['expSchema'])
     if update:
         models.ExperimentParameterSet.objects.filter(schema=exp_schema, 
                                                      experiment=experiment).delete()
@@ -395,35 +399,25 @@ def _parse_metaman(request, cleaned_data):
                                                      experiment=experiment)
     exp_parameterset.save()
 
-    experiment_metadata = { 'epn': epn,
-                            'propdb_link': PROPDB_LINK_TEMPLATE % epn
+    experiment_metadata = { 'epn': [ epn ],
+                            'propdb_link': [ PROPDB_LINK_TEMPLATE % epn ],
+                            'beamline': beamlines_unfiltered,
+                            'instrument_url': instrument_urls,
+                            'instrument_scientists': instrument_scientists
     }
-    metadata_keys = (
-        'beamline', 'program_id', 'instrument_url', 'instrument_scientists',
-    )
-    for key in metadata_keys:
-        if cleaned_data.has_key(key) and cleaned_data[key]:
-            experiment_metadata[key] = cleaned_data[key]
+    prog_id_key = 'program_id'
+    if prog_id_key in cleaned_data and cleaned_data[prog_id_key]:
+        experiment_metadata[prog_id_key] = [ cleaned_data[prog_id_key] ]
 
-    for key, value in experiment_metadata.iteritems():
-        try:
-            exp_parameter = models.ParameterName.objects.get(schema=exp_schema,
-                                                             name__iexact=key)
-            exp_par = models.ExperimentParameter(parameterset=exp_parameterset,
-                                                 name=exp_parameter,
-                                                 string_value=value)
-            exp_par.save()
-
-        except models.ParameterName.DoesNotExist:
-            logger.error('parameter %s not found in %s' % (key, exp_schema))
+    _save_parameters(exp_schema, exp_parameterset, experiment_metadata)
 
     if sample:
         # parse sample information and store it right away to keep the
         # order of the parameters
         sample_schema = \
-            models.Schema.objects.get(namespace__exact=_config[beamline]['sampleSchema'])
+            models.Schema.objects.get(namespace__exact=experiment_wide_config['sampleSchema'])
         chemical_schema = \
-            models.Schema.objects.get(namespace__exact=_config[beamline]['chemicalSchema'])
+            models.Schema.objects.get(namespace__exact=experiment_wide_config['chemicalSchema'])
 
         if update:
             models.ExperimentParameterSet.objects.filter(schema=sample_schema,
@@ -477,6 +471,11 @@ def _parse_metaman(request, cleaned_data):
         if line[0:3] == '<b>' and line[-5:] == '</b>:':
             path = line[4:-5]
             # Do we accept this particular file type?
+            beamline = path.split('/')[0]
+            if beamline not in beamlines:
+                logger.debug('Datafile %s is from an unknown beamline %s', path,
+                        beamline)
+                continue
             if _acceptFile(path, beamline):
                 # create new Datafile object and add it to the list
                 df = Datafile(path)
@@ -513,6 +512,7 @@ def _parse_metaman(request, cleaned_data):
     for df in files:
         if not df.hasMetadata():
             continue
+        beamline = df.getBeamline()
         # work out the dataset name
         dsName = _getDatasetName(df, beamline)
         metadata[dsName] = DatasetMetadata()
@@ -532,6 +532,12 @@ def _parse_metaman(request, cleaned_data):
     ###
     ### III: Ingest into database
     ###
+    df_schemas = {}
+    for beamline in beamlines:
+        schema = models.Schema.objects.get(namespace__exact=_config[beamline]['dfSchema'])
+        df_schemas[beamline] = schema
+
+    ds_schema = models.Schema.objects.get(namespace__exact=experiment_wide_config['dsSchema'])
 
     # loop over datasets
     for dsName, ds in datasets.items():
@@ -551,7 +557,6 @@ def _parse_metaman(request, cleaned_data):
 
         # does this dataset have any metadata?
         if dsName in metadata.keys():
-            ds_schema = models.Schema.objects.get(namespace__exact=_config[beamline]['dsSchema'])
             if update:
                 try:
                     models.DatasetParameterSet.objects.get(schema=ds_schema,
@@ -567,9 +572,6 @@ def _parse_metaman(request, cleaned_data):
             _save_parameters(ds_schema, ds_parameterset, metadata[dsName].data)
 
         # loop over associated files
-        df_schema = \
-            models.Schema.objects.get(namespace__exact=_config[beamline]['dfSchema'])
-
         for df in ds:
             if update:
                 try:
@@ -590,6 +592,8 @@ def _parse_metaman(request, cleaned_data):
                                                    size=df.getSize(),
                                                    protocol='vbl')
             dataset_file.save()
+
+            df_schema = df_schemas[df.getBeamline()]
 
             # loop over file meta-data
             if update:
@@ -623,11 +627,11 @@ def _parse_metaman(request, cleaned_data):
 #            continue
 #        logger.debug('looking for owner %s' % owner)
 #        # find corresponding user
-#        user = auth_service.getUser({'pluginname': vbl_auth_key,
-#                                    'id': owner})
+#        owner_username = owner # insert magic here
+#        user = auth_service.getUser(vbl_auth_key, owner_username)
 #
-#       logger.debug('registering user %s for owner %s' % (user.username, owner))
-#       acl = models.ExperimentACL(experiment=experiment,
+#        logger.debug('registering user %s for owner %s' % (user.username, owner))
+#        acl = models.ExperimentACL(experiment=experiment,
 #                                  pluginId=django_user,
 #                                  entityId=str(user.id),
 #                                  isOwner=True,
@@ -635,25 +639,26 @@ def _parse_metaman(request, cleaned_data):
 #                                  canWrite=True,
 #                                  canDelete=True,
 #                                  aclOwnershipType=models.ExperimentACL.OWNER_OWNED)
-#       acl.save()
+#        acl.save()
 ##
 
 
-    beamline_group = _config[beamline]['beamline_group']
-    group, created = Group.objects.get_or_create(name=beamline_group)
+    for beamline in beamlines:
+        beamline_group = _config[beamline]['beamline_group']
+        group, created = Group.objects.get_or_create(name=beamline_group)
 
-    if created:
-        logger.debug('registering new group: %s' % group.name)
-    else:
-        logger.debug('registering existing group: %s' % group.name)
+        if created:
+            logger.debug('registering new group: %s' % group.name)
+        else:
+            logger.debug('registering existing group: %s' % group.name)
 
-    # beamline group
-    acl = models.ExperimentACL(experiment=experiment,
-                               pluginId=django_group,
-                               entityId=str(group.id),
-                               canRead=True,
-                               aclOwnershipType=models.ExperimentACL.SYSTEM_OWNED)
-    acl.save()
+        # beamline group
+        acl = models.ExperimentACL(experiment=experiment,
+                                   pluginId=django_group,
+                                   entityId=str(group.id),
+                                   canRead=True,
+                                   aclOwnershipType=models.ExperimentACL.SYSTEM_OWNED)
+        acl.save()
 
     # create vbl group
     acl = models.ExperimentACL(experiment=experiment,

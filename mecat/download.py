@@ -17,21 +17,19 @@ from django.template import Context
 from tardis.tardis_portal import models
 from tardis.tardis_portal.auth.decorators import *
 
-from mecat.vbl_auth import SOAP_LOGIN_KEY
-
 
 logger = logging.getLogger('tardis.mecat')
 
 
 class VBLDownload():
     def __init__(self, request):
+        proxy = getattr(settings, 'VBLPROXY', None)
         # Switch the suds cache off, otherwise suds will try to
         # create a tmp directory in /tmp. If it already exists but
         # has the wrong permissions, the download will fail.
-        self.client = Client(settings.VBLSTORAGEGATEWAY,
+        self.client = Client(settings.VBLTARDISINTERFACE,
                              cache=None,
-                             proxy=settings.VBLPROXY)
-        #self.SOAPLoginKey = request.session[SOAP_LOGIN_KEY]
+                             proxy=proxy)
         self.request = request
 
     def download(self, EPN, file_string=''):
@@ -39,7 +37,7 @@ class VBLDownload():
         # already determined that the logged in user is authorized to access
         # the experiment in EPN and the files in file_string.
         logger.debug('VBL download request received for EPN %s. ' % EPN)
-        key = self.client.service.VBLstartTrustedTransferSSL(EPN, file_string)
+        key = self.client.service.VBLstartTransferSSL(EPN, file_string)
         if key.startswith('Error:'):
             logger.error('VBL download request failed: %s' % key)
             logger.error(file_string)
@@ -80,13 +78,10 @@ def download_datafiles(request):
                                                     atoi(request.POST.get('expid')))
 
     epn = par.get(name__name='EPN').string_value
-    client = Client(settings.VBLSTORAGEGATEWAY)
-    client.set_options(cache=None)
 
     datafiles = request.POST.getlist('datafile')
     datasets = request.POST.getlist('dataset')
 
-    # TODO: handle permission denied problem!
     file_string = ""
     for dsid in datasets:
         if has_dataset_access(request, dsid):
