@@ -2,7 +2,7 @@ from os import path
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -16,11 +16,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.',
         # Name of the database to use. For SQLite, it's the full path.
-        'NAME': ':memory:',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'tardis_db',
+        'USER': 'tardis',
+        'PASSWORD': 'tardis',
         'HOST': '',
         'PORT': '',
     }
