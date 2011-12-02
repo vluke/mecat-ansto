@@ -16,11 +16,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'ENGINE': 'django.db.backends.',
+        'ENGINE': 'django.db.backends.sqlite3',
         # Name of the database to use. For SQLite, it's the full path.
-        'NAME': 'tardis_db',
-        'USER': 'tardis',
-        'PASSWORD': 'tardis',
+        'NAME': 'tardis.db',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': '',
         'PORT': '',
     }
