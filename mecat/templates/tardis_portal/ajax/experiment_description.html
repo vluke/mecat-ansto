@@ -105,9 +105,9 @@
     {% for p in protocol %}
       <p>
 	{% if p.0 %}
-	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
+	  <strong><a href="{{p.1}}">Download Entire Experiment ({{p.0|upper}})</a></strong><br/>
 	{% else %}
-	  <strong><a href="{{p.1}}" target="_blank">Download Entire Experiment</a></strong><br/>
+	  <strong><a href="{{p.1}}">Download Entire Experiment</a></strong><br/>
 	{% endif %}
       </p>
     {% endfor %}
