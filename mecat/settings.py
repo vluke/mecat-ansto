@@ -253,10 +253,12 @@ TOKEN_EXPIRY_DAYS=30
 TOKEN_USERNAME='tokenuser'
 TOKEN_LENGTH=30
 
-EMBARGO_DAYS=30
+EMBARGO_DAYS=365*3+1
 
 # RIF-CS Settings
 OAI_DOCS_PATH = 'var/oai'
 RIFCS_PROVIDERS = ('mecat.rifcs.provider.anstorifcsprovider.AnstoRifCsProvider',)
 RIFCS_TEMPLATE_DIR = 'tardis_portal/rif-cs/profiles/'
 RELATED_INFO_SCHEMA_NAMESPACE = 'http://www.tardis.edu.au/schemas/related_info/2011/11/10'
+RIFCS_GROUP = "Australian Nuclear Science and Technology Organisation"
+RIFCS_MYTARDIS_KEY = "research-data.ansto.gov.au/collection/771"
