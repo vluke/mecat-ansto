@@ -61,14 +61,14 @@ class AnstoRifCsProviderTestCase(TestCase):
         self.assertTrue(self.provider.can_publish(self.e1))
     
     def testCanPublishPublicAndPublished(self):
-        # (experiment public: True, access type: public) -> True
+        # (experiment public: True, access type: published) -> True
         self.e1.public = True
         ph = PublishHandler(self.e1.id, create=True)
         ph.update(self.publish_data)
         self.assertTrue(self.provider.can_publish(self.e1))
         
     def testCanPublishPublicAndPrivate(self):
-        # (experiment public: True, access type: public) -> True
+        # (experiment public: True, access type: private) -> True
         self.e1.public = True
         self.publish_data[self.access_type_key] = "private"
         ph = PublishHandler(self.e1.id, create=True)
@@ -76,7 +76,7 @@ class AnstoRifCsProviderTestCase(TestCase):
         self.assertTrue(self.provider.can_publish(self.e1))    
         
     def testCanPublishPublicAndUnpublished(self):
-        # (experiment public: True, access type: public) -> False
+        # (experiment public: True, access type: unpublished) -> False
         self.e1.public = True
         self.publish_data[self.access_type_key] = "unpublished"
         ph = PublishHandler(self.e1.id, create=True)
