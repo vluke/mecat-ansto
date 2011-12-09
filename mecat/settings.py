@@ -135,7 +135,7 @@ MEDIA_URL = '/site_media/'
 
 #set to empty tuple () for no apps
 #TARDIS_APPS = ('mrtardis', )
-TARDIS_APPS = ()
+TARDIS_APPS = ('summary_table','related_info','ands_register')
 TARDIS_APP_ROOT = 'tardis.apps'
 
 if TARDIS_APPS:
