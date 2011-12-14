@@ -1,10 +1,13 @@
 """
     management utility to process out-of-embargo experiments
-    
+
     Typical usage is with a nighly cron job
 """
 
 import datetime as dt
+import sys
+import traceback
+
 from optparse import make_option
 
 from django.conf import settings
@@ -36,8 +39,11 @@ class Command(BaseCommand):
             if verbosity > 0:
                 self.stdout.write("%s %s\n" % (exp.id, exp))
             if not list_only:
-                self._unembargo(exp, verbosity)
-
+                try:
+                    self._unembargo(exp, verbosity)
+                except StandardError:
+                    self.stdout.write(''.join(traceback.format_exception(*sys.exc_info())))
+                    
     def _unembargo(self, experiment, verbosity):
 #        embargo_schema = Schema.objects.get(namespace=NAMESPACE)
 #        embargo_parametersets = experiment.experimentparameterset_set.filter(schema=embargo_schema)
