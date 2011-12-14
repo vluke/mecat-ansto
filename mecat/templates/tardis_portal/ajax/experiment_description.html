@@ -120,9 +120,6 @@
 	<p>
 		<a href="{% url tardis.tardis_portal.views.choose_license experiment.id %}">Choose License</a>
 	</p>
-	{% if not experiment.public %}
-		<strong><a href="publish/">Publish Experiment</a></strong><br/>
-	{% endif %}
 	{% endif %}
   </div>
 

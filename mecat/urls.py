@@ -5,7 +5,7 @@ from django.shortcuts import Http404
 admin.autodiscover()
 
 
-def no_view(request):
+def no_view(request, *args, **kwargs):
     raise Http404
 
 embargo_urls = patterns('mecat.embargo',
@@ -27,9 +27,10 @@ urlpatterns = patterns('',
                        (r'^accounts/manage_auth_methods/', no_view),
                        (r'^accounts/register/', no_view),
                        (r'^experiment/create/$', no_view),
+                       (r'^experiment/view/(?P<experiment_id>\d+)/publish/', no_view),
                        (r'^ansto_media/(?P<path>.*)$', 'django.views.static.serve',
                         {'document_root': settings.ANSTO_MEDIA_ROOT}),
-                        (r'^embargo/', include(embargo_urls)),
+                       (r'^embargo/', include(embargo_urls)),
                        )
 
 from tardis.urls import urlpatterns as tardisurls
