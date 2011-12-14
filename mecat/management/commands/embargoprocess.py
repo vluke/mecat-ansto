@@ -62,8 +62,10 @@ class Command(BaseCommand):
         embargo_schema = Schema.objects.get(namespace=NAMESPACE)
         expiry_date = ParameterName.objects.get(schema=embargo_schema, name=EXPIRY_DATE_KEY)
 
-        defaulted = Experiment.objects.exclude(experimentparameterset__schema=embargo_schema)
-        custom = Experiment.objects.filter(experimentparameterset__schema=embargo_schema)
+        private_experiments = Experiment.objects.filter(public=False)
+
+        defaulted = private_experiments.exclude(experimentparameterset__schema=embargo_schema)
+        custom = private_experiments.filter(experimentparameterset__schema=embargo_schema)
 
         today = dt.date.today()
         custom_expired = custom.filter(experimentparameterset__experimentparameter__name=expiry_date,
