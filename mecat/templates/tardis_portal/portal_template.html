@@ -120,7 +120,7 @@
 	  <li class="lineheight" style="width:500px;padding-top:0;">
           <form method="get" action="{% url tardis.tardis_portal.views.single_search %}" style="width:100%;">
       <span id="quicksearch_container" style="width:100%;">
-          <input type="text" name="q" id="id_q" style="width:80%;" {% if query %} value="{{ query }}"{% endif %}/>
+          <input type="text" name="q" id="id_q" style="width:80%;" {% if search_query %} value="{{ search_query }}"{% endif %}/>
             <input type="submit" value="search">
               <a title="advanced search help"
                   href="http://mytardis.readthedocs.org/en/latest/searching.html#advanced-search"
@@ -193,7 +193,7 @@
       'data': data,
       'url': '/ajax/parameter_field_list/',
       'success': function (data) {
-        data = data.split(" ");
+        data = data.split("+");
         var list = new Array();
         $.each(data, function(i,l) {
             var name = l.split(":")[0];
