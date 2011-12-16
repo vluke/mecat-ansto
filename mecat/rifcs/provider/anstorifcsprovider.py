@@ -3,8 +3,8 @@ from tardis.tardis_portal.models import ExperimentParameter, ParameterName, Sche
 
 import tardis.tardis_portal.publish.provider.schemarifcsprovider as schemarifcsprovider
     
-SERVER_URL = "https://mecat-test.nbi.ansto.gov.au"
-HARVEST_URL = "http://mecat-test.nbi.ansto.gov.au:8080/oai/provider"
+SERVER_URL = "https://tardis.nbi.ansto.gov.au"
+HARVEST_URL = "http://tardis.nbi.ansto.gov.au/oai/provider"
 
 INSTRUMENT_SERVICE_IDS = {
     'Echidna' : '766',
