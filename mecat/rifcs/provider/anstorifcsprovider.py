@@ -3,8 +3,8 @@ from tardis.tardis_portal.models import ExperimentParameter, ParameterName, Sche
 
 import tardis.tardis_portal.publish.provider.schemarifcsprovider as schemarifcsprovider
     
-SERVER_URL = "https://mecat-test.nbi.ansto.gov.au"
-HARVEST_URL = "http://mecat-test.nbi.ansto.gov.au:8080/oai/provider"
+SERVER_URL = "https://tardis.nbi.ansto.gov.au"
+HARVEST_URL = "http://tardis.nbi.ansto.gov.au/oai/provider"
 
 INSTRUMENT_SERVICE_IDS = {
     'Echidna' : '766',
@@ -21,8 +21,11 @@ class AnstoRifCsProvider(schemarifcsprovider.SchemaRifCsProvider):
         self.namespace = 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21'  
         self.sample_desc_schema_ns = 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21'
       
-    def get_email(self, beamline):
-        return "%s@ansto.gov.au" % beamline
+    def get_emails(self, beamlines):
+        emails = []
+        for bl in beamlines:
+            emails.append("%s@ansto.gov.au" % bl)
+        return emails
         
     def get_originating_source(self):
         return HARVEST_URL
@@ -30,9 +33,13 @@ class AnstoRifCsProvider(schemarifcsprovider.SchemaRifCsProvider):
     def get_key(self, experiment):
         return "research-data.ansto.gov.au/collection/bragg/%s" % (experiment.id)  
          
-    def get_produced_by(self, beamline):
-        return 'research-data.ansto.gov.au/collection/%s' % \
-            INSTRUMENT_SERVICE_IDS[beamline]
+    def get_produced_bys(self, beamlines):
+        pbs = []
+        for bl in beamlines:
+            id = INSTRUMENT_SERVICE_IDS.get(bl, None)
+            if id is not None:
+                pbs.append('research-data.ansto.gov.au/collection/%s' % id)
+        return pbs
 
     def get_rights(self, experiment):
         if self.get_license_uri(experiment):
@@ -55,12 +62,13 @@ class AnstoRifCsProvider(schemarifcsprovider.SchemaRifCsProvider):
 
     def get_rifcs_context(self, experiment):
         c = super(AnstoRifCsProvider, self).get_rifcs_context(experiment)
-        beamline = self.get_beamline(experiment)
+        beamlines = c['beamlines']
+        c['blnoun'] = 'instrument'
         c['originating_source'] = self.get_originating_source()
-        c['email'] = self.get_email(beamline)
+        c['emails'] = self.get_emails(beamlines)
         c['key'] = self.get_key(experiment)
         c['url'] = self.get_url(experiment, SERVER_URL)
-        c['produced_by'] = self.get_produced_by(beamline)
+        c['produced_bys'] = self.get_produced_bys(beamlines)
         c['anzsrcfor'].extend(['029904'])
         c['rights'] = self.get_rights(experiment)
         c['access_rights'] = self.get_access_rights(experiment)

@@ -84,8 +84,8 @@ class AnstoRifCsProviderTestCase(TestCase):
         self.assertTrue(self.provider.can_publish(self.e1))       
         
     def testEmail(self):
-        email = self.provider.get_email("mybeamline")
-        self.assertEquals(email, "mybeamline@ansto.gov.au")
+        emails = self.provider.get_emails(["mybeamline"])
+        self.assertEquals(emails, ["mybeamline@ansto.gov.au"])
     
     def testOriginatingSource(self):
         orig_source = self.provider.get_originating_source()
@@ -96,8 +96,8 @@ class AnstoRifCsProviderTestCase(TestCase):
         self.assertEquals(key, "research-data.ansto.gov.au/collection/bragg/%s" % self.e1.id)
         
     def testProducedBy(self):
-        prod_by = self.provider.get_produced_by("Quokka")
-        self.assertEquals(prod_by, 'research-data.ansto.gov.au/collection/769')
+        prod_bys = self.provider.get_produced_bys(["Quokka"])
+        self.assertEquals(prod_bys, ['research-data.ansto.gov.au/collection/769'])
         
         
     
