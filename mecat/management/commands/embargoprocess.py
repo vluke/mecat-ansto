@@ -33,27 +33,22 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         verbosity = int(options.get('verbosity', 1))
         list_only = options.get('list')
+        self._log('starting embargo processing\n')
 
         exps = self._get_experiments_to_publicise(verbosity)
         for exp in exps:
             if verbosity > 0:
-                self.stdout.write("%s %s\n" % (exp.id, exp))
+                self._log("%s %s\n" % (exp.id, exp))
             if not list_only:
                 try:
                     self._unembargo(exp, verbosity)
                 except StandardError:
-                    self.stdout.write(''.join(traceback.format_exception(*sys.exc_info())))
+                    self._log(''.join(traceback.format_exception(*sys.exc_info())))
+        self._log('finished embargo processing\n')
                     
     def _unembargo(self, experiment, verbosity):
-#        embargo_schema = Schema.objects.get(namespace=NAMESPACE)
-#        embargo_parametersets = experiment.experimentparameterset_set.filter(schema=embargo_schema)
-#
-#        if verbosity > 0:
-#            self.stdout.write("Deleting %s parameterset(s) for %s\n" %
-#                                (embargo_parametersets.count(), experiment))
-#        embargo_parametersets.delete()
         if verbosity > 0:
-            self.stdout.write("Publicising %s (%s)\n" % (experiment, experiment.id))
+            self._log("Publicising %s (%s)\n" % (experiment, experiment.id))
 
         experiment.public = True
         experiment.save()
@@ -77,3 +72,9 @@ class Command(BaseCommand):
         all_expired = custom_expired | default_expired
 
         return all_expired
+
+    def _log(self, message):
+        import datetime
+        timestamp = datetime.datetime.now().strftime('[%d/%b/%Y %H:%M:%S]')
+        self.stdout.write(timestamp + ' ')
+        self.stdout.write(message)
