@@ -7,16 +7,16 @@
         <div class="entry">
             <p>
                 <form action='' method='post'>
-                    <div class="fieldWrapper">
+                    <p>
                         {{ loginForm.username.label_tag }}
                         {{ loginForm.username }}
                         {{ loginForm.username.errors }}
-                    </div>
-                    <div class="fieldWrapper">
+                    </p>
+                    <p>
                         {{ loginForm.password.label_tag }}
                         {{ loginForm.password }}
                         {{ loginForm.password.errors }}
-                    </div>
+                    </p>
                     <input type="hidden" name="authMethod" value="vbl" />
                     <input type="submit" value="login" />
                 </form>
