@@ -1,0 +1,11 @@
+/*
+    custom.css
+    Custom css that should be included after all other includes
+*/
+
+/*
+    fix for close button not showing on add/edit parameters in ie8 (or ie9 in compatibility mode)
+ */
+.jqmAlertTitle {
+    height: auto;
+}
