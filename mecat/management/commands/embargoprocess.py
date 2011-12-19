@@ -71,7 +71,7 @@ class Command(BaseCommand):
 
         all_expired = custom_expired | default_expired
 
-        return all_expired
+        return all_expired.distinct()
 
     def _log(self, message):
         import datetime
