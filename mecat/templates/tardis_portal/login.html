@@ -1,0 +1,27 @@
+{% extends "tardis_portal/portal_template.html" %}
+
+{% block content %}
+<div id="content">
+    <div class="post">
+        <h1 class="title"><a href="#">Welcome</a></h1>
+        <div class="entry">
+            <p>
+                <form action='' method='post'>
+                    <div class="fieldWrapper">
+                        {{ loginForm.username.label_tag }}
+                        {{ loginForm.username }}
+                        {{ loginForm.username.errors }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ loginForm.password.label_tag }}
+                        {{ loginForm.password }}
+                        {{ loginForm.password.errors }}
+                    </div>
+                    <input type="hidden" name="authMethod" value="vbl" />
+                    <input type="submit" value="login" />
+                </form>
+            </p>
+        </div> <!-- entry -->
+    </div> <!-- post -->
+</div> <!-- content -->
+{% endblock content %}
