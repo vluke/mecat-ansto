@@ -405,3 +405,7 @@ button.fg-button {
 .embargo_edit td, .embargo_edit th{
     vertical-align: text-bottom;
 }
+
+.jqmAlertTitle {
+    height: auto;
+}
