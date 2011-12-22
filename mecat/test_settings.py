@@ -97,10 +97,9 @@ TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.request',
 # "C:/www/django/templates". Always use forward slashes, even on Windows.
 # Don't forget to use absolute paths, not relative paths.
 TEMPLATE_DIRS = (
-    path.join(path.dirname(__file__),
-    'templates/').replace('\\', '/'),
+    path.join(path.dirname(__file__), 'templates/').replace('\\', '/'),
+    path.join(path.dirname(__file__), '../src/MyTARDIS/tardis/tardis_portal/templates/').replace('\\', '/'),
 )
-#raise Exception(TEMPLATE_DIRS)
 
 # Temporarily disable transaction management until everyone agrees that
 # we should start handling transactions
