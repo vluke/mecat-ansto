@@ -91,6 +91,7 @@ ROOT_URLCONF = 'mecat.urls'
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
                                'django.core.context_processors.debug',
+                               'tardis.tardis_portal.context_processors.single_search_processor',
                                'django.core.context_processors.i18n')
 
 # Put strings here, like "/home/html/django_templates" or
@@ -238,7 +239,7 @@ DEFAULT_INSTITUTION = "ANSTO"
 #Are the datasets ingested via METS xml (web services) to be immutable?
 IMMUTABLE_METS_DATASETS = True
 
-SINGLE_SEARCH_ENABLED=False
+SINGLE_SEARCH_ENABLED=True
 if not SINGLE_SEARCH_ENABLED:
     HAYSTACK_ENABLE_REGISTRATIONS = False
 # Settings for the single search box

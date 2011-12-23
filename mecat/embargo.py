@@ -86,9 +86,6 @@ class EmbargoHandler(object):
             return params[0]
 
     def prevent_expiry(self):
-        # delete any current expiry dates
-        # set never_expires = True
-        logger.fatal('preventing expiry')
         if not self.parameterset:
             raise Exception('incorrectly initialised, call with create=True')
         params = self.parameterset.experimentparameter_set
