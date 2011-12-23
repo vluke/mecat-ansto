@@ -118,19 +118,20 @@
 	  <li class="lineheight"><a href="/login">Login</a></li>
 	  {% endif %}
           {% if search_form %}
-	  <li class="lineheight" style="width:500px;padding-top:0;">
-          <form method="get" action="{% url tardis.tardis_portal.views.single_search %}" style="width:100%;">
+	  <li class="lineheight" style="padding-top:0;margin-right:0;">
+              <a title="advanced search help"
+                  href="http://mytardis.readthedocs.org/en/latest/searching.html#advanced-search"
+                  style="margin-top: 0.3em;height:15px;width:7px;"
+                  class="fg-button small ui-state-default fg-button-icon-solo ui-corner-all"
+                  target="_blank">
+                  <span class="ui-icon ui-icon-help" style="padding-right: 0;width:16px:height:22px;"></span>
+              </a>
+          </li>
+	  <li class="lineheight" style="width:400px;padding-top:0;margin-left:0">
+          <form method="get" action="{% url tardis.tardis_portal.views.single_search %}" style="width:100%;padding-left:0;">
       <span id="quicksearch_container" style="width:100%;">
           <input type="text" name="q" id="id_q" style="width:80%;" {% if search_query %} value="{{ search_query }}"{% endif %}/>
             <input type="submit" value="search">
-              <a title="advanced search help"
-                  href="http://mytardis.readthedocs.org/en/latest/searching.html#advanced-search"
-                  style="margin-top: 0.3em;"
-                  class="fg-button small ui-state-default fg-button-icon-solo
-                  ui-corner-all"
-                  target="_blank">
-                  <span class="ui-icon ui-icon-help" style="padding-right: 0"></span>
-              </a>
       </span>
           </form>
 	  </li>
