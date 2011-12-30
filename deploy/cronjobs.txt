@@ -1,0 +1,5 @@
+#daily at midnight
+@daily /opt/mecat/mecat-ansto/bin/django embargoprocess >> /var/mytardis/log/embargoprocess.log
+@daily /opt/mecat/mecat-ansto/bin/django cleanuptokens >> /var/mytardis/log/cleanuptokens.log
+@daily /opt/mecat/mecat-ansto/bin/django cleanup >> /var/mytardis/log/cleanup.log
+@daily /opt/mecat/mecat-ansto/src/MyTARDIS/utils/update-solr-schema.sh

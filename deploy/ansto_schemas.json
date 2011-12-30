@@ -1,0 +1,2528 @@
+[
+    {
+        "pk": 14, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 3, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21", 
+            "name": "Quokka File", 
+            "immutable": true, 
+            "subtype": "QKK"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 3, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21", 
+            "name": "Echidna File", 
+            "immutable": true, 
+            "subtype": "ECH"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 3, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21", 
+            "name": "Wombat File", 
+            "immutable": true, 
+            "subtype": "WBT"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 3, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21", 
+            "name": "Platypus File", 
+            "immutable": true, 
+            "subtype": "PLP"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 2, 
+            "namespace": "http://gendsschema.com/", 
+            "name": "Dataset Sample", 
+            "immutable": true, 
+            "subtype": ""
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 1, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto_embargo/2011/06/10", 
+            "name": "Embargo Details", 
+            "immutable": true, 
+            "subtype": ""
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 1, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21", 
+            "name": "Chemical Details", 
+            "immutable": true, 
+            "subtype": ""
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 1, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/experiment/annotation/2011/07/07", 
+            "name": "Experiment Annotation", 
+            "immutable": false, 
+            "subtype": ""
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 1, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21", 
+            "name": "Sample Details", 
+            "immutable": true, 
+            "subtype": ""
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 1, 
+            "namespace": "http://www.tardis.edu.au/schemas/creative_commons/2011/05/17", 
+            "name": null, 
+            "immutable": true, 
+            "subtype": null
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 1, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21", 
+            "name": "Experiment ID", 
+            "immutable": true, 
+            "subtype": ""
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "tardis_portal.schema", 
+        "fields": {
+            "type": 3, 
+            "namespace": "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21", 
+            "name": "Kowari File", 
+            "immutable": true, 
+            "subtype": "KWR"
+        }
+    }, 
+    {
+        "pk": 117, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalName", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Chemical Name", 
+            "units": "", 
+            "order": 0, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 118, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "SampleDescription", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Sample Description", 
+            "units": "", 
+            "order": 0, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 119, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "SampleName", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Sample Name", 
+            "units": "", 
+            "order": 0, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 120, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalFormula", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Chemical Formula", 
+            "units": "", 
+            "order": 1, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 121, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "program_id", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Program ID", 
+            "units": "", 
+            "order": 1, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 122, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "sample_name", 
+            "units": "", 
+            "order": 1, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 123, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "sample/name", 
+            "units": "", 
+            "order": 1, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 124, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "sample_name", 
+            "units": "", 
+            "order": 1, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 125, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "sample_name", 
+            "units": "", 
+            "order": 1, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 126, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "sample_name", 
+            "units": "", 
+            "order": 1, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 127, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalCAS", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Chemical CAS", 
+            "units": "", 
+            "order": 2, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 128, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "EPN", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Proposal ID", 
+            "units": "", 
+            "order": 2, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 129, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_description", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_description", 
+            "units": "", 
+            "order": 2, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 130, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_description", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_description", 
+            "units": "", 
+            "order": 2, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 131, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_description", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_description", 
+            "units": "", 
+            "order": 2, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 132, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_description", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_description", 
+            "units": "", 
+            "order": 2, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 133, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "beamline", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "(Echidna:Echidna), (Kowari:Kowari), (Quokka:Quokka), (Platypus:Platypus), (Wombat:Wombat)", 
+            "comparison_type": 1, 
+            "full_name": "Instrument Name", 
+            "units": "", 
+            "order": 3, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 134, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_description", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_description", 
+            "units": "", 
+            "order": 3, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 135, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_short_title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_short_title", 
+            "units": "", 
+            "order": 3, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 136, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_short_title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_short_title", 
+            "units": "", 
+            "order": 3, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 137, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_short_title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_short_title", 
+            "units": "", 
+            "order": 3, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 138, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "instrument_url", 
+            "data_type": 3, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Instrument URL", 
+            "units": "", 
+            "order": 4, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 139, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "title", 
+            "units": "", 
+            "order": 4, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 140, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "title", 
+            "units": "", 
+            "order": 4, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 141, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "title", 
+            "units": "", 
+            "order": 4, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 142, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "title", 
+            "units": "", 
+            "order": 4, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 143, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "title", 
+            "units": "", 
+            "order": 4, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 144, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_start_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_start_time", 
+            "units": "", 
+            "order": 5, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 145, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_start_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_start_time", 
+            "units": "", 
+            "order": 5, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 146, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_start_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_start_time", 
+            "units": "", 
+            "order": 5, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 147, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_start_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_start_time", 
+            "units": "", 
+            "order": 5, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 148, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_start_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_start_time", 
+            "units": "", 
+            "order": 5, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 149, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "instrument_scientists", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Instrument Description", 
+            "units": "", 
+            "order": 5, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 150, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_end_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_end_time", 
+            "units": "", 
+            "order": 6, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 151, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_end_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_end_time", 
+            "units": "", 
+            "order": 6, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 152, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_end_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_end_time", 
+            "units": "", 
+            "order": 6, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 153, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_end_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_end_time", 
+            "units": "", 
+            "order": 6, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 154, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "experiment_end_time", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "experiment_end_time", 
+            "units": "", 
+            "order": 6, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 155, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "exposure_time_per_step", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "exposure_time_per_step", 
+            "units": "", 
+            "order": 7, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 156, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "exposure_time_per_step", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "exposure_time_per_step", 
+            "units": "", 
+            "order": 7, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 157, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "number_of_steps", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "number_of_steps", 
+            "units": "", 
+            "order": 7, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 158, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_number", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_number", 
+            "units": "", 
+            "order": 7, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 159, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "starting_azimuthal_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "starting_azimuthal_angle", 
+            "units": "", 
+            "order": 7, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 160, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "azimuthal_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "azimuthal_angle", 
+            "units": "", 
+            "order": 8, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 161, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "exposure_time_per_step", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "exposure_time_per_step", 
+            "units": "", 
+            "order": 8, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 162, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "finishing_azimuthal_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "finishing_azimuthal_angle", 
+            "units": "", 
+            "order": 8, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 163, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "number_of_steps", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "number_of_steps", 
+            "units": "", 
+            "order": 8, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 164, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_transmission_flag", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_transmission_flag", 
+            "units": "", 
+            "order": 8, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 165, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "exposure_time_per_step", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "exposure_time_per_step", 
+            "units": "", 
+            "order": 9, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 166, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "finishing_azimuthal_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "finishing_azimuthal_angle", 
+            "units": "", 
+            "order": 9, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 167, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "run_number", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "run_number", 
+            "units": "", 
+            "order": 9, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 168, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_magnetic_field", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_magnetic_field", 
+            "units": "", 
+            "order": 9, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 169, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "number_of_steps", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "number_of_steps", 
+            "units": "", 
+            "order": 10, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 170, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "slit_1_distance", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "slit_1_distance", 
+            "units": "", 
+            "order": 10, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 171, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "measured_temperature_near_sample", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "measured_temperature_near_sample", 
+            "units": "", 
+            "order": 11, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 172, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_x", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_x", 
+            "units": "", 
+            "order": 11, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 173, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "slit_2_distance", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "slit_2_distance", 
+            "units": "", 
+            "order": 11, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 174, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "rotate", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "omega", 
+            "units": "", 
+            "order": 12, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 175, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_y", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_y", 
+            "units": "", 
+            "order": 12, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 176, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "slit_3_distance", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "slit_3_distance", 
+            "units": "", 
+            "order": 12, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 177, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_z", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_z", 
+            "units": "", 
+            "order": 13, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 178, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "slit_4_distance", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "slit_4_distance", 
+            "units": "", 
+            "order": 13, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 179, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_theta", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_theta", 
+            "units": "", 
+            "order": 14, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 180, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_thickness", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_thickness", 
+            "units": "", 
+            "order": 15, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 181, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_1", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_1", 
+            "units": "", 
+            "order": 16, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 182, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_2", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_2", 
+            "units": "", 
+            "order": 17, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 183, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_3", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_3", 
+            "units": "", 
+            "order": 18, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 184, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_4", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_4", 
+            "units": "", 
+            "order": 19, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 185, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_5", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_5", 
+            "units": "", 
+            "order": 20, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 186, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_6", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_6", 
+            "units": "", 
+            "order": 21, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 187, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_7", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_7", 
+            "units": "", 
+            "order": 22, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 188, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_8", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_8", 
+            "units": "", 
+            "order": 23, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 189, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance_9", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source_to_sample_distance_9", 
+            "units": "", 
+            "order": 24, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 190, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "detector_x", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "detector_x", 
+            "units": "", 
+            "order": 25, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 191, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "detector_y", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "detector_y", 
+            "units": "", 
+            "order": 26, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 192, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source_to_sample_distance", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "source_to_sample_distance", 
+            "units": "", 
+            "order": 101, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 193, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_to_detector_distance", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "sample_to_detector_distance", 
+            "units": "", 
+            "order": 102, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 195, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "expiry", 
+            "data_type": 6, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Expiry", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto_embargo/2011/06/10"
+            ]
+        }
+    }, 
+    {
+        "pk": 196, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "exposure_time_per_step", 
+            "data_type": 1, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "exposure_time_per_step", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 197, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "finishing_takeoff_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "finishing_takeoff_angle", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 247, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "license_image", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "License Image", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/creative_commons/2011/05/17"
+            ]
+        }
+    }, 
+    {
+        "pk": 248, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "license_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "License Name", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/creative_commons/2011/05/17"
+            ]
+        }
+    }, 
+    {
+        "pk": 249, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "license_uri", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "License URI", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/creative_commons/2011/05/17"
+            ]
+        }
+    }, 
+    {
+        "pk": 198, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "monitor_counts", 
+            "data_type": 1, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Monitor Counts", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 199, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "never_expire", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Never Expires", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto_embargo/2011/06/10"
+            ]
+        }
+    }, 
+    {
+        "pk": 200, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "number_of_steps", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "number_of_steps", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 201, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "omega", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "omega", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 194, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "Parent", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Parent", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 202, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "propdb_link", 
+            "data_type": 3, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Proposals URL (must already be logged on)", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 206, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "run_number", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "run_number", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 205, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "run_number", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "Run Number", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 204, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "run_number", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "run_number", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 203, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "run_number", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "run_number", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 207, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_short_title", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_short_title", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 208, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "secondary_collimator", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "secondary_collimator", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 209, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "starting_azimuthal_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "starting_azimuthal_angle", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 210, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "takeoff_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "takeoff_angle", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 211, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "takeoff_angle", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "takeoff_angle", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 212, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "total_counts", 
+            "data_type": 1, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Total Counts", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/kwr/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 214, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "wavelength", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "wavelength", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/ech/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 213, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "wavelength", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "wavelength", 
+            "units": "", 
+            "order": 9999, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/wbt/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 223, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "aperture_diameter", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "aperture_diameter", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 224, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "attenuator", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "attenuator", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 225, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "average_cns_flow_temperature", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "average_cns_flow_temperature", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 226, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "average_cns_temperature", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "average_cns_temperature", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 227, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "average_reactor_power", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "average_reactor_power", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 215, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalAmount", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Chemical Amount", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 216, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalAmount", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Chemical Amount", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 217, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalCAS", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Chemical CAS", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 218, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalFormula", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Chemical Formula", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 219, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "ChemicalName", 
+            "data_type": 2, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Chemical Name", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 228, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "count_time", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "count_time", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 229, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "expComment", 
+            "data_type": 7, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Comments", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/experiment/annotation/2011/07/07"
+            ]
+        }
+    }, 
+    {
+        "pk": 230, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "lambda", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "lambda", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 231, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "lambda_res_fwhm_percent", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "lambda_res_fwhm_percent", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 232, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "max_binrate", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "max_binrate", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 233, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "monitor_counts", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "monitor_counts", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 234, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "monitor_counts", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "monitor_counts", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 235, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "monitor_event_rate", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "monitor_event_rate", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 236, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "monitor_time", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "monitor_time", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 237, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "omega", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "omega", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 238, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "preset", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "preset", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 239, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "r_speed", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 3, 
+            "full_name": "r_speed", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 221, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "SampleCAS", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Sample CAS", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 220, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "SampleCAS", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Sample CAS", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/chemical/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 222, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "SampleChemical", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "Chemical", 
+            "units": "", 
+            "order": null, 
+            "immutable": false, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 240, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_diameter", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_diameter", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 241, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_magnetic_field", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "sample_magnetic_field", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 242, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "sample_name", 
+            "data_type": 2, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 8, 
+            "full_name": "Sample Name", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://gendsschema.com/"
+            ]
+        }
+    }, 
+    {
+        "pk": 243, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "source", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "source", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 246, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "total_counts", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "total_counts", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/plp/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 245, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "total_counts", 
+            "data_type": 1, 
+            "is_searchable": false, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "total_counts", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }, 
+    {
+        "pk": 244, 
+        "model": "tardis_portal.parametername", 
+        "fields": {
+            "name": "t_tang", 
+            "data_type": 1, 
+            "is_searchable": true, 
+            "choices": "", 
+            "comparison_type": 1, 
+            "full_name": "t_tang", 
+            "units": "", 
+            "order": null, 
+            "immutable": true, 
+            "schema": [
+                "http://www.tardis.edu.au/schemas/ansto/qkk/2011/06/21"
+            ]
+        }
+    }
+]
