@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include
 from django.conf import settings
 from django.contrib import admin
+from django.http import HttpResponse
 from django.shortcuts import Http404
 admin.autodiscover()
 
@@ -19,6 +20,7 @@ embargo_urls = patterns('mecat.embargo',
 
 urlpatterns = patterns('',
                        (r'^$', 'tardis.tardis_portal.views.experiment_index'),
+                       (r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /vbl/", mimetype="text/plain")),
                        (r'^vbl/experiment/register/$', 'mecat.register.register_metaman'),
                        (r'^vbl/download/datafile/(?P<datafile_id>\d+)/$', 'mecat.download.download_datafile'),
                        (r'^vbl/download/experiment/(?P<experiment_id>\d+)/(?P<comptype>[a-z]{3})/$', 'mecat.download.download_experiment'),
