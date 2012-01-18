@@ -11,33 +11,38 @@
   </p>
 
   <p>
-    <strong>Abstract: </strong>
-    <div class="abstract">
-    {% if experiment.description %}
-     {% with content_full=experiment.description|sanitize_html|safe %}
-     {% with content_brief=content_full|truncatewords_html:125|safe %}
-     <span class="abstract_brief">{{ content_brief }}</span>
-     {% if content_full != content_brief %}
-        <span class="abstract_full">{{ content_full }}</span>
-        <a class="abstract_link" href="">[Read more]</a>
-        <script type="text/javascript" charset="utf-8">
-          $(".abstract_full").hide();
-          $(document).ready(function(){
-             $(".abstract_link").click(function(e){
-                e.preventDefault();
-                $(".abstract_full").show();
-                $(".abstract_brief").hide();
-                $(".abstract_link").hide();
-                return false;
-             });
-          });
-       </script>
-     {% endif %}
-     {% endwith %}
-     {% endwith %}
-    {% endif %}
+    {% if has_read_ACL %}
 
-    </div>
+        <strong>Abstract: </strong>
+        <div class="abstract">
+        {% if experiment.description %}
+         {% with content_full=experiment.description|sanitize_html|safe %}
+         {% with content_brief=content_full|truncatewords_html:125|safe %}
+         <span class="abstract_brief">{{ content_brief }}</span>
+         {% if content_full != content_brief %}
+            <span class="abstract_full">{{ content_full }}</span>
+            <a class="abstract_link" href="">[Read more]</a>
+            <script type="text/javascript" charset="utf-8">
+              $(".abstract_full").hide();
+              $(document).ready(function(){
+                 $(".abstract_link").click(function(e){
+                    e.preventDefault();
+                    $(".abstract_full").show();
+                    $(".abstract_brief").hide();
+                    $(".abstract_link").hide();
+                    return false;
+                    
+                 });
+              });
+           </script>
+         {% endif %}
+         {% endwith %}
+         {% endwith %}
+        {% endif %}
+
+      </div>
+    
+    {% endif %}  
   </p>
 
   {% if experiment.handle %}

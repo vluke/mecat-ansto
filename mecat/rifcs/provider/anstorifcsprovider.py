@@ -21,6 +21,16 @@ class AnstoRifCsProvider(schemarifcsprovider.SchemaRifCsProvider):
         self.namespace = 'http://www.tardis.edu.au/schemas/ansto/experiment/2011/06/21'  
         self.sample_desc_schema_ns = 'http://www.tardis.edu.au/schemas/ansto/sample/2011/06/21'
       
+    def get_description(self, experiment):
+        from tardis.apps.ands_register.publishing import PublishHandler        
+        phandler = PublishHandler(experiment.id) 
+        desc = phandler.custom_description()
+        if not desc:
+            # We do not want the abstract to be available in the description when
+            # no custom description is available
+            desc = ""
+        return super(AnstoRifCsProvider, self).format_desc(desc)
+    
     def get_emails(self, beamlines):
         emails = []
         for bl in beamlines:
