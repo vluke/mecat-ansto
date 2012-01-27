@@ -2,7 +2,7 @@ from os import path
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -61,11 +61,26 @@ SITE_ID = 1
 
 USE_I18N = True
 
+STATIC_ROOT = path.abspath(path.join(path.dirname(__file__),'..','static'))
+
+STATIC_URL = '/static'
+
+def get_admin_media_path():
+    import pkgutil
+    package = pkgutil.get_loader("django.contrib.admin")
+    return path.join(package.filename, 'media')
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
+ADMIN_MEDIA_STATIC_DOC_ROOT = get_admin_media_path()
 
-ADMIN_MEDIA_PREFIX = '/media/'
+
+ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+
+STATICFILES_DIRS = (
+    ('admin', ADMIN_MEDIA_STATIC_DOC_ROOT),
+)
 
 # Make this unique, and don't share it with anybody.
 
@@ -80,26 +95,28 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'tardis.tardis_portal.minidetector.Middleware',
+#    'tardis.tardis_portal.minidetector.Middleware',
     'tardis.tardis_portal.logging_middleware.LoggingMiddleware',
     'tardis.tardis_portal.auth.AuthorizationMiddleware',
-                      'ajaxerrors.middleware.ShowAJAXErrors',
+    'ajaxerrors.middleware.ShowAJAXErrors',
     'django.middleware.transaction.TransactionMiddleware')
 
 ROOT_URLCONF = 'mecat.urls'
 
+
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.request',
+                               'django.core.context_processors.static',
                                'django.contrib.auth.context_processors.auth',
                                'django.core.context_processors.debug',
-                               'tardis.tardis_portal.context_processors.single_search_processor',
-                               'django.core.context_processors.i18n')
+                               'django.core.context_processors.i18n',
+                                'tardis.tardis_portal.context_processors.single_search_processor',
+                                'tardis.tardis_portal.context_processors.tokenuser_processor',
+                                )
 
-# Put strings here, like "/home/html/django_templates" or
-# "C:/www/django/templates". Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (
-    path.join(path.dirname(__file__), 'templates/').replace('\\', '/'),
-    path.join(path.dirname(__file__), '../src/MyTARDIS/tardis/tardis_portal/templates/').replace('\\', '/'),
+TEMPLATE_LOADERS = (
+    'tardis.template.loaders.app_specific.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.filesystem.Loader',
 )
 
 # Temporarily disable transaction management until everyone agrees that
@@ -131,7 +148,8 @@ ANSTO_MEDIA_ROOT = path.abspath(path.join(path.dirname(__file__),
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 
-MEDIA_URL = '/site_media/'
+MEDIA_URL = '/site_media'
+
 
 #set to empty tuple () for no apps
 #TARDIS_APPS = ('mrtardis', )
@@ -147,7 +165,7 @@ else:
 # this Django installation.
 
 INSTALLED_APPS = (
-    'haystack',
+    'mecat',
     'django_extensions',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,11 +173,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.staticfiles',
+    'tardis.template.loaders',
     'tardis.tardis_portal',
     'tardis.tardis_portal.templatetags',
     'registration',
-    'mecat',
-    'south'
+    'south',
+    'haystack',
     ) + apps
 
 

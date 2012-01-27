@@ -11,17 +11,17 @@
 <link rel="stylesheet" type="text/css" href="/ansto_media/css/versi-ansto.css" />
 <script type="text/javascript" src="/ansto_media/js/jquery-1.7.min.js"></script>
 
-<script type="text/javascript" src="/site_media/js/jstree/jquery.jstree.js"></script>
-<script type="text/javascript" src="/site_media/js/jquery-ui-1.8.6.custom.min.js"></script>
-<script type="text/javascript" src="/site_media/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="/site_media/js/jqmodal.js"></script>
-<script type="text/javascript" src="/site_media/js/flash_detect_min.js"></script>
-<link href="/site_media/css/jqmodal.css" rel="stylesheet" type="text/css" media="screen">
-<link type="text/css" href="/site_media/css/theme/ui.all.css" rel="Stylesheet" />
-<link type="text/css" href="/site_media/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="{{STATIC_URL}}/js/jstree/jquery.jstree.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/js/jqmodal.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/js/flash_detect_min.js"></script>
+<link href="{{STATIC_URL}}/css/jqmodal.css" rel="stylesheet" type="text/css" media="screen">
+<link type="text/css" href="{{STATIC_URL}}/css/theme/ui.all.css" rel="Stylesheet" />
+<link type="text/css" href="{{STATIC_URL}}/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 
-<script type="text/javascript" src="/site_media/js/jquery.autocomplete.min.js"></script>
-<link type="text/css" href="/site_media/css/autocomplete/jquery.autocomplete.css" rel="stylesheet" />
+<script type="text/javascript" src="{{STATIC_URL}}/js/jquery.autocomplete.min.js"></script>
+<link type="text/css" href="{{STATIC_URL}}/css/autocomplete/jquery.autocomplete.css" rel="stylesheet" />
 <script src="/ansto_media/js/jquery.dataTables.js"></script>
 <script src="/ansto_media/js/ColVis.js"></script>
 <script src="/ansto_media/js/ColReorder.js"></script>
@@ -104,7 +104,6 @@
 	<ul>
 	  <li class="lineheight"><a href="/experiment/view">Data</a></li>
 	  <li class="lineheight"><a href="/about">About</a></li>
-	  <li class="lineheight"><a href="/partners">Partners</a></li>
 	  {% if username %}
 	    <li class="lineheight"><a href="/logout">Logout</a></li>
         <li class="lineheight">
