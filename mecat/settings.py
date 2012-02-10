@@ -1,4 +1,5 @@
 from os import path
+import djcelery
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
@@ -179,9 +180,15 @@ INSTALLED_APPS = (
     'tardis.tardis_portal.templatetags',
     'registration',
     'south',
-    'haystack',
+    'django_jasmine',
+    'djcelery',
+    'djkombu',
     ) + apps
 
+JASMINE_TEST_DIRECTORY = path.abspath(path.join(path.dirname(__file__),
+                                                'tardis_portal',
+                                                'tests',
+                                                'jasmine'))
 
 PUBLISH_PROVIDERS = (
                     'tardis.tardis_portal.publish.rif_cs_profile.'
@@ -260,14 +267,28 @@ DEFAULT_INSTITUTION = "ANSTO"
 IMMUTABLE_METS_DATASETS = True
 
 SINGLE_SEARCH_ENABLED=True
-if not SINGLE_SEARCH_ENABLED:
-    HAYSTACK_ENABLE_REGISTRATIONS = False
 # Settings for the single search box
 # Set HAYSTACK_SOLR_URL to the location of the SOLR server instance
 #SINGLE_SEARCH_ENABLED = True
 HAYSTACK_SITECONF = 'tardis.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = 'http://localhost:8080/solr'
+
+if SINGLE_SEARCH_ENABLED:
+    INSTALLED_APPS = INSTALLED_APPS + ('haystack',)
+else:
+    HAYSTACK_ENABLE_REGISTRATIONS = False
+
+DOI_ENABLE = False
+DOI_XML_PROVIDER = 'tardis.tardis_portal.ands_doi.DOIXMLProvider'
+#DOI_TEMPLATE_DIR = path.join(TARDIS_DIR, 'tardis_portal/templates/tardis_portal/doi/')
+DOI_TEMPLATE_DIR = path.join('tardis_portal/doi/')
+DOI_APP_ID = ''
+DOI_NAMESPACE = 'http://www.tardis.edu.au/schemas/doi/2011/12/07'
+DOI_MINT_URL = 'https://services.ands.org.au/home/dois/doi_mint.php'
+DOI_RELATED_INFO_ENABLE = False
+DOI_BASE_URL='http://mytardis.example.com'
+
 
 TOKEN_EXPIRY_DAYS=30
 TOKEN_USERNAME='tokenuser'
@@ -282,3 +303,6 @@ RIFCS_TEMPLATE_DIR = 'tardis_portal/rif-cs/profiles/'
 RELATED_INFO_SCHEMA_NAMESPACE = 'http://www.tardis.edu.au/schemas/related_info/2011/11/10'
 RIFCS_GROUP = "Australian Nuclear Science and Technology Organisation"
 RIFCS_MYTARDIS_KEY = "research-data.ansto.gov.au/collection/771"
+
+djcelery.setup_loader()
+

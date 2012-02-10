@@ -248,6 +248,8 @@ HAYSTACK_SITECONF = 'tardis.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = 'http://localhost:8080/solr'
 
+DOI_ENABLE=False
+
 TOKEN_EXPIRY_DAYS=30
 TOKEN_USERNAME='tokenuser'
 TOKEN_LENGTH=30
