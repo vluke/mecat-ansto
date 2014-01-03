@@ -1,0 +1,76 @@
+﻿<?xml version="1.0"?>
+<registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.2.0/schema/registryObjects.xsd">
+  <registryObject group="Australian Nuclear Science and Technology Organisation">
+    <key>research-data.ansto.gov.au/collection/769</key>
+    <originatingSource>http://mecat-test.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
+    <service type="create">
+      <name type="primary">
+        <namePart>Quokka - Small-Angle Neutron Scattering</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>quokka@ansto.gov.au</value>
+          </electronic>
+        </address>
+        <address>
+          <physical>
+            <addressPart type="streetName">New Illawarra Road</addressPart>
+            <addressPart type="suburbOrPlaceOrLocality">Lucas  Heights</addressPart>
+            <addressPart type="stateOrTerritory">NSW</addressPart>
+            <addressPart type="postCode">2234</addressPart>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/483</key>
+        <relation type="isOwnedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/764</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/843</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/841</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <subject type="anzsrc-for">029904</subject>
+      <subject type="local">beamline</subject>
+      <subject type="local">Small-Angle Neutron Scattering</subject>
+      <description type="deliveryMethod">offlineService</description>
+      <description type="brief">Small-angle scattering is a powerful technique for looking at sizes and structures of objects on the nanoscale (1-10nm), like polymer molecules, biological molecules, defect structures in metals and ceramics, pores in rocks, magnetic clusters, magnetic flux lines in type-II superconductors and so on.  ANSTO has both X-ray and neutron small-angle scattering adjacent to each other, and the advantage of neutrons is primarily for soft matter where the contrast-variation method (replacing hydrogen with deuterium) can be used.  In addition, it is useful for magnetic problems and ones in which large samples must be used.  In many ways, small-angle scattering is complementary to electron microscopy while direct imaging is the domain of electron microscopy, SAXS and SANS can provide particle sizes, shapes and distributions averaged over a complete macroscopic sample.  Small-angle scattering is rarely able to solve a problem on its own, and is typically used in conjunction with a number of other techniques.
+
+The major strength of the SANS technique is that it can be used to investigate a host of materials, which cover a wide range of research disciplines. Materials that are routinely characterised using the SANS technique include alloys, ceramics, biological materials, colloidal materials, complex fluids, polymers, surfaces and interfaces, flux lattices in superconductors.
+
+SANS is a versatile technique for investigating food components such as proteins, polymers and emulsions.
+
+QUOKKA will be particularly important in the Food Science project - a collaboration between ANSTO, CSIRO, Food Science Australia and the University of Queensland. Participants are investigating scientific problems of national significance for food processing and human nutrition.
+
+All data collected on this beamline is stored in NeXus format datafiles and consists of 2 dimensional integer arrays of neutron counts.  The metadata embedded in the nexus file indicates the spatial and temporal meaning of the arrays.
+
+For details of the NeXus file format, please see the NeXus Data Format relatedInfo link below.
+
+For assistance interpreting the data in the first instance please contact the authors of the relevant collection, or if the author is unavailable, one of the instrument scientists (listed in the Quokka Beamline Homepage relatedInfo).
+</description>
+      <accessPolicy>http://www.ansto.gov.au/research/user_access</accessPolicy>
+<relatedInfo type="website">
+    <identifier type="uri">http://www.ansto.gov.au/research/bragg_institute/facilities/instruments/quokka</identifier>
+    <title>Quokka Beamline Homepage</title>
+</relatedInfo>
+<relatedInfo type="website">
+    <identifier type="uri">http://www.nexusformat.org/Main_Page</identifier>
+    <title>NeXus Data Format</title>
+    <notes>Includes a description of the data format and links to utilities and programming libraries.</notes>
+</relatedInfo>
+    </service>
+  </registryObject>
+</registryObjects>

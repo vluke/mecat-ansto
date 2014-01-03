@@ -1,0 +1,80 @@
+﻿<?xml version="1.0"?>
+<registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.2.0/schema/registryObjects.xsd">
+  <registryObject group="Australian Nuclear Science and Technology Organisation">
+    <key>research-data.ansto.gov.au/collection/766</key>
+    <originatingSource>http://mecat-test.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
+    <service type="create">
+      <name type="primary">
+        <namePart>Echidna - High-Resolution Powder Diffractometer</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>echidna@ansto.gov.au</value>
+          </electronic>
+        </address>
+        <address>
+          <physical>
+            <addressPart type="streetName">New Illawarra Road</addressPart>
+            <addressPart type="suburbOrPlaceOrLocality">Lucas  Heights</addressPart>
+            <addressPart type="stateOrTerritory">NSW</addressPart>
+            <addressPart type="postCode">2234</addressPart>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/483</key>
+        <relation type="isOwnedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/844</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/845</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/847</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <subject type="anzsrc-for">029904</subject>
+      <subject type="local">beamline</subject>
+      <subject type="local">powder diffraction</subject>
+      <description type="deliveryMethod">offlineService</description>
+      <description type="brief">Echidna is a High-Resolution Powder Diffractometer optimised for structure determination of new materials.  The instrument uses a single wavelength and a highly collimated neutron-beam  to improve resolution. This diffraction technique can accurately resolve both complex atomic and magnetic structures. Relevant fields of study using ECHIDNA are solid-state physics, materials science, chemistry, geosciences, and engineering.
+
+High-resolution powder diffraction can be used to:
+
+* Determine structures of newly created materials, to better understand their properties
+* Study materials with light elements in the presence of heavy ones (eg. oxides, borides, carbides) and for magnetic materials
+* Study hydrogen (as deuterium) in hydrogen storage materials
+* Measure strain, crystallite size, and defects in materials such as metals, hydrogen storage and electro-chemical materials, and mesoscopic structures
+* Investigate materials with complex crystal structures, including catalysts, hybrid materials, organics, cements, natural minerals, zeolites, and non-linear optical materials
+* Study the structural and magnetic phase transitions of ferroic and electronic materials such as superconductors and magnetoresistive materials
+* Investigate bulk samples or samples in extreme environments (pressure, temperature, stress, magnetic and electric fields, or combinations of these)
+
+All data collected on this beamline is stored in Nexus format datafiles and consists of 2 dimensional integer arrays of neutron counts.  The metadata embedded in the nexus file indicates the spatial and temporal meaning of the arrays.
+
+For details of the Nexus file format, please see the NeXus Format relatedInfo link below.
+
+For assistance interpreting the data in the first instance please contact the authors of the relevant collection, or if the author is unavailable, one of the instrument scientists (listed in the Echidna Beamline Homepage relatedInfo).
+</description>
+      <accessPolicy>http://www.ansto.gov.au/research/user_access</accessPolicy>
+<relatedInfo type="website">
+    <identifier type="uri">http://www.ansto.gov.au/research/bragg_institute/facilities/instruments/echidna</identifier>
+    <title>Echidna Beamline Homepage</title>
+</relatedInfo>
+<relatedInfo type="website">
+    <identifier type="uri">http://www.nexusformat.org/Main_Page</identifier>
+    <title>NeXus Data Format</title>
+    <notes>Includes a description of the data format and links to utilities and programming libraries.</notes>
+</relatedInfo>
+    </service>
+  </registryObject>
+</registryObjects>

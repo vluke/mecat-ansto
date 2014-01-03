@@ -1,0 +1,81 @@
+﻿<?xml version="1.0"?>
+<registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.2.0/schema/registryObjects.xsd">
+  <registryObject group="Australian Nuclear Science and Technology Organisation">
+    <key>research-data.ansto.gov.au/collection/768</key>
+    <originatingSource>http://mecat-test.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
+    <service type="create">
+      <name type="primary">
+        <namePart>Platypus - Neutron Reflectometer</namePart>
+      </name>
+      <location>
+        <address>
+          <electronic type="email">
+            <value>platypus@ansto.gov.au</value>
+          </electronic>
+        </address>
+        <address>
+          <physical>
+            <addressPart type="streetName">New Illawarra Road</addressPart>
+            <addressPart type="suburbOrPlaceOrLocality">Lucas  Heights</addressPart>
+            <addressPart type="stateOrTerritory">NSW</addressPart>
+            <addressPart type="postCode">2234</addressPart>
+            <addressPart type="country">Australia</addressPart>
+          </physical>
+        </address>
+      </location>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/483</key>
+        <relation type="isOwnedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/772</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+        <key>research-data.ansto.gov.au/collection/840</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+            <relatedObject>
+        <key>research-data.ansto.gov.au/collection/773</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <subject type="anzsrc-for">029904</subject>
+      <subject type="local">beamline</subject>
+      <subject type="local">Neutron Reflectometry</subject>
+      <description type="deliveryMethod">offlineService</description>
+      <description type="brief">While the first neutron reflection experiments were originally performed in the early 1950s (to determine the fundamental properties of the neutron interaction with the elements), it was first used as a quantitative tool for materials science by Gian Felcher in Chicago (to study magnetic flux penetration in superconductors) and the Oxford group (to study soft matter on surfaces) in the 1980s. Since then the method has taken off for the study of all-manner of surface-science and interface problems, particularly related to the multi-$B magnetic recording industry and for polymer coatings, biosensors and artificial biological membranes. For instance, at the NIST reactor (Washington DC), there are now have 3 neutron reflectometers, the latest being fully funded by the National Institutes of Health for the study of biological molecules in membranes.
+
+Neutron reflectometry can be used to:
+
+* Study soft matter in biological and chemical science:
+ - Examining how surfactants work (substances that affect surface characteristics)
+    eg waterproofers, emulsifiers, lung surfactants in premature infants.
+ - The interactions of proteins and enzymes with biomimetic cell membranes (synthetic membrances used to model those in  living cells).
+* Deliver critical information about polymer film composition, chemical properties and the quality of the film in conjunction with other surface sensitive techniques.
+- Nanoscale plasma polymer surface coatings are key elements used in the development of new biotechnologies for tissue growth, bio-functionalisation, surface passivation and anti-biofouling, protein and antibody biosensors.
+* Study processes occurring at surfaces and interfaces such as adsorption, corrosion, adhesion and inter-diffusion between layers to solve important industrial problems.
+* Study thin-film magnetic devices to be used in future generations of computers, including magnetoresistive read head sensors and data storage films in hard drives as well as non-volatile magnetic random access memory devices.
+
+All data collected on this beamline is stored in NeXus format datafiles and consists of 2 dimensional integer arrays of neutron counts.  The metadata embedded in the nexus file indicates the spatial and temporal meaning of the arrays.
+
+For details of the NeXus file format, please see the NeXus Data Format relatedInfo link below.
+
+For assistance interpreting the data in the first instance please contact the authors of the relevant collection, or if the author is unavailable, one of the instrument scientists (listed in the Platypus Beamline Homepage relatedInfo).
+</description>
+      <accessPolicy>http://www.ansto.gov.au/research/user_access</accessPolicy>
+<relatedInfo type="website">
+    <identifier type="uri">http://www.ansto.gov.au/research/bragg_institute/facilities/instruments/platypus</identifier>
+    <title>Platypus Beamline Homepage</title>
+</relatedInfo>
+<relatedInfo type="website">
+    <identifier type="uri">http://www.nexusformat.org/Main_Page</identifier>
+    <title>NeXus Data Format</title>
+    <notes>Includes a description of the data format and links to utilities and programming libraries.</notes>
+</relatedInfo>
+    </service>
+  </registryObject>
+</registryObjects>
