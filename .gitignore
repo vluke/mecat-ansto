@@ -6,3 +6,5 @@ parts
 src
 var
 *.pyc
+
+/mecat/oai/Test_Taipan.xml
