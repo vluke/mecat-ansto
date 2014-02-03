@@ -2,7 +2,7 @@
 <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.2.0/schema/registryObjects.xsd">
   <registryObject group="Australian Nuclear Science and Technology Organisation">
     <key>research-data.ansto.gov.au/collection/768</key>
-    <originatingSource>http://mecat-test.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
+    <originatingSource>http://tardis.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
     <service type="create">
       <name type="primary">
         <namePart>Platypus - Neutron Reflectometer</namePart>
@@ -29,17 +29,17 @@
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/772</key>
+        <key>research-data.ansto.gov.au/collection/772</key> <!-- Michael James -->
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/840</key>
+        <key>research-data.ansto.gov.au/collection/840</key> <!-- Stephen Holt -->
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
             <relatedObject>
-        <key>research-data.ansto.gov.au/collection/773</key>
+        <key>research-data.ansto.gov.au/collection/773</key> <!-- Andrew Nelson -->
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
@@ -68,7 +68,7 @@ For assistance interpreting the data in the first instance please contact the au
 </description>
       <accessPolicy>http://www.ansto.gov.au/research/user_access</accessPolicy>
 <relatedInfo type="website">
-    <identifier type="uri">http://www.ansto.gov.au/research/bragg_institute/facilities/instruments/platypus</identifier>
+  <identifier type="uri">http://www.ansto.gov.au/ResearchHub/Bragg/Facilities/Instruments/Platypus/index.htm</identifier>
     <title>Platypus Beamline Homepage</title>
 </relatedInfo>
 <relatedInfo type="website">

@@ -2,7 +2,7 @@
 <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.2.0/schema/registryObjects.xsd">
   <registryObject group="Australian Nuclear Science and Technology Organisation">
     <key>research-data.ansto.gov.au/collection/769</key>
-    <originatingSource>http://mecat-test.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
+    <originatingSource>http://tardis.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
     <service type="create">
       <name type="primary">
         <namePart>Quokka - Small-Angle Neutron Scattering</namePart>
@@ -29,17 +29,17 @@
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/764</key>
+        <key>research-data.ansto.gov.au/collection/764</key> <!-- Elliot Gilbert -->
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/843</key>
+        <key>research-data.ansto.gov.au/collection/843</key> <!-- Christopher Garvey -->
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/841</key>
+        <key>research-data.ansto.gov.au/collection/841</key> <!-- Katy Wood -->
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
@@ -63,7 +63,7 @@ For assistance interpreting the data in the first instance please contact the au
 </description>
       <accessPolicy>http://www.ansto.gov.au/research/user_access</accessPolicy>
 <relatedInfo type="website">
-    <identifier type="uri">http://www.ansto.gov.au/research/bragg_institute/facilities/instruments/quokka</identifier>
+  <identifier type="uri">http://www.ansto.gov.au/ResearchHub/Bragg/Facilities/Instruments/Quokka/index.htm</identifier>
     <title>Quokka Beamline Homepage</title>
 </relatedInfo>
 <relatedInfo type="website">
