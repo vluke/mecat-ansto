@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <registryObjects xmlns="http://ands.org.au/standards/rif-cs/registryObjects" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ands.org.au/standards/rif-cs/registryObjects http://services.ands.org.au/documentation/rifcs/1.2.0/schema/registryObjects.xsd">
   <registryObject group="Australian Nuclear Science and Technology Organisation">
-    <key>research-data.ansto.gov.au/collection/???</key>
+    <key>research-data.ansto.gov.au/collection/874</key>
     <originatingSource>http://mecat.nbi.ansto.gov.au:8080/oai/provider</originatingSource>
     <service type="create">
       <name type="primary">
@@ -30,17 +30,26 @@
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/???</key>
+	      <!-- Sergey Danilkin -->
+        <key>research-data.ansto.gov.au/collection/877</key>
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/???</key>
+	      <!-- Anton Stampfl -->
+        <key>research-data.ansto.gov.au/collection/878</key>
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
       <relatedObject>
-        <key>research-data.ansto.gov.au/collection/???</key>
+	      <!-- Kirrily Rule -->
+        <key>research-data.ansto.gov.au/collection/876</key>
+        <relation type="isManagedBy">
+        </relation>
+      </relatedObject>
+      <relatedObject>
+	      <!-- Guochu Deng -->
+        <key>research-data.ansto.gov.au/collection/875</key>
         <relation type="isManagedBy">
         </relation>
       </relatedObject>
